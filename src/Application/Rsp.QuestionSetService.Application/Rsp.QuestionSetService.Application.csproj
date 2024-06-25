@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<PackageReference Include="Ardalis.Specification" Version="8.0.0" />
+		<PackageReference Include="MediatR" Version="12.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Primitives" Version="8.0.0" />
+		<PackageReference Include="Rsp.Logging" Version="1.0.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Domain\Rsp.QuestionSetService.Domain\Rsp.QuestionSetService.Domain.csproj" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="CQRS\Commands\" />
+	  <Folder Include="CQRS\Handlers\CommandHandlers\" />
+	  <Folder Include="CQRS\Handlers\QueryHandlers\" />
+	  <Folder Include="CQRS\Queries\" />
+	  <Folder Include="DTOS\Requests\" />
+	  <Folder Include="Specifications\" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+</Project>

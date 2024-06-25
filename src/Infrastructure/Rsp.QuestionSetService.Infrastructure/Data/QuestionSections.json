@@ -1,0 +1,245 @@
+[
+  {
+    "SectionId": "IQT0001",
+    "QuestionCategoryId": "A",
+    "SectionName": "Project Details",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0003",
+    "QuestionCategoryId": "A",
+    "SectionName": "Project Scope",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0004",
+    "QuestionCategoryId": "A",
+    "SectionName": "Research Location",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0005",
+    "QuestionCategoryId": "B",
+    "SectionName": "Project Information",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0006",
+    "QuestionCategoryId": "B",
+    "SectionName": "Public Involvement",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0007",
+    "QuestionCategoryId": "B",
+    "SectionName": "Research Design and Methodology",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0009",
+    "QuestionCategoryId": "B",
+    "SectionName": "Participants",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0008",
+    "QuestionCategoryId": "B",
+    "SectionName": "Research Activities",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0010",
+    "QuestionCategoryId": "B",
+    "SectionName": "Consent",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0011",
+    "QuestionCategoryId": "B",
+    "SectionName": "Risk and Conflicts of Interest",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0012",
+    "QuestionCategoryId": "B",
+    "SectionName": "Summary Ethical Issues",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0013",
+    "QuestionCategoryId": "B",
+    "SectionName": "Research Analysis",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0014",
+    "QuestionCategoryId": "B",
+    "SectionName": "Governance and Management",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0015",
+    "QuestionCategoryId": "B",
+    "SectionName": "Transparency",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0021",
+    "QuestionCategoryId": "B",
+    "SectionName": "Confidentiality and Information Governance",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0019",
+    "QuestionCategoryId": "C1",
+    "SectionName": "Educational Project",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0054",
+    "QuestionCategoryId": "C2",
+    "SectionName": "Research Bioresource",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0055",
+    "QuestionCategoryId": "C3",
+    "SectionName": "CTIMP",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0025",
+    "QuestionCategoryId": "C4",
+    "SectionName": "Devices Filter Questions",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0053",
+    "QuestionCategoryId": "C4",
+    "SectionName": "Device investigations not requiring review by MHRA",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0056",
+    "QuestionCategoryId": "C5",
+    "SectionName": "Ionising Radiation",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0022",
+    "QuestionCategoryId": "C6",
+    "SectionName": "Human Biological Samples",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0022.3",
+    "QuestionCategoryId": "C6",
+    "SectionName": "Health-related findings",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0023",
+    "QuestionCategoryId": "C7",
+    "SectionName": "Adults Lacking Capacity (CTIMP)",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0024",
+    "QuestionCategoryId": "C7",
+    "SectionName": "Adults Lacking Capacity (Non CTIMP)",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0020",
+    "QuestionCategoryId": "C8",
+    "SectionName": "Children",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "SectionId": "IQT0057",
+    "QuestionCategoryId": "D",
+    "SectionName": "Application Booking",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  }
+]

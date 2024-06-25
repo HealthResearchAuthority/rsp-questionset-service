@@ -1,0 +1,90 @@
+[
+  {
+    "CategoryId": "A",
+    "CategoryName": "Project Filter",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "B",
+    "CategoryName": "Project Details",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "C1",
+    "CategoryName": "Student",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "C2",
+    "CategoryName": "Research Bioresouces",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "C3",
+    "CategoryName": "CTIMP",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "C4",
+    "CategoryName": "Devices",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "C5",
+    "CategoryName": "Ionising Radiation",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "C6",
+    "CategoryName": "Tissue",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "C7",
+    "CategoryName": "Adults lacking capacity (ALC)",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "C8",
+    "CategoryName": "Children",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  },
+  {
+    "CategoryId": "D",
+    "CategoryName": "Booking",
+    "IsActive": true,
+    "StartDate": null,
+    "EndDate": null,
+    "Version": null
+  }
+]

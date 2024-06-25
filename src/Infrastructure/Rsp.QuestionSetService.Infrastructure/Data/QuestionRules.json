@@ -1,0 +1,18 @@
+[
+  {
+    "RuleId": 1,
+    "Sequence": 1,
+    "QuestionId": "IQA0006",
+    "ParentQuestionId": "IQA0005",
+    "Description": "Please answer the following question, if you have answered Yes to Q5",
+    "Operator": "And",
+    "Condition": {
+      "Comparison": "=",
+      "OptionsCountOperator": "=",
+      "ParentOptionsCount": 1,
+      "ParentOptions": [
+        "OPT0004"
+      ]
+    }
+  }
+]
