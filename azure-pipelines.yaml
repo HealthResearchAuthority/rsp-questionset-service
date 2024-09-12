@@ -53,9 +53,9 @@ variables:
   - name: publishContainerName
     value: "rsp-questionsetservice"
   - name: acrContainerName
-    value: "rsp-questionset-service"
+    value: "rsp-questionsetservice"
   - name: containerAppName
-    value: "questionset-service"
+    value: "questionsetservice"
   - name: buildConfiguration
     value: "Release"
 
