@@ -7,7 +7,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      // TODO: change the port number if needed
       "applicationUrl": "http://localhost:7941"
     },
     "Swagger": {
@@ -15,7 +14,6 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      // TODO: change the port number if needed
       "applicationUrl": "https://localhost:39213;http://localhost:7941",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

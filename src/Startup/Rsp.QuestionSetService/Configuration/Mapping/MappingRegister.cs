@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Rsp.QuestionSetService.Application.DTOS.Requests;
 using Rsp.QuestionSetService.Application.DTOS.Responses;
 using Rsp.QuestionSetService.Domain.Entities;
 
@@ -38,5 +39,16 @@ public class MappingRegister : IRegister
             .Map(dest => dest.IsMandatory, _ => true, source => source.Conformance == "Mandatory")
             .Map(dest => dest.IsOptional, _ => true, source => source.Conformance == "Optional")
             .Map(dest => dest.Rules, source => source.QuestionRules);
+
+        config
+            .NewConfig<CreateApplicationRequest, ResearchApplication>()
+            .Map(dest => dest.CreatedBy, source => source.UserId)
+            .Map(dest => dest.UpdatedBy, source => source.UserId);
+
+        config
+            .NewConfig<ResearchApplication, GetApplicationResponse>()
+            .MapToConstructor(true)
+            .Map(dest => dest.UserId, source => source.CreatedBy)
+            .Map(dest => dest.ApplicationId, source => source.ApplicationId);
     }
 }

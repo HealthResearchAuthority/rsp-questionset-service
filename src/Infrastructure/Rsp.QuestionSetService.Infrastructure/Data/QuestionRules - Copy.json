@@ -1,0 +1,182 @@
+[
+  {
+    "RuleId": 1,
+    "Sequence": 1,
+    "QuestionId": "IQA0002",
+    "ParentQuestionId": null,
+    "Description": "Short project title should be between 15 and 100 characters",
+    "Operator": "And",
+    "Conditions": [
+      {
+        "Operator": "AND",
+        "Comparer": "LENGTH",
+        "Value": "15,100",
+        "Negate": false,
+        "Selection": null,
+        "ParentOptions": []
+      }
+    ]
+  },
+  {
+    "RuleId": 2,
+    "Sequence": 1,
+    "QuestionId": "IQA0006",
+    "ParentQuestionId": "IQA0005",
+    "Description": "Please answer the following question, if you have answered Yes to Q5 under Project Filter",
+    "Operator": "And",
+    "Conditions": [
+      {
+        "Operator": "AND",
+        "Comparer": "IN",
+        "Value": null,
+        "Negate": false,
+        "Selection": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ]
+      }
+    ]
+  },
+  {
+    "RuleId": 3,
+    "Sequence": 1,
+    "QuestionId": "IQA0014",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers to Q2 under Project Scope, the following question should be answered",
+    "Operator": "And",
+    "Conditions": [
+      {
+        "Operator": "AND",
+        "Comparer": "=",
+        "Value": null,
+        "Negate": false,
+        "Selection": "Single",
+        "ParentOptions": [
+          "OPT0008",
+          "OPT0009",
+          "OPT0013"
+        ]
+      }
+    ]
+  },
+  {
+    "RuleId": 4,
+    "Sequence": 1,
+    "QuestionId": "IQA0015",
+    "ParentQuestionId": "IQA0014",
+    "Description": "Please answer the following question, if you have answered Yes to Q3 under Project Scope",
+    "Operator": "And",
+    "Conditions": [
+      {
+        "Operator": "AND",
+        "Comparer": "=",
+        "Value": null,
+        "Negate": false,
+        "Selection": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ]
+      }
+    ]
+  },
+  {
+    "RuleId": 5,
+    "Sequence": 1,
+    "QuestionId": "IQA0017",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers to Q2 or if you have answered Yes to Q3 under Project Scope, the following question should be answered",
+    "Operator": "OR",
+    "Conditions": [
+      {
+        "Operator": "AND",
+        "Comparer": "=",
+        "Value": null,
+        "Negate": false,
+        "Selection": "Single",
+        "ParentOptions": [
+          "OPT0009"
+        ]
+      }
+    ]
+  },
+  {
+    "RuleId": 6,
+    "Sequence": 2,
+    "QuestionId": "IQA0017",
+    "ParentQuestionId": "IQA0014",
+    "Description": "Please answer the following question, if you have answered Yes to Q3 under Project Scope",
+    "Operator": "OR",
+    "Conditions": [
+      {
+        "Operator": "AND",
+        "Comparer": "=",
+        "Value": null,
+        "Negate": false,
+        "Selection": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ]
+      }
+    ]
+  },
+  {
+    "RuleId": 7,
+    "Sequence": 1,
+    "QuestionId": "IQA0018",
+    "ParentQuestionId": "IQA0017",
+    "Description": "Please answer the following question, if you have answered Yes to Q4 under Project Scope",
+    "Operator": "AND",
+    "Conditions": [
+      {
+        "Operator": "AND",
+        "Comparer": "=",
+        "Value": null,
+        "Negate": false,
+        "Selection": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ]
+      }
+    ]
+  },
+  {
+    "RuleId": 8,
+    "Sequence": 1,
+    "QuestionId": "IQA03282",
+    "ParentQuestionId": "IQA0018",
+    "Description": "Please answer the following question, if you have answered Yes to Q4a under Project Scope",
+    "Operator": "AND",
+    "Conditions": [
+      {
+        "Operator": "AND",
+        "Comparer": "=",
+        "Value": null,
+        "Negate": false,
+        "Selection": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ]
+      }
+    ]
+  },
+  {
+    "RuleId": 9,
+    "Sequence": 1,
+    "QuestionId": "IQA0020",
+    "ParentQuestionId": "IQA0018",
+    "Description": "Please answer the following question, if you have answered Yes to Q4a under Project Scope",
+    "Operator": "AND",
+    "Conditions": [
+      {
+        "Operator": "AND",
+        "Comparer": "=",
+        "Value": null,
+        "Negate": false,
+        "Selection": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ]
+      }
+    ]
+  }
+]

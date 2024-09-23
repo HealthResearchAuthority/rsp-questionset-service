@@ -11,12 +11,6 @@ public class AnswerConfiguration : IEntityTypeConfiguration<Answer>
     {
         builder.HasKey(qo => qo.AnswerId);
 
-        //builder
-        //    .HasOne<AnswerOption>()
-        //    .WithMany()
-        //    .HasForeignKey(ans => ans.AnswerOptionId)
-        //    .OnDelete(DeleteBehavior.Cascade);
-
         builder.HasData(QuestionsData.SeedAnswers());
     }
 }
