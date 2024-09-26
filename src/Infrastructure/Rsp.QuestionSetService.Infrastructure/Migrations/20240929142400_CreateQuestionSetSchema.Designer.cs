@@ -12,8 +12,8 @@ using Rsp.QuestionSetService.Infrastructure;
 namespace Rsp.QuestionSetService.Infrastructure.Migrations
 {
     [DbContext(typeof(QuestionSetDbContext))]
-    [Migration("20240809144257_UpdateQuestionIds")]
-    partial class UpdateQuestionIds
+    [Migration("20240929142400_CreateQuestionSetSchema")]
+    partial class CreateQuestionSetSchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -4514,6 +4514,9 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Sequence")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -4538,7 +4541,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0001",
                             QuestionText = "Short project title",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         },
                         new
                         {
@@ -4549,7 +4553,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0001",
                             QuestionText = "Identify your role",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 2
                         },
                         new
                         {
@@ -4560,7 +4565,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0001",
                             QuestionText = "Full project title",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -4571,7 +4577,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0001",
                             QuestionText = "Is this project likely to be managed as commercial research?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 4
                         },
                         new
                         {
@@ -4582,18 +4589,20 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0001",
                             QuestionText = "Are you seeking NIHR funding for this project?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 5
                         },
                         new
                         {
                             QuestionId = "IQG0001",
                             Conformance = "Mandatory",
                             DataType = "n/a",
-                            Heading = "n/a",
+                            Heading = "Note",
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0001",
                             QuestionText = "The following services to support researchers are available via the Central Portfolio Management System (CPMS)\n• creation of a Schedule of Events Cost Attribution Template (SoECAT) to support non-commercial funding applications and the set-up of studies in the NHS or HSC\n• creation of an interactive costing tool (for commercial sponsors) for set up of studies in the NHS or HSC \n• access to feasibility services\n• access to clinical research network support",
-                            QuestionType = "Label: on-screen instruction"
+                            QuestionType = "Label: on-screen instruction",
+                            Sequence = 6
                         },
                         new
                         {
@@ -4604,7 +4613,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0001",
                             QuestionText = "Do you wish to access one or more of the CPMS services? If you select 'Yes', IRAS will share information with the CPMS once the 'continue' button at the bottom of the page has been pressed.",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 7
                         },
                         new
                         {
@@ -4615,18 +4625,20 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0001",
                             QuestionText = "Provide the email of the person who will be the initial contact for CPMS.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 8
                         },
                         new
                         {
                             QuestionId = "IQG0002",
                             Conformance = "Conditional",
                             DataType = "n/a",
-                            Heading = "n/a",
+                            Heading = "Note",
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0001",
                             QuestionText = "The person identified will be able to access CPMS [link to CPMS SIM Homepage Link].",
-                            QuestionType = "Label: on-screen instruction"
+                            QuestionType = "Label: on-screen instruction",
+                            Sequence = 9
                         },
                         new
                         {
@@ -4637,7 +4649,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Is the research project or any part of it being undertaken as an educational project?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 1
                         },
                         new
                         {
@@ -4648,7 +4661,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Select all the activities that will be involved in this project:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 2
                         },
                         new
                         {
@@ -4659,7 +4673,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Is this application to establis a research bioresource?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 3
                         },
                         new
                         {
@@ -4670,7 +4685,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Will the bioresource be established within a NHS or HSC diagnostic archive?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 4
                         },
                         new
                         {
@@ -4681,7 +4697,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Is this project a clinical trial of an investigational medicinal product (CTIMP)?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 5
                         },
                         new
                         {
@@ -4692,7 +4709,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Select the option that applies to your project:",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 6
                         },
                         new
                         {
@@ -4703,7 +4721,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Does any investigational medicinal product contain genetically modified organisms?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 7
                         },
                         new
                         {
@@ -4714,7 +4733,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Is this project a clinical investigation or other study of a medical device (including digital technology)?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 8
                         },
                         new
                         {
@@ -4725,7 +4745,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Does the project involve exposing participants to any ionising radiation?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 9
                         },
                         new
                         {
@@ -4736,7 +4757,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Will you be taking or using any human biological samples?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 10
                         },
                         new
                         {
@@ -4747,7 +4769,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Select the option that applies to your project:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 11
                         },
                         new
                         {
@@ -4758,7 +4781,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Will identifiable patient data be accessed outside the care team without prior consent at any stage of the project (including identification of potential participants)?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 12
                         },
                         new
                         {
@@ -4769,7 +4793,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Do you plan at any stage of the project to undertake research with adults lacking capacity to consent for themselves that would otherwise require consent?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 13
                         },
                         new
                         {
@@ -4780,7 +4805,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Will you include any participants who are children?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 14
                         },
                         new
                         {
@@ -4791,7 +4817,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Will you include any participants who are prisoners or young offenders in the custody of His Majesty's Prison and Probation Service (HMPPS) or who are offenders supervised by the probation service in England or Wales?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 15
                         },
                         new
                         {
@@ -4802,7 +4829,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Will this project involve any activity under the responsibility of the Ministry of Defence (MOD)?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 16
                         },
                         new
                         {
@@ -4813,7 +4841,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0003",
                             QuestionText = "Will this project involve activities regulated by the Human Fertilisation and Embryology Authority (HFEA)?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 17
                         },
                         new
                         {
@@ -4824,7 +4853,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0004",
                             QuestionText = "Is this project taking place in any countries other than the UK?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 1
                         },
                         new
                         {
@@ -4835,7 +4865,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0004",
                             QuestionText = "List the countries outside the UK participating in this project.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 2
                         },
                         new
                         {
@@ -4846,7 +4877,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0004",
                             QuestionText = "In which countries of the UK will the project take place? Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 3
                         },
                         new
                         {
@@ -4857,7 +4889,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0004",
                             QuestionText = "Where in the UK will the human biologicial samples or data be held? Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 4
                         },
                         new
                         {
@@ -4868,7 +4901,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0004",
                             QuestionText = "From where in the UK will human biologicial samples or data be obtained? Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 5
                         },
                         new
                         {
@@ -4879,7 +4913,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0004",
                             QuestionText = "Where will the project be taking place? Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 6
                         },
                         new
                         {
@@ -4890,7 +4925,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0004",
                             QuestionText = "Give details of other organisations responsible for conducting the project.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 7
                         },
                         new
                         {
@@ -4901,7 +4937,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "A",
                             QuestionSectionId = "IQT0004",
                             QuestionText = "Will you allow your research sites to use Participant Identification Centres (PICs)?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 8
                         },
                         new
                         {
@@ -4912,7 +4949,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0005",
                             QuestionText = "Provide protocol reference number",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         },
                         new
                         {
@@ -4923,7 +4961,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0005",
                             QuestionText = "Provide the EU Clinical Trial (EUCT) number",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 2
                         },
                         new
                         {
@@ -4934,7 +4973,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0005",
                             QuestionText = "Research project public summary:\n* explain why the research is being carried out, the questions it seeks to answer, its design and methodology\n* do not reproduce or refer to the protocol \n* complete this section in language understandable to a member of the public (maximum 300 words)\n\nThis summary will be published on the Health Research Authority (HRA) website following approval.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -4945,7 +4985,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "In which aspects of the project have you already actively involved patients or their carers, service users or members of the public?\nInclude patient and public involvement from wider programmes that has informed this project. Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 1
                         },
                         new
                         {
@@ -4956,7 +4997,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "Give details of how you involved public contributors",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 2
                         },
                         new
                         {
@@ -4967,7 +5009,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "Insights from patients, carers, services users or members of the public could have helped to ensure that this research reflects the priorities, needs and concerns of both the intended participant population, and of the people the research is intended to benefit. What are your reasons for not involving these people?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -4978,7 +5021,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "How did you identify the public contributors that you involved?  Select all that apply",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 4
                         },
                         new
                         {
@@ -4989,7 +5033,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "Give details how you identified the public contributors to that you involved.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -5000,7 +5045,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "Tell us about the public contributors you worked with: \n• how many of them were there?\n• were the perspectives those of patients, of carers, of service users, of people with experience of being involved in research, or of members of the public?\n• what was relevant about their skills and experience (this might include their demographic information)?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 6
                         },
                         new
                         {
@@ -5011,7 +5057,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "What did your public contributors say was important to them about how this research is done?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -5022,7 +5069,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "How do you plan to involve public contributors in the remaining stages of the research process?  Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 8
                         },
                         new
                         {
@@ -5033,7 +5081,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "Give details of other aspects public contributors will advise on or contribute to",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -5044,7 +5093,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "Justify your approach and describe the benefits and challenges of involving public contributors",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -5055,7 +5105,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0006",
                             QuestionText = "Justify the approach and  absence of public involvement",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 11
                         },
                         new
                         {
@@ -5066,7 +5117,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Select the methodology or methodologies you will be using for this project:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 1
                         },
                         new
                         {
@@ -5077,7 +5129,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Give details of the methodologies you will be using",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 2
                         },
                         new
                         {
@@ -5088,7 +5141,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Select the trial methodology",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 3
                         },
                         new
                         {
@@ -5099,7 +5153,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Specify the methodology",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 4
                         },
                         new
                         {
@@ -5110,7 +5165,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Give more details of the methodology",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -5121,7 +5177,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Is your project a clinical trial to study a novel intervention?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 6
                         },
                         new
                         {
@@ -5132,7 +5189,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Is your project a randomised clinical trial to compare any interventions in clinical practice?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 7
                         },
                         new
                         {
@@ -5143,7 +5201,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Are all the interventions that you are comparing routine 'gold standard' care options in clinical practice?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 8
                         },
                         new
                         {
@@ -5154,7 +5213,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "What is the principal research question or objective? Describe this in language understandable to a member of the public.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -5165,7 +5225,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "What are the secondary research question or objectives if applicable? Describe this in language understandable to a member of the public.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -5176,7 +5237,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Does your project use AI (artificial intelligence)?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 11
                         },
                         new
                         {
@@ -5187,7 +5249,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "In relation to designing, developing or testing an AI product or tool, what best describes the type of AI? Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 12
                         },
                         new
                         {
@@ -5198,7 +5261,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Describe the type of AI being used in your project.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 13
                         },
                         new
                         {
@@ -5209,7 +5273,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "In relation to using an existing AI product or tool for its intended purpose, what best describes the type of AI? Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 14
                         },
                         new
                         {
@@ -5220,7 +5285,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "Describe the type of AI being used in your project.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 15
                         },
                         new
                         {
@@ -5231,7 +5297,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0007",
                             QuestionText = "State exactly what will happen to participants, their tissue or data, how many times and in what order:\n* complete this in language understandable to a member of the public",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 16
                         },
                         new
                         {
@@ -5242,7 +5309,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "What are the primary conditions or problems being studied? Select all that apply",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 1
                         },
                         new
                         {
@@ -5253,7 +5321,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "List the principal inclusion criteria for selection of participants, data or samples",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 2
                         },
                         new
                         {
@@ -5264,7 +5333,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "List the principal exclusion criteria or selection of participants, data or samples",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -5275,7 +5345,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "How are you making sure that your study sample reflects the real-world population that the research is for and about? Consider people and communities who are often excluded from research in the field you are studying.\nYou may attach evidence or assessments already agreed with funders or sponsors.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 4
                         },
                         new
                         {
@@ -5286,7 +5357,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "How will you ensure that the people you have chosen to include in your project are able to participate fully?  Consider factors such as health, identity, cultural, socioeconomic factors, literacy, accessibility, or other circumstances to facilitate participation in your research.\nYou may attach evidence or assessments already agreed with funders or sponsors.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -5297,7 +5369,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "Select which groups will participate or provide data or samples in this project. Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 6
                         },
                         new
                         {
@@ -5308,7 +5381,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "Give details of the groups participating or providing data or samples in this project",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -5319,7 +5393,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "When do you plan to start recruiting participants or collecting samples or data?",
-                            QuestionType = "Date"
+                            QuestionType = "Date",
+                            Sequence = 8
                         },
                         new
                         {
@@ -5330,7 +5405,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "How long do you expect each participant to be in the project in total?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -5341,7 +5417,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "What arrangements will apply to potential participants who are involved in current research or have recently been involved in any research prior to recruitment?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -5352,7 +5429,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0009",
                             QuestionText = "Could any of the potential participants for the project be considered to be vulnerable at the time of approach?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 11
                         },
                         new
                         {
@@ -5363,7 +5441,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "What is the intervention or treatment being studied? \n* provide the trade name, and brand name where relevant, of any device or medicine. \n* for surgical, psychological or non-clinical interventions briefly describe the nature of the intervention\n* if relevant, include details of any control arm",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         },
                         new
                         {
@@ -5374,7 +5453,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Is this treatment first-in-human?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 2
                         },
                         new
                         {
@@ -5385,7 +5465,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Does your project involve a change or a delay to patients’ standard treatment or care?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 3
                         },
                         new
                         {
@@ -5396,7 +5477,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Are any of the treatments in this project being compared to standard care?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 4
                         },
                         new
                         {
@@ -5407,7 +5489,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Describe what arrangements you will put in place to address any changes in standard care during the project, for example resulting from new guidance from the National Institute for Health and Care Excellence (NICE).",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -5418,7 +5501,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "What type of questionnaires are you using in this project? Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 6
                         },
                         new
                         {
@@ -5429,7 +5513,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Is it possible that any interviews, questionnaires or group discussions include topics that might be sensitive, embarrassing or upsetting?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 7
                         },
                         new
                         {
@@ -5440,7 +5525,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Is it possible that interviews, questionnaires or group discussions include topics that might result in criminal or other disclosures?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 8
                         },
                         new
                         {
@@ -5451,7 +5537,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Explain how any requirement for criminal or other disclosures will be dealt with in line with legal obligations, safeguarding arrangements and professional procedures and guidance.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -5462,7 +5549,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "What are the potential benefits for participants and society (including future patients)?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -5473,7 +5561,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Describe the potential safety concerns, risks and burdens in the project and how you will minimise these.",
-                            QuestionType = "Label"
+                            QuestionType = "Label",
+                            Sequence = 11
                         },
                         new
                         {
@@ -5484,7 +5573,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Any risks, side-effects or burdens of any research activities or monitoring of participants:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -5495,7 +5585,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Any risks due to a change or delay to standard treatment or care:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 13
                         },
                         new
                         {
@@ -5506,7 +5597,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Any risk or burden due to interviews, questionnaires or group discussions that include topics that might be sensitive, embarrassing or upsetting:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 14
                         },
                         new
                         {
@@ -5517,7 +5609,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Will you inform the participants' General Practitioners (or any other health or care professional responsible for their care) that they are taking part in the study?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 15
                         },
                         new
                         {
@@ -5528,7 +5621,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Explain the circumstances when you will contact General Practitioners or other responsible health or care professionals about a participant. What will you tell participants about this?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 16
                         },
                         new
                         {
@@ -5539,7 +5633,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "What will happen with treatment after the project has finished?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 17
                         },
                         new
                         {
@@ -5550,7 +5645,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Describe all the arrangements for continuued provision of treatment after the project has finished, including funding. Give details of the parties that have agreed these arrangements.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 18
                         },
                         new
                         {
@@ -5561,7 +5657,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "Describe the care arrangements after the project has finished.  Justify these arrangements",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 19
                         },
                         new
                         {
@@ -5572,7 +5669,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0008",
                             QuestionText = "When do you plan to finish collecting data for this project in the UK?",
-                            QuestionType = "Date"
+                            QuestionType = "Date",
+                            Sequence = 20
                         },
                         new
                         {
@@ -5583,7 +5681,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "Will you only include adults lacking capacity to consent for themselves as participants?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 1
                         },
                         new
                         {
@@ -5594,7 +5693,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "Will you only include children as participants?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 2
                         },
                         new
                         {
@@ -5605,7 +5705,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "Will you seek consent from participants prior to participation in the project?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 3
                         },
                         new
                         {
@@ -5616,7 +5717,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "Select the reasons why consent will not be obtained.  Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 4
                         },
                         new
                         {
@@ -5627,7 +5729,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "Justify why you will not seek consent:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -5638,7 +5741,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "Describe any arrangements for seeking consent using simplified methods:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 6
                         },
                         new
                         {
@@ -5649,7 +5753,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "How long will you allow potential participants to decide whether or not to take part?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -5660,7 +5765,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "Explain any payments, reimbursement of expenses or any other benefits or incentives to participants:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 8
                         },
                         new
                         {
@@ -5671,7 +5777,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "What arrangements will you make to comply with the principles of the Welsh Language Act in the provision of information to participants in Wales?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -5682,7 +5789,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "What consent arrangements will you make for persons who:\na) might not hear verbal explanations sufficiently, or \nb) might not be able to read written information in English sufficiently, or \nc) have special communication needs?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -5693,7 +5801,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "What arrangements will you make for participants who are unable to confirm their consent in writing?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 11
                         },
                         new
                         {
@@ -5704,7 +5813,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "What arrangements will you make to ensure participants receive any information that becomes available during the course of the project that may be relevant to their continued participation?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -5715,18 +5825,20 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "What steps would you take if a participant, who has given informed consent, loses capacity to consent during the research project? Select one option only.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 13
                         },
                         new
                         {
                             QuestionId = "IQA0109",
                             Conformance = "n/a",
                             DataType = "n/a",
-                            Heading = "n/a",
+                            Heading = "Note",
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0010",
                             QuestionText = "Proceed to complete Adults Lacking Capacity\n[final wording TBC]",
-                            QuestionType = "Label: on-screen instruction"
+                            QuestionType = "Label: on-screen instruction",
+                            Sequence = 14
                         },
                         new
                         {
@@ -5737,7 +5849,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0011",
                             QuestionText = "Describe potential risks to the research team in conducting the project and state how these will be managed",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         },
                         new
                         {
@@ -5748,7 +5861,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0011",
                             QuestionText = "Does the Chief Investigator or any other investigator or collaborator have any direct personal involvement (for example, financial, share-holding, personal relationship) in the organisations sponsoring or funding the project that may give rise to a possible conflict of interest?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 2
                         },
                         new
                         {
@@ -5759,7 +5873,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0011",
                             QuestionText = "Give details of any potential relevant conflict of interest.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -5770,7 +5885,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0011",
                             QuestionText = "Is the Chief Investigator a member of any NHS Research Ethics Committee?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 4
                         },
                         new
                         {
@@ -5781,7 +5897,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0011",
                             QuestionText = "Select all Research Ethics Committees (REC) the Chief Investigator or any other investigators are a member of.  Select all that apply.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 5
                         },
                         new
                         {
@@ -5792,7 +5909,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0011",
                             QuestionText = "Will the Chief Investigator or any other investigator receive any personal payment over and above normal salary, or any other benefits or incentives, for taking part in this project?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 6
                         },
                         new
                         {
@@ -5803,7 +5921,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0011",
                             QuestionText = "Give details of payments, benefits or any other incentives.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -5814,7 +5933,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0012",
                             QuestionText = "Summarise the main ethical issues arising from the project. \n* consider risks, burdens and benefits involved\n* include justifications for balancing risks and benefits (such as the involvement of potential participants being vulnerable at time of approach) \n* complete this in language understandable to a member of the public.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         },
                         new
                         {
@@ -5825,7 +5945,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0012",
                             QuestionText = "Is this application any of the following:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 2
                         },
                         new
                         {
@@ -5836,7 +5957,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0012",
                             QuestionText = "Provide the IRAS ID of the project that received an unfavourable opinion.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -5847,7 +5969,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0012",
                             QuestionText = "Explain how the reasons for the unfavourable opinion have been addressed in this application.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 4
                         },
                         new
                         {
@@ -5858,7 +5981,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0012",
                             QuestionText = "Provide any information about the linked project that will help reviewers to understand the background to this application or the decisions you have made in this application.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -5869,7 +5993,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "How has the quality of the research been assessed?  Select all that apply.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 1
                         },
                         new
                         {
@@ -5880,7 +6005,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "Give details of how the quality of the research has been assessed",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 2
                         },
                         new
                         {
@@ -5891,7 +6017,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "Explain why this review process is appropriate to the nature of the project and if any issues raised by the review have not been addressed.  Give details if the review only relates to part of the project.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -5902,7 +6029,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "What will the primary form of analysis be?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 4
                         },
                         new
                         {
@@ -5913,7 +6041,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "Give details of the methods for analysing the data.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -5924,7 +6053,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "How have the statistical aspects of the project been reviewed?  Select all that apply.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 6
                         },
                         new
                         {
@@ -5935,7 +6065,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "Give details of the person or organisation who undertook the statistical review, and how you have addressed their recommendations.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -5946,7 +6077,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "What is the primary outcome measure for the project?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 8
                         },
                         new
                         {
@@ -5957,7 +6089,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "What are the secondary outcome measures (if any)?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -5968,7 +6101,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "How many participants, samples, or data records do you plan to study in total? Describe why you chose this number. If there is more than one group, give further details.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -5979,7 +6113,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "How was the sample size decided upon? If a formal sample size calculation was used, indicate how this was done, giving sufficient information to justify and reproduce the calculation.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 11
                         },
                         new
                         {
@@ -5990,7 +6125,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0013",
                             QuestionText = "What are the criteria for electively stopping the project early?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -6001,7 +6137,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "Give details of the source of all funding or materials supplied.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         },
                         new
                         {
@@ -6012,7 +6149,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "Describe any logistical, legal, or management risks relating to your project. State how you are addressing them. Studies that present a minimal risk to participants may still raise complex organisational or legal issues.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 2
                         },
                         new
                         {
@@ -6023,7 +6161,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "What arrangements will be put in place for the monitoring and auditing of the conduct of the project?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 3
                         },
                         new
                         {
@@ -6034,7 +6173,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "What arrangements will be made to review interim safety and efficacy data from the project? Will a formal Data Monitoring Committee or equivalent body be convened?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 4
                         },
                         new
                         {
@@ -6045,7 +6185,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "What arrangements will be made for insurance or indemnity to meet the potential legal liability of the sponsors for harm to participants arising from the management of the project? Provide any insurance certificates.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -6056,7 +6197,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "What arrangements will be made for insurance or indemnity to meet the potential legal liability of the sponsors or employers for harm to participants arising from the design of the project? Provide any insurance certificates.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 6
                         },
                         new
                         {
@@ -6067,7 +6209,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "What arrangements will be made for insurance or indemnity to meet the potential legal liability of investigators or collaborators arising from harm to participants in the conduct of the project? \n* Provide details of any time limits to the cover.  \n* Explain the arrangements that would apply if the insurance ceases.\n* Provide any insurance certificates.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -6078,7 +6221,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "Describe and justify which participant groups are excluded from cover under the insurance.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 8
                         },
                         new
                         {
@@ -6089,7 +6233,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "Have sponsors made arrangements for payment of compensation in the event of harm to the participants where no legal liability arises?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 9
                         },
                         new
                         {
@@ -6100,7 +6245,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "Give details of the arrangements for compensation.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -6111,7 +6257,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "Have sponsors delegated any site management responsibilities to a Contract Research Organisation or a Clinical Trials Unit?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 11
                         },
                         new
                         {
@@ -6122,7 +6269,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "Give details of the Contract Research Organisation or Clinical Trials Unit with site management responsibilities.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -6133,7 +6281,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "Has responsibility for any specific research activities or procedures been delegated to a subcontractor? ",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 13
                         },
                         new
                         {
@@ -6144,18 +6293,20 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0014",
                             QuestionText = "Give details of subcontractors and the proposed oversight arrangements.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 14
                         },
                         new
                         {
                             QuestionId = "IQG0003",
                             Conformance = "n/a",
                             DataType = "n/a",
-                            Heading = "n/a",
+                            Heading = "Note",
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Most research should be registered in a publicly accessible registry and it is expected that all researchers, research sponsors and others meet this fundamental best practice standard. ",
-                            QuestionType = "Label: on-screen instruction"
+                            QuestionType = "Label: on-screen instruction",
+                            Sequence = 1
                         },
                         new
                         {
@@ -6166,7 +6317,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Is the project already registered elsewhere?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 2
                         },
                         new
                         {
@@ -6177,7 +6329,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Registration and research project public summary publication deferral request. Deferral will only be agreed where a strong justification is provided.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 3
                         },
                         new
                         {
@@ -6188,7 +6341,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Provide clear justification for the deferral request.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 4
                         },
                         new
                         {
@@ -6199,7 +6353,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Confirm the arrangements for registration of this project. Select all that apply:",
-                            QuestionType = "Checkbox"
+                            QuestionType = "Checkbox",
+                            Sequence = 5
                         },
                         new
                         {
@@ -6210,7 +6365,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Provide details of other arrangements for project registration.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 6
                         },
                         new
                         {
@@ -6221,7 +6377,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Confirm the arrangements for registration of this project. Select all that apply.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 7
                         },
                         new
                         {
@@ -6232,7 +6389,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "ISRCTN",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 8
                         },
                         new
                         {
@@ -6243,7 +6401,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Clinicaltrials.gov",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -6254,18 +6413,20 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Provide the name of any other registries and the reference number",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
                             QuestionId = "IQG0004",
                             Conformance = "Conditional",
                             DataType = "n/a",
-                            Heading = "n/a",
+                            Heading = "Note",
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "The Health Research Authority will publish a summary of the project, once approved unless a deferral is requested and agreed. Deferral will only be agreed where a strong justification is provided.",
-                            QuestionType = "Label/On-screen Instructions"
+                            QuestionType = "Label/On-screen Instructions",
+                            Sequence = 11
                         },
                         new
                         {
@@ -6276,7 +6437,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Project public summary publication deferral request",
-                            QuestionType = "Label"
+                            QuestionType = "Label",
+                            Sequence = 12
                         },
                         new
                         {
@@ -6287,7 +6449,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Provide clear justification for the deferral request.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 13
                         },
                         new
                         {
@@ -6298,7 +6461,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "You should define the end of your project and notify relevant bodies at the end of the project.  What is the planned end date?",
-                            QuestionType = "Date"
+                            QuestionType = "Date",
+                            Sequence = 14
                         },
                         new
                         {
@@ -6309,7 +6473,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "A final report should be submitted to the Research Ethics Committee (REC) within 12 months of the end of the project, including a public summary of results. How else do you intend to report and disseminate the results of the project? Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 15
                         },
                         new
                         {
@@ -6320,7 +6485,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Give details of other reporting and dissemination plans",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 16
                         },
                         new
                         {
@@ -6331,7 +6497,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Results of the research provide feedback to participants on the outcome and how they have contributed.  This information should be accessible and easy to understand.  \n* explain how and when you will inform participants of the results, or give reasons if there are no arrangements to do this",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 17
                         },
                         new
                         {
@@ -6342,7 +6509,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "You should enable the sharing of study data, with appropriate safeguards in place, to other interested groups and communities. Sharing data maximises and respects the contribution of participants and enables and supports further re-use. Do you plan to share de-identified individual participant-level data?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 18
                         },
                         new
                         {
@@ -6353,7 +6521,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Give details of your plans for sharing de-identified individual participant-level data, or describe your alternative plans for making data available for scrutiny or re-use.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 19
                         },
                         new
                         {
@@ -6364,18 +6533,20 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Will you have any remaining human biological material at the end of the project?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 20
                         },
                         new
                         {
                             QuestionId = "IQA0182",
                             Conformance = "Conditional",
                             DataType = "Boolean",
-                            Heading = " 8a",
+                            Heading = "8a",
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "The UK Clinical Research Collaboration (UKCRC) Tissue Directory and Coordination Centre advises researchers to register sample collections with them, to maximise the use of the samples. Will you be registering any remaining samples with them?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 21
                         },
                         new
                         {
@@ -6386,7 +6557,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "The Human Tissue Authority and Medical Research Council advise researchers to consider options for maximising use before disposal. You should enable the sharing of tissue samples, with appropriate safeguards in place, to other interested groups and communities. Sharing tissue maximises and respects the contribution of participants and enables and supports further research. Justify the post-study arrangements or destruction of the material.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 22
                         },
                         new
                         {
@@ -6397,7 +6569,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "What is the contact point for public queries about this project? This information will be made public so you should use generic contact details rather than naming an individual person.",
-                            QuestionType = "Label"
+                            QuestionType = "Label",
+                            Sequence = 23
                         },
                         new
                         {
@@ -6408,7 +6581,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Email",
-                            QuestionType = "Email"
+                            QuestionType = "Email",
+                            Sequence = 24
                         },
                         new
                         {
@@ -6419,7 +6593,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Telephone",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 25
                         },
                         new
                         {
@@ -6430,7 +6605,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Postal address",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 26
                         },
                         new
                         {
@@ -6441,7 +6617,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "What is the contact point for scientific queries about this project? This information will be made public so you should use generic contact details rather than naming an individual person.",
-                            QuestionType = "Label"
+                            QuestionType = "Label",
+                            Sequence = 27
                         },
                         new
                         {
@@ -6452,7 +6629,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Email",
-                            QuestionType = "Email"
+                            QuestionType = "Email",
+                            Sequence = 28
                         },
                         new
                         {
@@ -6463,7 +6641,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Telephone",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 29
                         },
                         new
                         {
@@ -6474,7 +6653,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0015",
                             QuestionText = "Postal address",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 30
                         },
                         new
                         {
@@ -6485,7 +6665,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "B",
                             QuestionSectionId = "IQT0021",
                             QuestionText = "Is this study limited to working with data only?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 1
                         },
                         new
                         {
@@ -6496,7 +6677,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Describe the role of the students in the project",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         },
                         new
                         {
@@ -6507,7 +6689,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Is the project being undertaken as a group project?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 2
                         },
                         new
                         {
@@ -6518,40 +6701,44 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Level of course ",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 3
                         },
                         new
                         {
                             QuestionId = "IQG0005",
                             Conformance = "Conditional",
                             DataType = "n/a",
-                            Heading = "n/a",
+                            Heading = "Note",
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "You cannot proceed with your project if it is at undergraduate level or below and not a group project led by a supervisor.",
-                            QuestionType = "Label: on-screen instruction"
+                            QuestionType = "Label: on-screen instruction",
+                            Sequence = 4
                         },
                         new
                         {
                             QuestionId = "IQA0223",
                             Conformance = "Conditional",
                             DataType = "Radio button",
-                            Heading = "n/a",
+                            Heading = "4",
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "You should complete the student research toolkit and confirm whether you are eligible to proceed with your project. You should include the relevant suplementary declaration form from your supervisor or course leader with your IRAS application. If you are not eligible you cannot proceed with your project.  Indicate which declaration is included as part of your project submission:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 5
                         },
                         new
                         {
                             QuestionId = "IQA0220",
                             Conformance = "Mandatory",
                             DataType = "Text",
-                            Heading = "4",
+                            Heading = "4a",
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
-                            QuestionText = "University name ",
-                            QuestionType = "Label"
+                            QuestionText = "University name",
+                            QuestionType = "Text",
+                            Sequence = 6
                         },
                         new
                         {
@@ -6561,8 +6748,9 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             Heading = "5",
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
-                            QuestionText = "Course name ",
-                            QuestionType = "Text"
+                            QuestionText = "Course name",
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -6573,7 +6761,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "The university is expected to take on the role of sponsor for this project. Is the university the sponsor?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 8
                         },
                         new
                         {
@@ -6584,7 +6773,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Justify why the university is not taking on the role of sponsor. If the project will be in the NHS this is not sufficient reason for the sponsor to be an NHS organisation.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -6595,7 +6785,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Student name and contact details",
-                            QuestionType = "Label"
+                            QuestionType = "Label",
+                            Sequence = 10
                         },
                         new
                         {
@@ -6606,7 +6797,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "First name",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 11
                         },
                         new
                         {
@@ -6617,7 +6809,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Last name",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -6628,18 +6821,20 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Email",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 13
                         },
                         new
                         {
                             QuestionId = "IQA0230",
                             Conformance = "Conditional",
                             DataType = "n/a",
-                            Heading = "n/a",
+                            Heading = "Note",
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "If your course is masters or equivalent, a supervisor is expected to act as the Chief Investigator",
-                            QuestionType = "Label: on-screen instruction"
+                            QuestionType = "Label: on-screen instruction",
+                            Sequence = 14
                         },
                         new
                         {
@@ -6650,7 +6845,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Who will act as Chief Investigator for this project?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 15
                         },
                         new
                         {
@@ -6661,7 +6857,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Academic supervisor name and contact details. If you have more than one supervisor, list the supervisor acting as Chief Investigator first.",
-                            QuestionType = "Label: on-screen instruction"
+                            QuestionType = "Label: on-screen instruction",
+                            Sequence = 16
                         },
                         new
                         {
@@ -6672,7 +6869,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "First name",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 17
                         },
                         new
                         {
@@ -6683,7 +6881,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Last name",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 18
                         },
                         new
                         {
@@ -6694,7 +6893,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Job title",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 19
                         },
                         new
                         {
@@ -6705,7 +6905,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "University",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 20
                         },
                         new
                         {
@@ -6716,7 +6917,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C1",
                             QuestionSectionId = "IQT0019",
                             QuestionText = "Email",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 21
                         },
                         new
                         {
@@ -6727,7 +6929,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0025",
                             QuestionText = "Is the study sponsored, funded or supported by a device manufacturer or other commercial company?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 1
                         },
                         new
                         {
@@ -6738,7 +6941,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0025",
                             QuestionText = "Select the type of project",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 2
                         },
                         new
                         {
@@ -6749,7 +6953,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0025",
                             QuestionText = "Select the type of project",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 3
                         },
                         new
                         {
@@ -6760,7 +6965,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0025",
                             QuestionText = "Will you be conducting this research project in Northern Ireland?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 4
                         },
                         new
                         {
@@ -6771,7 +6977,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0025",
                             QuestionText = "Confirm the review required for your project",
-                            QuestionType = "Label"
+                            QuestionType = "Label",
+                            Sequence = 5
                         },
                         new
                         {
@@ -6782,7 +6989,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0025",
                             QuestionText = "Based on the information you have provided you are likely to need to apply to the Medicines and Healthcare products Regulatory Agency (MHRA) and Research Ethics Committee (REC). Review the guidance and confirm what review is required.",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 6
                         },
                         new
                         {
@@ -6793,7 +7001,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0025",
                             QuestionText = "Based on the information you have provided you are likely to need to apply to a Research Ethics Committee (REC) but not to the Medicines and Healthcare products Regulatory Agency (MHRA). Review the guidance and confirm what review is required.",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 7
                         },
                         new
                         {
@@ -6804,7 +7013,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Is the manufacturer (or other organisation responsible for developing the device) the same organisation named as lead sponsor for this study?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 1
                         },
                         new
                         {
@@ -6815,7 +7025,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Details of the medical devices to be used in the study",
-                            QuestionType = "Label"
+                            QuestionType = "Label",
+                            Sequence = 2
                         },
                         new
                         {
@@ -6826,7 +7037,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Name of the manufacturer:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -6837,18 +7049,20 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Manufacturer's trade name for the device:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 4
                         },
                         new
                         {
                             QuestionId = "IQA03251",
-                            Conformance = "n/a",
+                            Conformance = "Mandatory",
                             DataType = "n/a",
-                            Heading = "n/a",
+                            Heading = "Note",
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Device identification name and number:",
-                            QuestionType = "Label"
+                            QuestionType = "Label",
+                            Sequence = 5
                         },
                         new
                         {
@@ -6859,7 +7073,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Name:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 6
                         },
                         new
                         {
@@ -6870,7 +7085,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Number:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -6881,7 +7097,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Generic name of device and principal intended uses:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 8
                         },
                         new
                         {
@@ -6892,7 +7109,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Length of time since device came into use:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -6903,7 +7121,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Select the type of research project. For all products with UKCA/CE UKNI/CE mark, attach instructions for use.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 10
                         },
                         new
                         {
@@ -6914,7 +7133,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Will the device be used within its intended population?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 11
                         },
                         new
                         {
@@ -6925,7 +7145,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Description of any new device, materials, method of use or operation with a summary of the intended purpose.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -6936,7 +7157,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Composition of any new implantable materials, including summary of biocompatibility findings from studies to date.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 13
                         },
                         new
                         {
@@ -6947,7 +7169,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "A summary of any modifications to UKCA/CE UKNI/CE marked devices.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 14
                         },
                         new
                         {
@@ -6958,7 +7181,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "A summary of any proposed changes to the UKCA/CE UKNI/CE marked intended purpose.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 15
                         },
                         new
                         {
@@ -6969,7 +7193,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Are the procedures involved non-invasive or minimally invasive?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 16
                         },
                         new
                         {
@@ -6980,7 +7205,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Describe the arrangements for manufacture of the investigational device. Include details of the quality assurance system in place within the legal entity. Give details of any collaboration with a commercial manufacturer or other sub- contractor. Enclose a copy of the contract.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 17
                         },
                         new
                         {
@@ -6991,7 +7217,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "What safety and performance testing has been undertaken on the investigational device and its constituents? Give summarised details of appropriate tests (including outcome such as pass or fail), for example mechanical, electrical, biological, toxicological, sterilisation.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 18
                         },
                         new
                         {
@@ -7002,7 +7229,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Describe the sponsor’s plans for further development and use of the device. Indicate whether the plans include making it available (whether for a fee or not) to other legal entities or working with a device manufacturer or other company to commercialise the product.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 19
                         },
                         new
                         {
@@ -7013,7 +7241,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C4",
                             QuestionSectionId = "IQT0053",
                             QuestionText = "Give details of the arrangements for ensuring that the device has been manufactured to the standards expected of an equivalent UKCA/CE UKNI/CE marked device, and that all relevant testing to demonstrate compliance with these standards has been undertaken.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 20
                         },
                         new
                         {
@@ -7024,7 +7253,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Describe this type of materials. Give details of the samples.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 1
                         },
                         new
                         {
@@ -7035,7 +7265,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Will you be collecting new samples from participants? This could be new samples collected from participants for the project, or collecting samples for research at the same time as routine clinical samples.",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 2
                         },
                         new
                         {
@@ -7046,7 +7277,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Will the samples be provided as extra or surplus taken during a clinically directed procedure with consent?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 3
                         },
                         new
                         {
@@ -7057,7 +7289,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "How will the samples be collected? Describe what will happen to participants and how much sample will be collected. ",
-                            QuestionType = "text"
+                            QuestionType = "text",
+                            Sequence = 4
                         },
                         new
                         {
@@ -7068,7 +7301,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Will these participants be living or deceased?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 5
                         },
                         new
                         {
@@ -7079,7 +7313,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Will the samples be removed from the deceased in England, Northern Ireland, Scotland or Wales?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 6
                         },
                         new
                         {
@@ -7090,7 +7325,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Give details of any relevant Human Tissue Authority licences covering the premises where samples will be removed from the deceased. If a licence is not yet in place, confirm the arrangements for obtaining a relevant licence.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -7101,7 +7337,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Will the material be identifiable to the research team?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 8
                         },
                         new
                         {
@@ -7112,7 +7349,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Does this project come within the scope of the consent for the use of the material in research?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 9
                         },
                         new
                         {
@@ -7123,7 +7361,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "The geographical scope of the Human Tissue Act is largely limited to England, Wales and Northern Ireland. Will this material be exported from, or imported into, these nations from another nation outside of the geographical remit of the Human Tissue Act (including to, or from, Scotland)?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 10
                         },
                         new
                         {
@@ -7134,7 +7373,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "The Human Tissue Act (Scotland) applies to Scotland. Will this material be exported from, or imported into, Scotland from another nation outside of the geographical remit of the Human Tissue Act (Scotland)?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 11
                         },
                         new
                         {
@@ -7145,7 +7385,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Give reasons for the import or export activity that will take place and clarify whether a Material Transfer Agreement will be in place to manage this activity.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -7156,7 +7397,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "What consent arrangements will apply to collection and use of this sample? Where relevant, give details of any prior consent for use of samples from existing collections. If the use of this sample involves the analysis of DNA, or the analysis of RNA with the intention of providing information about DNA, confirm that explicit consent will be in place.",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 13
                         },
                         new
                         {
@@ -7167,7 +7409,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Give details of where the sample will be stored, who will have access and the custodial arrangements. ",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 14
                         },
                         new
                         {
@@ -7178,7 +7421,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Will the sample be processed or stored under study-specific arrangements or in line with normal clinical arrangements for the organisation?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 15
                         },
                         new
                         {
@@ -7189,7 +7433,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "What will happen to this material following the end of the project?",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 16
                         },
                         new
                         {
@@ -7200,7 +7445,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Explain how destruction of the material will be undertaken. If this relates to relevant material describe how it will comply with the Human Tissue Authority Code of Practice. ",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 17
                         },
                         new
                         {
@@ -7211,7 +7457,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022",
                             QuestionText = "Give further details of the proposed post-study arrangements including whether any relevant material will be rendered acellular.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 18
                         },
                         new
                         {
@@ -7222,7 +7469,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022.3",
                             QuestionText = "Is it possible that the project could produce health related findings of clinical significance for donors or their relatives?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 1
                         },
                         new
                         {
@@ -7233,7 +7481,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022.3",
                             QuestionText = "Will arrangements be made to notify the individuals concerned?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 2
                         },
                         new
                         {
@@ -7244,7 +7493,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C6",
                             QuestionSectionId = "IQT0022.3",
                             QuestionText = "Explain why individuals concerned will not be notified.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -7255,7 +7505,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "The clinical trial must relate directly to a life-threatening or debilitating clinical condition from which the individual suffers.  Describe how your project meets this requirement.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         },
                         new
                         {
@@ -7266,7 +7517,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Justify why this project is essential to validate data obtained in other clinical trials involving persons able to consent or obtained by other research methods",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 2
                         },
                         new
                         {
@@ -7277,7 +7529,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Set out the benefits that the administration of the investigational medicinal products is expected to produce for these participants and the grounds for expecting these benefits.  Detail why the inclusion of adults unable to give informed consent produces no risk at all to these participants, including risks to freedom of action or privacy.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -7288,7 +7541,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Describe how you will ensure that members of the research team who will make decisions on participants' capacity to consent are suitably qualified and experienced to make that decision.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 4
                         },
                         new
                         {
@@ -7299,7 +7553,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "What arrangements will be made to identify and seek informed consent from a personal or professional legal representative?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -7310,7 +7565,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "What arrangements will be made to continue to consult personal or professional legal representatives during the course of the project where necessary?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 6
                         },
                         new
                         {
@@ -7321,7 +7577,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Where appropriate you should provide information about the trial to participants according to their capacity to understand.  Include in your response:\n* what steps will you take to provide information\n* how will you consider the wishes of participants capable of forming an opinion\n* what arrangements will be put in place where capacity to consent will fluctuate or will be borderline",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -7332,7 +7589,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Is it possible that a participant requiring urgent treatment might need to be recruited into the trial before it is possible to identify and seek consent from a personal or professional legal representative?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 8
                         },
                         new
                         {
@@ -7343,7 +7601,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Outline how decisions will be made on the inclusion of such participants and what arrangements will be made to seek consent from the participant (if capacity has been recovered) or from a legal representative as soon as possible.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -7354,7 +7613,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Describe the arrangements for informing relatives in circumstances where a professional legal representative has to be consulted. If you will not be informing relatives in this circumstance, explain your reasoning.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -7365,7 +7625,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Where a participant is recruited prior to consent being obtained, and consent is later withheld or the participant dies before consent can be given, what provisions will apply to the study data collected up to this point?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 11
                         },
                         new
                         {
@@ -7376,7 +7637,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort).",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -7387,7 +7649,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0023",
                             QuestionText = "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 13
                         },
                         new
                         {
@@ -7398,7 +7661,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "The project must be connected with an impairing condition affecting the participant or their treatment. What impairing conditions will the participants have and how does the project relate to the impairing condition?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         },
                         new
                         {
@@ -7409,7 +7673,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Justify why this project could not be carried out as effectively if confined to adults capable of giving consent.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 2
                         },
                         new
                         {
@@ -7420,7 +7685,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Does the project have the potential to either:\na) benefit the participant without imposing a disproportionate burden, or \nb) provide knowledge of the causes of, or treatment or care of others with, the same or a similar condition? If the project does not meet either requirement you cannot undertake the research with adults lacking capacity.",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 3
                         },
                         new
                         {
@@ -7431,7 +7697,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Describe how the project has the potential to benefit the participant without imposing a disproportionate burden.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 4
                         },
                         new
                         {
@@ -7442,7 +7709,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Describe how the project will contribute to the knowledge of:\n* causes of the same or simlar condition\n* treatment or care of others with the same or simliar condition",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -7453,7 +7721,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "The project must not interfere significantly with participants' freedom of action or privacy.  It also must not be unduly invasive or restrictive.  Describe how the project meets these requirements.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 6
                         },
                         new
                         {
@@ -7464,7 +7733,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Describe how you will ensure that members of the research team who will make decisions on participant's capacity to consent are suitably qualified and experienced to make that decision.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -7475,7 +7745,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "For participants in England, Wales or Northern Ireland: What arrangements will be made to identify and consult an individual who is able to advise on the inclusion of the participant in the project who are unable to consent for themselves?  Describe how the individual will advise on the participant's presumed wishes and feelings.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 8
                         },
                         new
                         {
@@ -7486,7 +7757,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "For participants in Scotland: what arrangements will be made to consult a Welfare Guardian or Welfare Attorney, or if not appointed the nearest relative able to give consent on behalf of the incapacitated adult?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -7497,7 +7769,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "What arrangements will be made to continue to consult these individuals during the course of the project where necessary?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -7508,7 +7781,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "What will steps you take, if appropriate, to provide information about the trial to participants, according to their capacity of understanding, and to consider the wishes of participants capable of forming an opinion?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 11
                         },
                         new
                         {
@@ -7519,7 +7793,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "What arrangements will be put in place where capacity to consent will fluctuate or will be borderline?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -7530,7 +7805,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Is it possible that a participant requiring urgent treatment might need to be recruited into this project before it is possible to identify and consult a person able to advise on the presumed wishes and feelings of participants unable to consent for themselves?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 13
                         },
                         new
                         {
@@ -7541,7 +7817,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Where possible you should seek agreement from a registered practioner before including the participant.  Outline these arrangments.\n* if this is not feasible to seek agreement from a registered practioner, how will decisions be made on inclusion of participants? \n* what arrangements will be made to seek consent from the participant (if capacity has been recovered) or advice from a consultee as soon as possible",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 14
                         },
                         new
                         {
@@ -7552,7 +7829,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Describe the arrangements for informing relatives in circumstances where a nominated consultee has to be approached. If you will not be informing relatives in this circumstance, explain your reasoning.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 15
                         },
                         new
                         {
@@ -7563,7 +7841,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Where a participant is recruited prior to consent being obtained, and consent is later withheld or the participant dies before consent can be given, what provisions will apply to the study data collected up to this point?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 16
                         },
                         new
                         {
@@ -7574,7 +7853,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort).",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 17
                         },
                         new
                         {
@@ -7585,7 +7865,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C7",
                             QuestionSectionId = "IQT0024",
                             QuestionText = "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 18
                         },
                         new
                         {
@@ -7596,7 +7877,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Specify the ages of children who will be participating in this research project. Select all groups that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 1
                         },
                         new
                         {
@@ -7607,7 +7889,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Will you include children who will be unable to fully understand the details of the project and consequences of their participation? Select all that apply:",
-                            QuestionType = "Look-up list"
+                            QuestionType = "Look-up list",
+                            Sequence = 2
                         },
                         new
                         {
@@ -7618,7 +7901,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Describe the arrangements for obtaining consent from a person who has parental rights and responsibility for children who will not be able to fully understand the details of the project and consequences of their participation.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 3
                         },
                         new
                         {
@@ -7629,7 +7913,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Describe how you intend to provide children who will not be able to fully understand the details of the project and consequences of their participation, with information about the project. How will you seek their assent, if they are able? Describe how this process will be adapted to their age and level of understanding.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 4
                         },
                         new
                         {
@@ -7640,7 +7925,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Describe how you intend to seek informed consent from children who will be able to understand the details of the project and the consequences of participation, and willing to give consent on their own behalf, alongside parental agreement. For sites in Scotland, this may include children over the age of 12 years who are willing and able to give consent as the Children (Scotland) Act specifies that a child of 12 years or more should be presumed to be of sufficient age and maturity to form a view.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 5
                         },
                         new
                         {
@@ -7651,7 +7937,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Describe the arrangements for seeking informed consent from a person with parental responsibility or another legal representative for children under 16 years.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 6
                         },
                         new
                         {
@@ -7662,7 +7949,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Describe how you intend to provide children under 16 with information about the trial and seek their assent, where they are able. Describe how this process will be adapted to their age and level of understanding.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 7
                         },
                         new
                         {
@@ -7673,7 +7961,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Is it possible that a child might need to be treated urgently as part of the project before it is possible to identify and seek consent from a person with parental rights and responsibility or another legal representative?",
-                            QuestionType = "Boolean"
+                            QuestionType = "Boolean",
+                            Sequence = 8
                         },
                         new
                         {
@@ -7684,7 +7973,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Justify the need for urgent treatment in this project. What arrangements will be put in place to identify and seek consent from a person with parental rights and responsibility or another legal representative, once urgent actions have been completed?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 9
                         },
                         new
                         {
@@ -7695,7 +7985,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "What arrangements will you make to seek consent to continue in the project when participating children are able to give consent for themselves?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 10
                         },
                         new
                         {
@@ -7706,7 +7997,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "What arrangements will you make to seek consent to continue in the trial when participating children reach the age of 16?",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 11
                         },
                         new
                         {
@@ -7717,7 +8009,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "C8",
                             QuestionSectionId = "IQT0020",
                             QuestionText = "Explain how you have tested the materials and resources for explaining this project with children and adults with parental rights and responsibility.",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 12
                         },
                         new
                         {
@@ -7728,7 +8021,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                             QuestionCategoryId = "D",
                             QuestionSectionId = "IQT0057",
                             QuestionText = "I agree for this project application information to be used for:",
-                            QuestionType = "Text"
+                            QuestionType = "Text",
+                            Sequence = 1
                         });
                 });
 
@@ -7834,9 +8128,17 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RuleId"));
 
-                    b.Property<string>("ParentOptionId")
+                    b.Property<string>("Condition")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Operator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ParentQuestionId")
                         .IsRequired()
@@ -7844,15 +8146,60 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     b.Property<string>("QuestionId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Sequence")
+                        .HasColumnType("int");
 
                     b.HasKey("RuleId");
 
-                    b.HasIndex("ParentOptionId");
-
                     b.HasIndex("ParentQuestionId");
 
+                    b.HasIndex("QuestionId");
+
                     b.ToTable("QuestionRules");
+
+                    b.HasData(
+                        new
+                        {
+                            RuleId = 1,
+                            Condition = "{\"Comparison\":\"=\",\"OptionsCountOperator\":\"=\",\"ParentOptionsCount\":1,\"ParentOptions\":[\"OPT0004\"]}",
+                            Description = "Please answer the following question, if you have answered Yes to Project Details:Q6",
+                            Operator = "And",
+                            ParentQuestionId = "IQA0005",
+                            QuestionId = "IQA0006",
+                            Sequence = 1
+                        },
+                        new
+                        {
+                            RuleId = 2,
+                            Condition = "{\"Comparison\":\"=\",\"OptionsCountOperator\":\"=\",\"ParentOptionsCount\":1,\"ParentOptions\":[\"OPT0004\"]}",
+                            Description = "Please answer the following question, if you have answered Yes to Project Scope:Q3",
+                            Operator = "And",
+                            ParentQuestionId = "IQA0014",
+                            QuestionId = "IQA0017",
+                            Sequence = 1
+                        },
+                        new
+                        {
+                            RuleId = 3,
+                            Condition = "{\"Comparison\":\"=\",\"OptionsCountOperator\":\"=\",\"ParentOptionsCount\":1,\"ParentOptions\":[\"OPT0004\"]}",
+                            Description = "Please answer the following question, if you have answered Yes to Project Scope:Q4",
+                            Operator = "And",
+                            ParentQuestionId = "IQA0017",
+                            QuestionId = "IQA0018",
+                            Sequence = 1
+                        },
+                        new
+                        {
+                            RuleId = 4,
+                            Condition = "{\"Comparison\":\"=\",\"OptionsCountOperator\":\"=\",\"ParentOptionsCount\":1,\"ParentOptions\":[\"OPT0004\"]}",
+                            Description = "Please answer the following question, if you have answered Yes to Project Scope:Q4",
+                            Operator = "And",
+                            ParentQuestionId = "IQA0017",
+                            QuestionId = "IQA03282",
+                            Sequence = 1
+                        });
                 });
 
             modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.QuestionSection", b =>
@@ -8078,109 +8425,6 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.ResearchApplication", b =>
-                {
-                    b.Property<int>("ApplicationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicationId"));
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ApplicationId");
-
-                    b.ToTable("ResearchApplications");
-                });
-
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.Respondent", b =>
-                {
-                    b.Property<int>("RespondentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RespondentId"));
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Version")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RespondentId");
-
-                    b.ToTable("Respondents");
-                });
-
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.RespondentAnswer", b =>
-                {
-                    b.Property<int>("RespondentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("QuestionId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OptionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Response")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Version")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RespondentId", "QuestionId", "ApplicationId");
-
-                    b.ToTable("RespondentAnswers");
-                });
-
             modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.Answer", b =>
                 {
                     b.HasOne("Rsp.QuestionSetService.Domain.Entities.AnswerOption", "AnswerOption")
@@ -8206,25 +8450,27 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Rsp.QuestionSetService.Domain.Entities.QuestionSection", null)
+                    b.HasOne("Rsp.QuestionSetService.Domain.Entities.QuestionSection", "QuestionSection")
                         .WithMany("Questions")
                         .HasForeignKey("QuestionSectionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("QuestionSection");
                 });
 
             modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.QuestionRule", b =>
                 {
-                    b.HasOne("Rsp.QuestionSetService.Domain.Entities.AnswerOption", null)
+                    b.HasOne("Rsp.QuestionSetService.Domain.Entities.Question", null)
                         .WithMany()
-                        .HasForeignKey("ParentOptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("ParentQuestionId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Rsp.QuestionSetService.Domain.Entities.Question", null)
                         .WithMany("QuestionRules")
-                        .HasForeignKey("ParentQuestionId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -8233,15 +8479,6 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                     b.HasOne("Rsp.QuestionSetService.Domain.Entities.QuestionCategory", null)
                         .WithMany("QuestionSections")
                         .HasForeignKey("QuestionCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.RespondentAnswer", b =>
-                {
-                    b.HasOne("Rsp.QuestionSetService.Domain.Entities.Respondent", null)
-                        .WithMany("RespondentAnswers")
-                        .HasForeignKey("RespondentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -8263,11 +8500,6 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
             modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.QuestionSection", b =>
                 {
                     b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.Respondent", b =>
-                {
-                    b.Navigation("RespondentAnswers");
                 });
 #pragma warning restore 612, 618
         }

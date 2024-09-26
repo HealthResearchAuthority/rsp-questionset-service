@@ -23,8 +23,6 @@ public static class ServicesConfiguration
         services.AddSingleton<ITokenHelper, TokenHelper>();
 
         services.AddTransient<IQuestionService, QuestionService>();
-        //services.AddTransient<IResearchApplicationService, ResearchApplicationService>();
-        //services.AddTransient<IResearchApplicationRepository, >();
 
         services.AddTransient<IQuestionRepository, QuestionRepository>();
         services.AddMediatR(option => option.RegisterServicesFromAssemblyContaining<IApplication>());

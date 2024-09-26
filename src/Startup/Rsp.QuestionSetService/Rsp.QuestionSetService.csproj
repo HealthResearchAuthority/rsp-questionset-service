@@ -19,10 +19,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\rsp-service-defaults\src\Rsp.ServiceDefaults\Rsp.ServiceDefaults.csproj" />
-		<ProjectReference Include="..\..\Infrastructure\Rsp.QuestionSetService.Infrastructure\Rsp.QuestionSetService.Infrastructure.csproj" />
-		<ProjectReference Include="..\..\Services\Rsp.QuestionSetService.Services\Rsp.QuestionSetService.Services.csproj" />
-		<ProjectReference Include="..\..\WebApi\Rsp.QuestionSetService.WebApi\Rsp.QuestionSetService.WebApi.csproj" />
+	  <ProjectReference Include="..\..\..\..\rsp-service-defaults\src\Rsp.ServiceDefaults\Rsp.ServiceDefaults.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\Rsp.QuestionSetService.Infrastructure\Rsp.QuestionSetService.Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\Services\Rsp.QuestionSetService.Services\Rsp.QuestionSetService.Services.csproj" />
+	  <ProjectReference Include="..\..\WebApi\Rsp.QuestionSetService.WebApi\Rsp.QuestionSetService.WebApi.csproj" />
 	</ItemGroup>
 
 </Project>

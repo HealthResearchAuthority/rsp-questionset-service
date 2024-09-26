@@ -8161,10 +8161,40 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         {
                             RuleId = 1,
                             Condition = "{\"Comparison\":\"=\",\"OptionsCountOperator\":\"=\",\"ParentOptionsCount\":1,\"ParentOptions\":[\"OPT0004\"]}",
-                            Description = "Please answer the following question, if you have answered Yes to Q5",
+                            Description = "Please answer the following question, if you have answered Yes to Project Details:Q6",
                             Operator = "And",
                             ParentQuestionId = "IQA0005",
                             QuestionId = "IQA0006",
+                            Sequence = 1
+                        },
+                        new
+                        {
+                            RuleId = 2,
+                            Condition = "{\"Comparison\":\"=\",\"OptionsCountOperator\":\"=\",\"ParentOptionsCount\":1,\"ParentOptions\":[\"OPT0004\"]}",
+                            Description = "Please answer the following question, if you have answered Yes to Project Scope:Q3",
+                            Operator = "And",
+                            ParentQuestionId = "IQA0014",
+                            QuestionId = "IQA0017",
+                            Sequence = 1
+                        },
+                        new
+                        {
+                            RuleId = 3,
+                            Condition = "{\"Comparison\":\"=\",\"OptionsCountOperator\":\"=\",\"ParentOptionsCount\":1,\"ParentOptions\":[\"OPT0004\"]}",
+                            Description = "Please answer the following question, if you have answered Yes to Project Scope:Q4",
+                            Operator = "And",
+                            ParentQuestionId = "IQA0017",
+                            QuestionId = "IQA0018",
+                            Sequence = 1
+                        },
+                        new
+                        {
+                            RuleId = 4,
+                            Condition = "{\"Comparison\":\"=\",\"OptionsCountOperator\":\"=\",\"ParentOptionsCount\":1,\"ParentOptions\":[\"OPT0004\"]}",
+                            Description = "Please answer the following question, if you have answered Yes to Project Scope:Q4",
+                            Operator = "And",
+                            ParentQuestionId = "IQA0017",
+                            QuestionId = "IQA03282",
                             Sequence = 1
                         });
                 });
@@ -8392,109 +8422,6 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.ResearchApplication", b =>
-                {
-                    b.Property<int>("ApplicationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicationId"));
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ApplicationId");
-
-                    b.ToTable("ResearchApplications");
-                });
-
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.Respondent", b =>
-                {
-                    b.Property<int>("RespondentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RespondentId"));
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Version")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RespondentId");
-
-                    b.ToTable("Respondents");
-                });
-
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.RespondentAnswer", b =>
-                {
-                    b.Property<int>("RespondentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("QuestionId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OptionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Response")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Version")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RespondentId", "QuestionId", "ApplicationId");
-
-                    b.ToTable("RespondentAnswers");
-                });
-
             modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.Answer", b =>
                 {
                     b.HasOne("Rsp.QuestionSetService.Domain.Entities.AnswerOption", "AnswerOption")
@@ -8553,15 +8480,6 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.RespondentAnswer", b =>
-                {
-                    b.HasOne("Rsp.QuestionSetService.Domain.Entities.Respondent", null)
-                        .WithMany("RespondentAnswers")
-                        .HasForeignKey("RespondentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.Question", b =>
                 {
                     b.Navigation("Answers");
@@ -8579,11 +8497,6 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
             modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.QuestionSection", b =>
                 {
                     b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.Respondent", b =>
-                {
-                    b.Navigation("RespondentAnswers");
                 });
 #pragma warning restore 612, 618
         }

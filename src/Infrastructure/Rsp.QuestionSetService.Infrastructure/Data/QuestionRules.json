@@ -4,7 +4,55 @@
     "Sequence": 1,
     "QuestionId": "IQA0006",
     "ParentQuestionId": "IQA0005",
-    "Description": "Please answer the following question, if you have answered Yes to Q5",
+    "Description": "Please answer the following question, if you have answered Yes to Project Details:Q6",
+    "Operator": "And",
+    "Condition": {
+      "Comparison": "=",
+      "OptionsCountOperator": "=",
+      "ParentOptionsCount": 1,
+      "ParentOptions": [
+        "OPT0004"
+      ]
+    }
+  },
+  {
+    "RuleId": 2,
+    "Sequence": 1,
+    "QuestionId": "IQA0017",
+    "ParentQuestionId": "IQA0014",
+    "Description": "Please answer the following question, if you have answered Yes to Project Scope:Q3",
+    "Operator": "And",
+    "Condition": {
+      "Comparison": "=",
+      "OptionsCountOperator": "=",
+      "ParentOptionsCount": 1,
+      "ParentOptions": [
+        "OPT0004"
+      ]
+    }
+  },
+  {
+    "RuleId": 3,
+    "Sequence": 1,
+    "QuestionId": "IQA0018",
+    "ParentQuestionId": "IQA0017",
+    "Description": "Please answer the following question, if you have answered Yes to Project Scope:Q4",
+    "Operator": "And",
+    "Condition": {
+      "Comparison": "=",
+      "OptionsCountOperator": "=",
+      "ParentOptionsCount": 1,
+      "ParentOptions": [
+        "OPT0004"
+      ]
+    }
+  },
+  {
+    "RuleId": 4,
+    "Sequence": 1,
+    "QuestionId": "IQA03282",
+    "ParentQuestionId": "IQA0017",
+    "Description": "Please answer the following question, if you have answered Yes to Project Scope:Q4",
     "Operator": "And",
     "Condition": {
       "Comparison": "=",
