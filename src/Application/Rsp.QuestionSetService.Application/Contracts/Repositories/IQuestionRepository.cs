@@ -13,4 +13,6 @@ public interface IQuestionRepository
     Task UpdateQuestion(Question entity);
 
     Task DeleteQuestion(string questionId);
+
+    Task CreateQuestions(IEnumerable<Question> adaptedQuestions);
 }

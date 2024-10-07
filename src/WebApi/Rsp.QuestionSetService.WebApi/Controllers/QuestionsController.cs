@@ -21,4 +21,10 @@ public class QuestionsController(IQuestionService questionService) : ControllerB
     {
         return await questionService.GetQuestions(category);
     }
+
+    [HttpPost]
+    public async Task CreateQuestions(IEnumerable<QuestionDto> questions)
+    {
+        await questionService.CreateQuestions(questions);
+    }
 }

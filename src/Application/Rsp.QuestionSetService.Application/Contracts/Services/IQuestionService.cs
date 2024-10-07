@@ -5,4 +5,6 @@ namespace Rsp.QuestionSetService.Application.Contracts.Services;
 public interface IQuestionService
 {
     Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId);
+
+    Task CreateQuestions(IEnumerable<QuestionDto> questions);
 }

@@ -38,5 +38,7 @@ public class MappingRegister : IRegister
             .Map(dest => dest.IsMandatory, _ => true, source => source.Conformance == "Mandatory")
             .Map(dest => dest.IsOptional, _ => true, source => source.Conformance == "Optional")
             .Map(dest => dest.Rules, source => source.QuestionRules);
+
+        // QuestionDto to Question mapping
     }
 }
