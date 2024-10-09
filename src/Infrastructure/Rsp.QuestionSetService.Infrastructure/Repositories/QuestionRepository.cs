@@ -1,59 +1,60 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Rsp.QuestionSetService.Application.Contracts.Repositories;
 using Rsp.QuestionSetService.Domain.Entities;
 
 namespace Rsp.QuestionSetService.Infrastructure.Repositories;
 
+/// <summary>
+/// Questionset repository
+/// </summary>
+/// <param name="context"><see cref="QuestionSetDbContext"/></param>
 public class QuestionRepository(QuestionSetDbContext context) : IQuestionRepository
 {
-    private readonly QuestionSetDbContext _context = context;
-
-    public async Task<Question?> GetById(string id)
+    /// <inheritdoc/>
+    public async Task<Question?> GetQuestion(ISpecification<Question> specification)
     {
-        return await _context
+        return await context
             .Questions
-            .AsNoTracking()
-            .AsSplitQuery()
-            .Include(q => q.QuestionSection)
-            .Include(q => q.Answers)
-            .ThenInclude(ans => ans.AnswerOption)
-            .Include(q => q.QuestionRules)
-            .FirstOrDefaultAsync(q => q.QuestionId == id);
+            .WithSpecification(specification)
+            .FirstOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<Question>> GetQuestions(string categoryId)
+    /// <inheritdoc/>
+    public async Task<IEnumerable<Question>> GetQuestions(ISpecification<Question> specification)
     {
-        return await _context
+        return await context
             .Questions
-            .AsNoTracking()
-            .AsSplitQuery()
-            .Where(q => q.QuestionCategoryId == categoryId)
-            .Include(q => q.QuestionSection)
-            .Include(q => q.Answers)
-            .ThenInclude(ans => ans.AnswerOption)
-            .Include(q => q.QuestionRules)
+            .WithSpecification(specification)
             .ToListAsync();
     }
 
+    /// <inheritdoc/>
     public async Task AddQuestion(Question entity)
     {
-        await _context.Questions.AddAsync(entity);
-        await _context.SaveChangesAsync();
+        await context.Questions.AddAsync(entity);
+
+        await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task UpdateQuestion(Question entity)
     {
-        _context.Questions.Update(entity);
-        await _context.SaveChangesAsync();
+        context.Questions.Update(entity);
+
+        await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task DeleteQuestion(string questionId)
     {
-        var questionEntity = await _context.Questions.FirstOrDefaultAsync(q => q.QuestionId == questionId);
+        var questionEntity = await context.Questions.FirstOrDefaultAsync(q => q.QuestionId == questionId);
+
         if (questionEntity != null)
         {
-            _context.Questions.Remove(questionEntity);
-            await _context.SaveChangesAsync();
+            context.Questions.Remove(questionEntity);
+            await context.SaveChangesAsync();
         }
     }
 }

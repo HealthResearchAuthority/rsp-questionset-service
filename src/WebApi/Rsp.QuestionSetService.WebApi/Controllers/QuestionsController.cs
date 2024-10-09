@@ -8,17 +8,15 @@ namespace Rsp.QuestionSetService.WebApi.Controllers;
 [Route("[controller]")]
 public class QuestionsController(IQuestionService questionService) : ControllerBase
 {
+    /// <summary>
+    /// Gets all questions or by category if provided
+    /// </summary>
     [HttpGet]
     [Produces<IEnumerable<QuestionDto>>]
-    public async Task<IEnumerable<QuestionDto>> GetQuestions()
+    public async Task<IEnumerable<QuestionDto>> GetQuestions(string? categoryId)
     {
-        return await questionService.GetQuestions("A");
-    }
-
-    [HttpGet("next")]
-    [Produces<IEnumerable<QuestionDto>>]
-    public async Task<IEnumerable<QuestionDto>> GetNextQuestions(string category)
-    {
-        return await questionService.GetQuestions(category);
+        return categoryId == null ?
+            await questionService.GetQuestions() :
+            await questionService.GetQuestions(categoryId);
     }
 }
