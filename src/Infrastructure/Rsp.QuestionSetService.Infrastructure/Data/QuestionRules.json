@@ -2,65 +2,493 @@
   {
     "RuleId": 1,
     "Sequence": 1,
-    "QuestionId": "IQA0006",
-    "ParentQuestionId": "IQA0005",
-    "Description": "Please answer the following question, if you have answered Yes to Project Details:Q6",
-    "Operator": "And",
-    "Condition": {
-      "Comparison": "=",
-      "OptionsCountOperator": "=",
-      "ParentOptionsCount": 1,
-      "ParentOptions": [
-        "OPT0004"
-      ]
-    }
+    "QuestionId": "IQA0002",
+    "ParentQuestionId": null,
+    "Description": "Provide project title between 15 and 100 characters",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "LENGTH",
+        "Value": "15,100",
+        "Negate": false,
+        "OptionType": null,
+        "ParentOptions": [],
+        "Description": "Short project title should be between the specified characters limit"
+      }
+    ]
   },
   {
     "RuleId": 2,
     "Sequence": 1,
-    "QuestionId": "IQA0017",
-    "ParentQuestionId": "IQA0014",
-    "Description": "Please answer the following question, if you have answered Yes to Project Scope:Q3",
-    "Operator": "And",
-    "Condition": {
-      "Comparison": "=",
-      "OptionsCountOperator": "=",
-      "ParentOptionsCount": 1,
-      "ParentOptions": [
-        "OPT0004"
-      ]
-    }
+    "QuestionId": "IQA0003",
+    "ParentQuestionId": null,
+    "Description": "Provide full project title between 15 and 2000 characters",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "LENGTH",
+        "Value": "15,2000",
+        "Negate": false,
+        "OptionType": null,
+        "ParentOptions": [],
+        "Description": "Full project title should be between the specified characters limit"
+      }
+    ]
   },
   {
     "RuleId": 3,
     "Sequence": 1,
-    "QuestionId": "IQA0018",
-    "ParentQuestionId": "IQA0017",
-    "Description": "Please answer the following question, if you have answered Yes to Project Scope:Q4",
-    "Operator": "And",
-    "Condition": {
-      "Comparison": "=",
-      "OptionsCountOperator": "=",
-      "ParentOptionsCount": 1,
-      "ParentOptions": [
-        "OPT0004"
-      ]
-    }
+    "QuestionId": "IQA0006",
+    "ParentQuestionId": "IQA0005",
+    "Description": "Answer the following question, if you have answered Yes to Project Details:Q6",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": false,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Provide a valid email address"
+      },
+      {
+        "Mode": "AND",
+        "Operator": "REGEX",
+        "Value": "^(?=.{6,50}$)[\\w\\.\\-]+@[a-zA-Z\\d\\-]+\\.[a-zA-Z]{2,}$",
+        "Negate": false,
+        "OptionType": null,
+        "ParentOptions": [],
+        "Description": "Should be a valid email address between 6 and 50 characters "
+      }
+    ]
   },
   {
     "RuleId": 4,
     "Sequence": 1,
-    "QuestionId": "IQA03282",
+    "QuestionId": "IQA0014",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers Project Scope:Q2, the following question should be answered",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0008",
+          "OPT0009",
+          "OPT0013"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 5,
+    "Sequence": 1,
+    "QuestionId": "IQA0015",
+    "ParentQuestionId": "IQA0014",
+    "Description": "Answer the following question, if you have answered Yes to Q3 under Project Scope",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": false,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 6,
+    "Sequence": 1,
+    "QuestionId": "IQA0017",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers Project Scope:Q2, the following question should be answered",
+    "Mode": "OR",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0009"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 7,
+    "Sequence": 2,
+    "QuestionId": "IQA0017",
+    "ParentQuestionId": "IQA0014",
+    "Description": " or if you have answered No to Project Scope:Q3",
+    "Mode": "OR",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 8,
+    "Sequence": 1,
+    "QuestionId": "IQA0018",
     "ParentQuestionId": "IQA0017",
-    "Description": "Please answer the following question, if you have answered Yes to Project Scope:Q4",
-    "Operator": "And",
-    "Condition": {
-      "Comparison": "=",
-      "OptionsCountOperator": "=",
-      "ParentOptionsCount": 1,
-      "ParentOptions": [
-        "OPT0004"
-      ]
-    }
+    "Description": "Answer the following question, if you have answered Yes to Project Scope:Q4",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": false,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 9,
+    "Sequence": 1,
+    "QuestionId": "IQA03282",
+    "ParentQuestionId": "IQA0018",
+    "Description": "Answer the following question, if you have answered Yes to Project Scope:Q4a",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": false,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 10,
+    "Sequence": 1,
+    "QuestionId": "IQA0020",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers to Project Scope:Q2, the following question should be answered",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0009"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 11,
+    "Sequence": 2,
+    "QuestionId": "IQA0020",
+    "ParentQuestionId": "IQA0014",
+    "Description": " and if you have answered No to Project Scope:Q3",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 12,
+    "Sequence": 3,
+    "QuestionId": "IQA0020",
+    "ParentQuestionId": "IQA0017",
+    "Description": " or if you have answered No to Project Scope:Q4",
+    "Mode": "OR",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 13,
+    "Sequence": 1,
+    "QuestionId": "IQA0021",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers to Project Scope:Q2, the following question should be answered",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": false,
+        "OptionType": "Multiple",
+        "ParentOptions": [
+          "OPT0012",
+          "OPT0013"
+        ],
+        "Description": "Select an option"
+      },
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0008",
+          "OPT0009"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 14,
+    "Sequence": 1,
+    "QuestionId": "IQA0022",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers to Project Scope:Q2, the following question should be answered",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0008",
+          "OPT0009"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 15,
+    "Sequence": 1,
+    "QuestionId": "IQA0024",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers to Project Scope:Q2, the following question should be answered",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0008"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 16,
+    "Sequence": 1,
+    "QuestionId": "IQA0025",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers to Project Scope:Q2, the following question should be answered",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0008"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 17,
+    "Sequence": 1,
+    "QuestionId": "IQA0026",
+    "ParentQuestionId": "IQA0061",
+    "Description": "Based on your answers to Project Scope:Q2, the following question should be answered",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0008"
+        ],
+        "Description": "Select an option"
+      }
+    ]
+  },
+  {
+    "RuleId": 18,
+    "Sequence": 1,
+    "QuestionId": "IQA0143",
+    "ParentQuestionId": "IQA0142",
+    "Description": "Answer the following question, if you have answered Multi-national to Research location:Q1",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": false,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0017"
+        ],
+        "Description": "Select at least one option"
+      }
+    ]
+  },
+  {
+    "RuleId": 19,
+    "Sequence": 1,
+    "QuestionId": "IQA0033",
+    "ParentQuestionId": "IQA0014",
+    "Description": "Answer the following question, if you have answered Yes to Project Scope:Q3",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": false,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Select at least one option"
+      }
+    ]
+  },
+  {
+    "RuleId": 20,
+    "Sequence": 1,
+    "QuestionId": "IQA0034",
+    "ParentQuestionId": "IQA0014",
+    "Description": "Answer the following question, if you have answered Yes to Project Scope:Q3",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": false,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Select at least one option"
+      }
+    ]
+  },
+  {
+    "RuleId": 21,
+    "Sequence": 1,
+    "QuestionId": "IQA0145",
+    "ParentQuestionId": "IQA0144",
+    "Description": "Answer the following question, if you have answered Other to Research Location:Q4",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": false,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0033"
+        ],
+        "Description": "Provide an answer to this question"
+      },
+      {
+        "Mode": "AND",
+        "Operator": "LENGTH",
+        "Value": "15,2000",
+        "Negate": false,
+        "OptionType": null,
+        "ParentOptions": [],
+        "Description": "Should be between 100 and 2000 characters"
+      }
+    ]
+  },
+  {
+    "RuleId": 22,
+    "Sequence": 1,
+    "QuestionId": "IQA0146",
+    "ParentQuestionId": "IQA0014",
+    "Description": "Answer the following question, if you have answered No to Project Scope:Q3",
+    "Mode": "AND",
+    "Conditions": [
+      {
+        "Mode": "AND",
+        "Operator": "IN",
+        "Value": null,
+        "Negate": true,
+        "OptionType": "Single",
+        "ParentOptions": [
+          "OPT0004"
+        ],
+        "Description": "Select one option"
+      }
+    ]
   }
 ]
