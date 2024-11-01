@@ -7,4 +7,6 @@ public interface IQuestionService
     Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId);
 
     Task CreateQuestions(IEnumerable<QuestionDto> questions);
+
+    Task AddQuestion(QuestionDto entity);
 }

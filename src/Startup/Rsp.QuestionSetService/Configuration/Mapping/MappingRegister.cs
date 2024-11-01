@@ -23,10 +23,31 @@ public class MappingRegister : IRegister
             .Map(dest => dest.AnswerText, source => source.AnswerOption.OptionText);
 
         config
-            .NewConfig<Condition, ConditionDto>();
+            .NewConfig<AnswerDto, Answer>()
+            .Ignore(dest => dest.AnswerId)
+            .Map(dest => dest.AnswerOptionId, source => source.AnswerId)
+            .Map(dest => dest.AnswerOption.OptionText, source => source.AnswerText)
+            .Map(dest => dest.AnswerOption.OptionId, source => source.AnswerId);
 
         config
-            .NewConfig<QuestionRule, RuleDto>();
+            .NewConfig<Condition, ConditionDto>()
+            .TwoWays();
+
+        config
+            .NewConfig<QuestionRule, RuleDto>()
+            .TwoWays();
+
+        // QuestionDto to Question mapping
+        config
+            .NewConfig<QuestionDto, Question>()
+            .MapToConstructor(true)
+            .Map(dest => dest.QuestionCategoryId, source => source.Category)
+            .Map(dest => dest.QuestionSectionId, source => source.SectionId)
+            .Map(dest => dest.QuestionSection.SectionId, source => source.SectionId)
+            .Map(dest => dest.QuestionSection.SectionName, source => source.Section)
+            .Map(dest => dest.QuestionSection.QuestionCategoryId, source => source.Category)
+            .Map(dest => dest.Conformance, source => source.IsOptional ? "Optional" : "Mandatory")
+            .Map(dest => dest.QuestionRules, source => source.Rules);
 
         // Question to GetQuestionsResponse mappings
         config
@@ -38,7 +59,5 @@ public class MappingRegister : IRegister
             .Map(dest => dest.IsMandatory, _ => true, source => source.Conformance == "Mandatory")
             .Map(dest => dest.IsOptional, _ => true, source => source.Conformance == "Optional")
             .Map(dest => dest.Rules, source => source.QuestionRules);
-
-        // QuestionDto to Question mapping
     }
 }

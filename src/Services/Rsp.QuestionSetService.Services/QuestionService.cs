@@ -21,4 +21,11 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
 
         await questionRepository.CreateQuestions(adaptedQuestions);
     }
+
+    public async Task AddQuestion(QuestionDto entity)
+    {
+        var adaptedQuestion = entity.Adapt<Question>();
+
+        await questionRepository.AddQuestion(adaptedQuestion);
+    }
 }

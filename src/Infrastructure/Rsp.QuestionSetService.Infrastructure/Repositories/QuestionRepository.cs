@@ -61,7 +61,11 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
     {
         foreach (Question question in adaptedQuestions)
         {
-            var existingQuestion = await _context.Questions.Include(q => q.QuestionRules).FirstOrDefaultAsync(q => q.QuestionId == question.QuestionId);
+            var existingQuestion =
+                await _context.Questions
+                .Include(q => q.QuestionRules)
+                .Include(q => q.Answers)
+                .FirstOrDefaultAsync(q => q.QuestionId == question.QuestionId);
 
             if (existingQuestion == null)
             {
@@ -84,8 +88,8 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
             existingQuestion.Conformance = question.Conformance;
             existingQuestion.Answers = question.Answers;
             existingQuestion.QuestionRules = existingQuestion.QuestionRules;
-
-            await _context.SaveChangesAsync();
         }
+
+        await _context.SaveChangesAsync();
     }
 }

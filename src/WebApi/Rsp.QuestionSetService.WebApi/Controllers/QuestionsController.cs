@@ -27,4 +27,10 @@ public class QuestionsController(IQuestionService questionService) : ControllerB
     {
         await questionService.CreateQuestions(questions);
     }
+
+    [HttpPost("add")]
+    public async Task AddQuestion(QuestionDto question)
+    {
+        await questionService.AddQuestion(question);
+    }
 }
