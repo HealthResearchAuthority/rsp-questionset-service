@@ -19,7 +19,6 @@
 	  <Folder Include="CQRS\Handlers\QueryHandlers\" />
 	  <Folder Include="CQRS\Queries\" />
 	  <Folder Include="DTOS\Requests\" />
-	  <Folder Include="Specifications\" />
 	</ItemGroup>
 
 	<PropertyGroup>

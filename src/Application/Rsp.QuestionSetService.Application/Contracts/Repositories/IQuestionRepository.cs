@@ -1,17 +1,41 @@
-﻿using Rsp.QuestionSetService.Domain.Entities;
+﻿using Ardalis.Specification;
+using Rsp.QuestionSetService.Domain.Entities;
 
 namespace Rsp.QuestionSetService.Application.Contracts.Repositories;
 
+/// <summary>
+/// Questions repository interface
+/// </summary>
 public interface IQuestionRepository
 {
-    Task<Question?> GetById(string id);
+    /// <summary>
+    /// Gets a question using the provided specification i.e. questionId = value
+    /// </summary>
+    /// <param name="specification"><see cref="QuestionSpecification"/></param>
+    Task<Question?> GetQuestion(ISpecification<Question> specification);
 
-    Task<IEnumerable<Question>> GetQuestions(string categoryId);
+    /// <summary>
+    /// Gets all questions using the provided specification
+    /// </summary>
+    /// <param name="specification"><see cref="QuestionSpecification"/></param>
+    Task<IEnumerable<Question>> GetQuestions(ISpecification<Question> specification);
 
+    /// <summary>
+    /// Adds a question to the database
+    /// </summary>
+    /// <param name="entity">Question entity</param>
     Task AddQuestion(Question entity);
 
+    /// <summary>
+    /// Updates an existing question in the database
+    /// </summary>
+    /// <param name="entity">Question entity</param>
     Task UpdateQuestion(Question entity);
 
+    /// <summary>
+    /// Deletes a question from the database
+    /// </summary>
+    /// <param name="questionId">Id of the question to be deleted</param>
     Task DeleteQuestion(string questionId);
 
     Task CreateQuestions(IEnumerable<Question> adaptedQuestions);

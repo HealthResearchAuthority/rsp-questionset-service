@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rsp.QuestionSetService.Infrastructure;
 
@@ -11,9 +12,11 @@ using Rsp.QuestionSetService.Infrastructure;
 namespace Rsp.QuestionSetService.Infrastructure.Migrations
 {
     [DbContext(typeof(QuestionSetDbContext))]
-    partial class QuestionSetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012105758_AddComplexRules")]
+    partial class AddComplexRules
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -8159,8 +8162,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 1,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"LENGTH\",\"Value\":\"15,100\",\"Negate\":false,\"ParentOptions\":[],\"OptionType\":null,\"Description\":\"Short project title should be between the specified characters limit\"}]",
-                            Description = "Provide project title between 15 and 100 characters",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"LENGTH\",\"Value\":\"15,100\",\"Negate\":false,\"ParentOptions\":[],\"OptionType\":null}]",
+                            Description = "Short project title should be between 15 and 100 characters",
                             Mode = "AND",
                             QuestionId = "IQA0002",
                             Sequence = 1
@@ -8168,8 +8171,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 2,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"LENGTH\",\"Value\":\"15,2000\",\"Negate\":false,\"ParentOptions\":[],\"OptionType\":null,\"Description\":\"Full project title should be between the specified characters limit\"}]",
-                            Description = "Provide full project title between 15 and 2000 characters",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"LENGTH\",\"Value\":\"15,2000\",\"Negate\":false,\"ParentOptions\":[],\"OptionType\":null}]",
+                            Description = "Full project title should be between 15 and 2000 characters",
                             Mode = "AND",
                             QuestionId = "IQA0003",
                             Sequence = 1
@@ -8177,8 +8180,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 3,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Provide a valid email address\"},{\"Mode\":\"AND\",\"Operator\":\"REGEX\",\"Value\":\"^(?=.{6,50}$)[\\\\w\\\\.\\\\-]\\u002B@[a-zA-Z\\\\d\\\\-]\\u002B\\\\.[a-zA-Z]{2,}$\",\"Negate\":false,\"ParentOptions\":[],\"OptionType\":null,\"Description\":\"Should be a valid email address between 6 and 50 characters \"}]",
-                            Description = "Answer the following question, if you have answered Yes to Project Details:Q6",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"EQUAL\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\"}]",
+                            Description = "Please answer the following question, if you have answered Yes to Project Details:Q6",
                             Mode = "AND",
                             ParentQuestionId = "IQA0005",
                             QuestionId = "IQA0006",
@@ -8187,8 +8190,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 4,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0008\",\"OPT0009\",\"OPT0013\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Based on your answers Project Scope:Q2, the following question should be answered",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"EQUAL\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0008\",\"OPT0009\",\"OPT0013\"],\"OptionType\":\"Single\"}]",
+                            Description = "Based on your answers to Q2 under Project Scope, the following question should be answered",
                             Mode = "AND",
                             ParentQuestionId = "IQA0061",
                             QuestionId = "IQA0014",
@@ -8197,8 +8200,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 5,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Answer the following question, if you have answered Yes to Q3 under Project Scope",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"EQUAL\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\"}]",
+                            Description = "Please answer the following question, if you have answered Yes to Q3 under Project Scope",
                             Mode = "AND",
                             ParentQuestionId = "IQA0014",
                             QuestionId = "IQA0015",
@@ -8207,8 +8210,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 6,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0009\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Based on your answers Project Scope:Q2, the following question should be answered",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"EQUAL\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0009\"],\"OptionType\":\"Single\"}]",
+                            Description = "Please answer the following question, if you have selected any of these options under Project Scope: Q2, ",
                             Mode = "OR",
                             ParentQuestionId = "IQA0061",
                             QuestionId = "IQA0017",
@@ -8217,8 +8220,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 7,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = " or if you have answered No to Project Scope:Q3",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"EQUAL\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\"}]",
+                            Description = "or if you have answered Yes to Project Scope:Q3",
                             Mode = "OR",
                             ParentQuestionId = "IQA0014",
                             QuestionId = "IQA0017",
@@ -8227,8 +8230,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 8,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Answer the following question, if you have answered Yes to Project Scope:Q4",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"EQUAL\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\"}]",
+                            Description = "Please answer the following question, if you have answered Yes to Q4 under Project Scope",
                             Mode = "AND",
                             ParentQuestionId = "IQA0017",
                             QuestionId = "IQA0018",
@@ -8237,8 +8240,8 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 9,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Answer the following question, if you have answered Yes to Project Scope:Q4a",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"EQUAL\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\"}]",
+                            Description = "Please answer the following question, if you have answered Yes to Q4a under Project Scope",
                             Mode = "AND",
                             ParentQuestionId = "IQA0018",
                             QuestionId = "IQA03282",
@@ -8247,131 +8250,11 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         new
                         {
                             RuleId = 10,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0009\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Based on your answers to Project Scope:Q2, the following question should be answered",
+                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"EQUAL\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\"}]",
+                            Description = "Please answer the following question, if you have answered Yes to Q4a under Project Scope",
                             Mode = "AND",
-                            ParentQuestionId = "IQA0061",
+                            ParentQuestionId = "IQA0018",
                             QuestionId = "IQA0020",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 11,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = " and if you have answered No to Project Scope:Q3",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0014",
-                            QuestionId = "IQA0020",
-                            Sequence = 2
-                        },
-                        new
-                        {
-                            RuleId = 12,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = " or if you have answered No to Project Scope:Q4",
-                            Mode = "OR",
-                            ParentQuestionId = "IQA0017",
-                            QuestionId = "IQA0020",
-                            Sequence = 3
-                        },
-                        new
-                        {
-                            RuleId = 13,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0012\",\"OPT0013\"],\"OptionType\":\"Multiple\",\"Description\":\"Select an option\"},{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0008\",\"OPT0009\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Based on your answers to Project Scope:Q2, the following question should be answered",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0061",
-                            QuestionId = "IQA0021",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 14,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0008\",\"OPT0009\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Based on your answers to Project Scope:Q2, the following question should be answered",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0061",
-                            QuestionId = "IQA0022",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 15,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0008\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Based on your answers to Project Scope:Q2, the following question should be answered",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0061",
-                            QuestionId = "IQA0024",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 16,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0008\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Based on your answers to Project Scope:Q2, the following question should be answered",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0061",
-                            QuestionId = "IQA0025",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 17,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0008\"],\"OptionType\":\"Single\",\"Description\":\"Select an option\"}]",
-                            Description = "Based on your answers to Project Scope:Q2, the following question should be answered",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0061",
-                            QuestionId = "IQA0026",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 18,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0017\"],\"OptionType\":\"Single\",\"Description\":\"Select at least one option\"}]",
-                            Description = "Answer the following question, if you have answered Multi-national to Research location:Q1",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0142",
-                            QuestionId = "IQA0143",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 19,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Select at least one option\"}]",
-                            Description = "Answer the following question, if you have answered Yes to Project Scope:Q3",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0014",
-                            QuestionId = "IQA0033",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 20,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Select at least one option\"}]",
-                            Description = "Answer the following question, if you have answered Yes to Project Scope:Q3",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0014",
-                            QuestionId = "IQA0034",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 21,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":false,\"ParentOptions\":[\"OPT0033\"],\"OptionType\":\"Single\",\"Description\":\"Provide an answer to this question\"},{\"Mode\":\"AND\",\"Operator\":\"LENGTH\",\"Value\":\"15,2000\",\"Negate\":false,\"ParentOptions\":[],\"OptionType\":null,\"Description\":\"Should be between 100 and 2000 characters\"}]",
-                            Description = "Answer the following question, if you have answered Other to Research Location:Q4",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0144",
-                            QuestionId = "IQA0145",
-                            Sequence = 1
-                        },
-                        new
-                        {
-                            RuleId = 22,
-                            Conditions = "[{\"Mode\":\"AND\",\"Operator\":\"IN\",\"Value\":null,\"Negate\":true,\"ParentOptions\":[\"OPT0004\"],\"OptionType\":\"Single\",\"Description\":\"Select one option\"}]",
-                            Description = "Answer the following question, if you have answered No to Project Scope:Q3",
-                            Mode = "AND",
-                            ParentQuestionId = "IQA0014",
-                            QuestionId = "IQA0146",
                             Sequence = 1
                         });
                 });

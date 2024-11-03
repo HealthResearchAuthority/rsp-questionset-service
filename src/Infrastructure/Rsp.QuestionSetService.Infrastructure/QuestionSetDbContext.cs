@@ -4,6 +4,9 @@ using Rsp.QuestionSetService.Infrastructure.EntitiesConfiguration;
 
 namespace Rsp.QuestionSetService.Infrastructure;
 
+/// <summary>
+/// Questionset Database context
+/// </summary>
 public class QuestionSetDbContext(DbContextOptions<QuestionSetDbContext> options) : DbContext(options)
 {
     public DbSet<QuestionCategory> QuestionCategories { get; set; }
