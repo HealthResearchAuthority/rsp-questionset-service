@@ -87,8 +87,8 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
             existingQuestion.QuestionType = question.QuestionType;
             existingQuestion.DataType = question.DataType;
             existingQuestion.Conformance = question.Conformance;
-            existingQuestion.Answers = question.Answers;
-            existingQuestion.QuestionRules = existingQuestion.QuestionRules;
+            //existingQuestion.Answers = question.Answers;
+            //existingQuestion.QuestionRules = existingQuestion.QuestionRules;
         }
 
         await context.SaveChangesAsync();
