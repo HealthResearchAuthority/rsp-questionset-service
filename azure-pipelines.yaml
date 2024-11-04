@@ -58,6 +58,11 @@ variables:
     value: "questionsetservice"
   - name: buildConfiguration
     value: "Release"
+    - name: service_connection
+      ${{ if in(parameters.env, 'dev') }}:
+        value: "ARMDevConnectionNew"
+      ${{ if in(parameters.env, 'systemtest_auto') }}:
+        value: "ARMAutomatedTestConnection"
 
 resources:
   repositories:
@@ -80,6 +85,13 @@ resources:
 
 stages:
   - stage: dev
+    variables: 
+      - name: ContainerRegistryName
+        value: 'crrspshared2i2oqdevuks'
+      - name: ApplicationResourceGroup
+        value: 'rg-rsp-applications-spoke-dev-uks'
+      - name: DeployEnvironment
+        value: 'dev'
     jobs:
       - template: jobs/build.yaml@library
         parameters:
@@ -96,8 +108,15 @@ stages:
           service_defaults_repo: service_defaults
 
   - stage: systemtest_auto
+    variables: 
+      - name: ContainerRegistryName
+        value: 'crrspsharedryefnautomationtestuks'
+      - name: ApplicationResourceGroup
+        value: 'rg-rsp-applications-spoke-systemtestauto-uks'
+      - name: DeployEnvironment
+        value: 'System Test Auto'
     jobs:
-      #- template: jobs/deploy.yaml@library
+      - template: jobs/deploy.yaml@library
       - job:
         displayName: Deploy to SystemTest Auto
         steps:
