@@ -64,12 +64,45 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
         {
             var existingQuestion =
                 await context.Questions
-                .Include(q => q.QuestionRules)
-                .Include(q => q.Answers)
+                //.Include(q => q.QuestionRules)
+                //.Include(q => q.QuestionSection)
+                //.Include(q => q.Answers)
                 .FirstOrDefaultAsync(q => q.QuestionId == question.QuestionId);
 
             if (existingQuestion == null)
             {
+                var existingSection =
+                    await context.QuestionSections
+                    .FirstOrDefaultAsync(s => s.SectionId == question.QuestionSectionId);
+
+                if (existingSection != null)
+                {
+                    context.Entry(existingSection).State = EntityState.Unchanged;
+                    question.QuestionSection = existingSection;
+                }
+
+                var existingAnswers =
+                    await context.Answers
+                    .Where(a => a.QuestionId == question.QuestionId)
+                    .ToListAsync();
+
+                if (existingAnswers.Count == 0)
+                {
+                    foreach (var answer in question.Answers)
+                    {
+                        var answerOption =
+                            await context.AnswerOptions
+                            .FirstOrDefaultAsync(o => o.OptionId == answer.AnswerOptionId);
+
+                        if (answerOption != null)
+                        {
+                            context.Entry(answerOption).State = EntityState.Unchanged;
+                            answer.AnswerOption = answerOption;
+                            answer.QuestionId = question.QuestionId;
+                        }
+                    }
+                }
+
                 await context.Questions.AddAsync(question);
                 continue;
             }
