@@ -5,6 +5,7 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Rsp.Logging.Extensions;
 using Rsp.Logging.Middlewares.CorrelationId;
 using Rsp.Logging.Middlewares.RequestTracing;
 using Rsp.QuestionSetService.Application.Settings;
@@ -34,6 +35,11 @@ builder.AddServiceDefaults();
 
 var services = builder.Services;
 var configuration = builder.Configuration;
+
+if (!builder.Environment.IsDevelopment())
+{
+    services.AddLogging(builder => builder.AddConsole());
+}
 
 if (!builder.Environment.IsDevelopment())
 {
@@ -111,6 +117,8 @@ config.Scan(typeof(MappingRegister).Assembly);
 
 var app = builder.Build();
 
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
 app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
@@ -140,5 +148,7 @@ app.MapControllers();
 
 // run the database migration and seed the data
 await app.MigrateAndSeedDatabaseAsync();
+
+logger.LogInformationHp("Starting Up");
 
 await app.RunAsync();

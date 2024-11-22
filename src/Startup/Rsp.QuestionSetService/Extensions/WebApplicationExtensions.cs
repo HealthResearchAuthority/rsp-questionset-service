@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using Rsp.Logging.Extensions;
 using Rsp.QuestionSetService.Infrastructure;
 
 namespace Rsp.QuestionSetService.Extensions;
@@ -16,9 +17,21 @@ public static class WebApplicationExtensions
     /// <param name="app">The WebApplication instance</param>
     public static async Task MigrateAndSeedDatabaseAsync(this WebApplication app)
     {
-        using var scope = app.Services.CreateScope();
-        await using var context = scope.ServiceProvider.GetRequiredService<QuestionSetDbContext>();
+        var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
-        await context.Database.MigrateAsync();
+        logger.LogInformationHp("Performing Migrations");
+
+        try
+        {
+            using var scope = app.Services.CreateScope();
+
+            await using var context = scope.ServiceProvider.GetRequiredService<QuestionSetDbContext>();
+
+            await context.Database.MigrateAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogErrorHp("ERR_FAILED_MIGRATIONS", "Database Migration failed", ex);
+        }
     }
 }

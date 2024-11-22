@@ -1,13 +1,15 @@
 {
   "Serilog": {
-    "Using": [ "Serilog.Sinks.Console" ],
+    "Using": [
+      "Serilog.Sinks.Console"
+    ],
     "MinimumLevel": {
       "Default": "Verbose",
       "Override": {
-        "System.Net.Http.HttpClient": "Warning",
+        "System.Net.Http.HttpClient": "Information",
         "Microsoft": "Information",
         "Microsoft.Hosting.Lifetime": "Information",
-        "Microsoft.AspNetCore": "Warning"
+        "Microsoft.AspNetCore": "Information"
       }
     },
     "WriteTo": [
@@ -41,7 +43,10 @@
         }
       }
     ],
-    "Enrich": [ "FromLogContext", "WithExceptionDetails" ],
+    "Enrich": [
+      "FromLogContext",
+      "WithExceptionDetails"
+    ],
     "Properties": {
       "ApplicationName": "Rsp.QuestionSetService"
     }
