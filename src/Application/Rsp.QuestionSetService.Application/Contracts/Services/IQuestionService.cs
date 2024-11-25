@@ -18,7 +18,7 @@ public interface IQuestionService
     /// <param name="categoryId">Category Id of the questions</param>
     Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId);
 
-    Task CreateQuestions(IEnumerable<QuestionDto> questions);
+    Task CreateQuestions(QuestionSetDto questionSet);
 
     Task AddQuestion(QuestionDto entity);
 }

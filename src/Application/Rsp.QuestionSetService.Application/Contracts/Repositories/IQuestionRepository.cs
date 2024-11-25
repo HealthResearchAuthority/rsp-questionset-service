@@ -38,5 +38,13 @@ public interface IQuestionRepository
     /// <param name="questionId">Id of the question to be deleted</param>
     Task DeleteQuestion(string questionId);
 
-    Task CreateQuestions(IEnumerable<Question> adaptedQuestions);
+    Task ClearAllEntities();
+
+    Task PopulateAnswerOptions(IEnumerable<AnswerOption> answerOptions);
+
+    Task PopulateQuestionCategories(IEnumerable<QuestionCategory> categories);
+
+    Task PopulateQuestionSections(IEnumerable<QuestionSection> sections);
+
+    Task PopulateQuestions(IEnumerable<Question> questions);
 }

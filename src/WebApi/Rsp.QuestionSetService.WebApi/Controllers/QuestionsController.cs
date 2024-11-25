@@ -21,9 +21,9 @@ public class QuestionsController(IQuestionService questionService) : ControllerB
     }
 
     [HttpPost]
-    public async Task CreateQuestions(IEnumerable<QuestionDto> questions)
+    public async Task CreateQuestions(QuestionSetDto questionSet)
     {
-        await questionService.CreateQuestions(questions);
+        await questionService.CreateQuestions(questionSet);
     }
 
     [HttpPost("add")]

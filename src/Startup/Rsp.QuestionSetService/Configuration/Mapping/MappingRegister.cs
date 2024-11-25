@@ -37,6 +37,18 @@ public class MappingRegister : IRegister
             .NewConfig<QuestionRule, RuleDto>()
             .TwoWays();
 
+        config
+            .NewConfig<QuestionCategory, CategoryDto>()
+            .TwoWays();
+
+        config
+            .NewConfig<QuestionSection, SectionDto>()
+            .TwoWays();
+
+        config
+            .NewConfig<AnswerOption, AnswerOptionDto>()
+            .TwoWays();
+
         // QuestionDto to Question mapping
         config
             .NewConfig<QuestionDto, Question>()
@@ -44,9 +56,9 @@ public class MappingRegister : IRegister
             .Map(dest => dest.QuestionCategoryId, source => source.Category)
             .Map(dest => dest.QuestionSectionId, source => source.SectionId)
             .Map(dest => dest.QuestionSection.SectionId, source => source.SectionId)
-            .Map(dest => dest.QuestionSection.SectionName, source => source.Section)
             .Map(dest => dest.QuestionSection.QuestionCategoryId, source => source.Category)
-            .Map(dest => dest.Conformance, source => source.IsOptional ? "Optional" : "Mandatory")
+            .Map(dest => dest.QuestionSection.SectionName, source => source.Section)
+            .Map(dest => dest.Conformance, source => source.IsMandatory ? "Mandatory" : source.IsOptional ? "Optional" : "Conditional")
             .Map(dest => dest.QuestionRules, source => source.Rules);
 
         // Question to GetQuestionsResponse mappings

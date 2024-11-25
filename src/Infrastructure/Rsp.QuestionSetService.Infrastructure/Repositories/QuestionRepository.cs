@@ -58,72 +58,131 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
         }
     }
 
-    public async Task CreateQuestions(IEnumerable<Question> adaptedQuestions)
+    public async Task ClearAllEntities()
     {
-        foreach (Question question in adaptedQuestions)
+        await context.Answers.ExecuteDeleteAsync();
+        await context.AnswerOptions.ExecuteDeleteAsync();
+        await context.QuestionRules.ExecuteDeleteAsync();
+        await context.Questions.ExecuteDeleteAsync();
+        await context.QuestionSections.ExecuteDeleteAsync();
+        await context.QuestionCategories.ExecuteDeleteAsync();
+    }
+
+    public async Task PopulateAnswerOptions(IEnumerable<AnswerOption> answerOptions)
+    {
+        context.AnswerOptions.AddRange(answerOptions);
+        await context.SaveChangesAsync();
+    }
+
+    public async Task PopulateQuestionCategories(IEnumerable<QuestionCategory> questionCategories)
+    {
+        foreach (var category in questionCategories)
         {
-            var existingQuestion =
-                await context.Questions
-                //.Include(q => q.QuestionRules)
-                //.Include(q => q.QuestionSection)
-                //.Include(q => q.Answers)
-                .FirstOrDefaultAsync(q => q.QuestionId == question.QuestionId);
+            category.IsActive = true;
+            await context.QuestionCategories.AddAsync(category);
+        }
 
-            if (existingQuestion == null)
+        await context.SaveChangesAsync();
+    }
+
+    public async Task PopulateQuestionSections(IEnumerable<QuestionSection> questionSections)
+    {
+        foreach (var questionSection in questionSections)
+        {
+            var questionCategory =
+                await context.QuestionCategories
+                .FirstOrDefaultAsync(c => c.CategoryId == questionSection.QuestionCategoryId);
+
+            if (questionCategory == null)
             {
-                var existingSection =
-                    await context.QuestionSections
-                    .FirstOrDefaultAsync(s => s.SectionId == question.QuestionSectionId);
-
-                if (existingSection != null)
-                {
-                    context.Entry(existingSection).State = EntityState.Unchanged;
-                    question.QuestionSection = existingSection;
-                }
-
-                var existingAnswers =
-                    await context.Answers
-                    .Where(a => a.QuestionId == question.QuestionId)
-                    .ToListAsync();
-
-                if (existingAnswers.Count == 0)
-                {
-                    foreach (var answer in question.Answers)
-                    {
-                        var answerOption =
-                            await context.AnswerOptions
-                            .FirstOrDefaultAsync(o => o.OptionId == answer.AnswerOptionId);
-
-                        if (answerOption != null)
-                        {
-                            context.Entry(answerOption).State = EntityState.Unchanged;
-                            answer.AnswerOption = answerOption;
-                            answer.QuestionId = question.QuestionId;
-                        }
-                    }
-                }
-
-                await context.Questions.AddAsync(question);
                 continue;
             }
 
-            if (existingQuestion.QuestionRules.Count == 0)
-            {
-                existingQuestion.QuestionRules = question.QuestionRules;
-            }
+            questionSection.IsActive = true;
 
-            existingQuestion.QuestionCategoryId = question.QuestionCategoryId;
-            existingQuestion.QuestionSectionId = question.QuestionSectionId;
-            existingQuestion.Sequence = question.Sequence;
-            existingQuestion.Heading = question.Heading;
-            existingQuestion.QuestionText = question.QuestionText;
-            existingQuestion.QuestionType = question.QuestionType;
-            existingQuestion.DataType = question.DataType;
-            existingQuestion.Conformance = question.Conformance;
-            //existingQuestion.Answers = question.Answers;
-            //existingQuestion.QuestionRules = existingQuestion.QuestionRules;
+            context.Entry(questionCategory).State = EntityState.Unchanged; // Might be unnecessary
+            context.QuestionSections.Add(questionSection);
         }
 
+        await context.SaveChangesAsync();
+    }
+
+    public async Task PopulateQuestions(IEnumerable<Question> questions)
+    {
+        foreach (var question in questions)
+        {
+            var questionSection = await context.QuestionSections
+                .FirstOrDefaultAsync(s => s.SectionId == question.QuestionSectionId);
+
+            if (questionSection == null)
+            {
+                continue;
+            }
+
+            // Prevent tracked entity issues
+            context.Entry(questionSection).State = EntityState.Unchanged;
+            question.QuestionSection = questionSection;
+
+            // Skip question if category of QuestionSection does not match category of Question
+            if (questionSection.QuestionCategoryId != question.QuestionCategoryId)
+            {
+                continue;
+            }
+
+            var questionCategory = await context.QuestionCategories
+                .FirstOrDefaultAsync(c => c.CategoryId == question.QuestionCategoryId);
+
+            // Skip question if provided category does not exist
+            if (questionCategory == null)
+            {
+                continue;
+            }
+
+            // Populate answers
+            foreach (var answer in question.Answers)
+            {
+                var answerOption = await context.AnswerOptions
+                    .FirstOrDefaultAsync(o => o.OptionId == answer.AnswerOptionId);
+
+                // Skip answer if provided answer option does not exist
+                if (answerOption == null)
+                {
+                    continue;
+                }
+
+                context.Entry(answerOption).State = EntityState.Unchanged;
+                answer.AnswerOption = answerOption;
+                answer.QuestionId = question.QuestionId;
+            }
+
+            var newQuestion = question;
+            newQuestion.QuestionRules = [];
+
+            await context.Questions.AddAsync(newQuestion);
+        }
+
+        // Save all questions to generate IDs
+        await context.SaveChangesAsync();
+
+        foreach (var question in questions)
+        {
+            foreach (var rule in question.QuestionRules)
+            {
+                var parentQuestion = await context.Questions
+                    .FirstOrDefaultAsync(q => q.QuestionId == rule.ParentQuestionId);
+
+                if (parentQuestion == null)
+                {
+                    rule.ParentQuestionId = null;
+                }
+
+                rule.QuestionId = question.QuestionId;
+
+                context.QuestionRules.Add(rule);
+            }
+        }
+
+        // Save all rules
         await context.SaveChangesAsync();
     }
 }
