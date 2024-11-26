@@ -31,11 +31,18 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }
 
-    public async Task CreateQuestions(IEnumerable<QuestionDto> questions)
+    public async Task CreateQuestions(QuestionSetDto questionSet)
     {
-        var adaptedQuestions = questions.Adapt<IEnumerable<Question>>();
+        var adaptedCategories = questionSet.Categories.Adapt<IEnumerable<QuestionCategory>>();
+        var adaptedSections = questionSet.Sections.Adapt<IEnumerable<QuestionSection>>();
+        var adaptedAnswerOptions = questionSet.AnswerOptions.Adapt<IEnumerable<AnswerOption>>();
+        var adaptedQuestions = questionSet.Questions.Adapt<IEnumerable<Question>>();
 
-        await questionRepository.CreateQuestions(adaptedQuestions);
+        await questionRepository.ClearAllEntities();
+        await questionRepository.PopulateAnswerOptions(adaptedAnswerOptions);
+        await questionRepository.PopulateQuestionCategories(adaptedCategories);
+        await questionRepository.PopulateQuestionSections(adaptedSections);
+        await questionRepository.PopulateQuestions(adaptedQuestions);
     }
 
     public async Task AddQuestion(QuestionDto entity)
