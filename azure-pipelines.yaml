@@ -15,7 +15,6 @@ parameters:
       - dev
       - systemtest_manual
       - systemtest_auto
-      - system_integration_test
       - uat
       - pre_prod
       - production
@@ -41,7 +40,7 @@ parameters:
     default: 10
 
 variables:
-  - group: 'Test Automation'
+  - group: 'QuestionSetServiceContainerApp'
   - name: vstsFeed
     value: "0e030eb0-cb72-4f42-b99a-26e6544271c3/0a3e0ad2-23b6-4e8b-ae12-cd6d01fe97e7"
   - name: solution
@@ -50,14 +49,13 @@ variables:
     value: "**/*.csproj"
   - name: projectForContainerBuild
     value: "Rsp.QuestionSetService.csproj"
-  - name: publishContainerName
-    value: "rsp-questionsetservice"
-  - name: acrContainerName
-    value: "rsp-questionsetservice"
-  - name: containerAppName
-    value: "questionsetservice"
   - name: buildConfiguration
     value: "Release"
+  - name: service_connection
+    ${{ if in(parameters.env, 'dev') }}:
+      value: "ARM Dev Connection New"
+    ${{ if in(parameters.env, 'systemtest_auto') }}:
+      value: "ARM Automated Test Connection"  
 
 resources:
   repositories:
@@ -80,29 +78,37 @@ resources:
 
 stages:
   - stage: dev
+    variables: 
+    - group: 'DevelopmentEnvironment'
+    condition: eq('${{ parameters.env }}', 'dev')  
     jobs:
       - template: jobs/build.yaml@library
         parameters:
           run_github_security_scan: ${{ parameters.run_github_security_scan }}
           sonar_project_key: FutureIRAS_rsp-questionset-service
           sonar_project_name: rsp-questionset-service
-
           install_aspire: true
           service_defaults_repo: service_defaults
-
       - template: jobs/deploy.yaml@library
         parameters:
           install_aspire: true
           service_defaults_repo: service_defaults
 
   - stage: systemtest_auto
+    variables: 
+    - group: 'STAutoEnvironment'
+    condition: eq('${{ parameters.env }}', 'systemtest_auto')
     jobs:
-      #- template: jobs/deploy.yaml@library
-      - job:
-        displayName: Deploy to SystemTest Auto
-        steps:
-        - script: |
-            echo 'deploying to systemtest_auto'
+      - template: jobs/deploy.yaml@library
+        parameters:
+          install_aspire: true
+          service_defaults_repo: service_defaults
+      - ${{ if eq(variables.run_e2e_tests, 'true') }}:
+        - template: jobs/e2e_tests.yaml@library
+          parameters:
+            browser: ${{ parameters.browser }}
+            repo: e2e_tests
+            tests_run_timeout: ${{ parameters.tests_run_timeout }}
 
       - ${{ if eq(variables.run_e2e_tests, 'true') }}:
         - template: jobs/e2e_tests.yaml@library
