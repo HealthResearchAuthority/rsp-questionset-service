@@ -1,6 +1,8 @@
-﻿namespace Rsp.QuestionSetService.Domain.Entities;
+﻿using Rsp.QuestionSetService.Domain.Interfaces;
 
-public class Question
+namespace Rsp.QuestionSetService.Domain.Entities;
+
+public class Question : ISoftDelete
 {
     public string QuestionId { get; set; } = null!;
     public string QuestionCategoryId { get; set; } = null!;
@@ -17,4 +19,7 @@ public class Question
     public QuestionSection QuestionSection { get; set; } = null!;
     public ICollection<Answer> Answers { get; set; } = [];
     public ICollection<QuestionRule> QuestionRules { get; set; } = [];
+
+    public bool IsDeleted { get; set; } = false;
+    public DateTimeOffset? DeletedAt { get; set; } = null;
 }

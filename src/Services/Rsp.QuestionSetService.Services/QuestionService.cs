@@ -51,4 +51,14 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
 
         await questionRepository.AddQuestion(adaptedQuestion);
     }
+
+    public async Task DeleteQuestion(string questionId)
+    {
+        await questionRepository.DeleteQuestion(questionId);
+    }
+
+    public async Task UndeleteQuestion(string questionId)
+    {
+        await questionRepository.UndeleteQuestion(questionId);
+    }
 }

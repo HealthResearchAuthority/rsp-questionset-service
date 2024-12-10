@@ -3,6 +3,7 @@ using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Rsp.QuestionSetService.Application.Contracts.Repositories;
 using Rsp.QuestionSetService.Domain.Entities;
+using Rsp.QuestionSetService.Domain.Interfaces;
 
 namespace Rsp.QuestionSetService.Infrastructure.Repositories;
 
@@ -58,12 +59,26 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
         }
     }
 
+    public async Task UndeleteQuestion(string questionId)
+    {
+        var deletedQuestionEntity =
+            await context.Questions
+            .IgnoreQueryFilters()
+            .FirstOrDefaultAsync(q => questionId == q.QuestionId && q.IsDeleted);
+
+        if (deletedQuestionEntity != null && deletedQuestionEntity is ISoftDelete softDeletedEntity)
+        {
+            softDeletedEntity.Undo();
+            await context.SaveChangesAsync();
+        }
+    }
+
     public async Task ClearAllEntities()
     {
         await context.Answers.ExecuteDeleteAsync();
         await context.AnswerOptions.ExecuteDeleteAsync();
         await context.QuestionRules.ExecuteDeleteAsync();
-        await context.Questions.ExecuteDeleteAsync();
+        await context.Questions.IgnoreQueryFilters().ExecuteDeleteAsync();
         await context.QuestionSections.ExecuteDeleteAsync();
         await context.QuestionCategories.ExecuteDeleteAsync();
     }

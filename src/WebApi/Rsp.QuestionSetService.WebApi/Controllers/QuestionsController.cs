@@ -31,4 +31,16 @@ public class QuestionsController(IQuestionService questionService) : ControllerB
     {
         await questionService.AddQuestion(question);
     }
+
+    [HttpDelete("delete")]
+    public async Task DeleteQuestion(string questionId)
+    {
+        await questionService.DeleteQuestion(questionId);
+    }
+
+    [HttpPatch("undelete")]
+    public async Task UndeleteQuestion(string questionId)
+    {
+        await questionService.UndeleteQuestion(questionId);
+    }
 }
