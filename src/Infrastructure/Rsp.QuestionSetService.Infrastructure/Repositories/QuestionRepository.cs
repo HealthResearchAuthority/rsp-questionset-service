@@ -59,6 +59,7 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
         }
     }
 
+    /// <inheritdoc/>
     public async Task UndeleteQuestion(string questionId)
     {
         var deletedQuestionEntity =
@@ -66,13 +67,14 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
             .IgnoreQueryFilters()
             .FirstOrDefaultAsync(q => questionId == q.QuestionId && q.IsDeleted);
 
-        if (deletedQuestionEntity != null && deletedQuestionEntity is ISoftDelete softDeletedEntity)
+        if (deletedQuestionEntity is ISoftDeletable softDeletedQuestion)
         {
-            softDeletedEntity.Undo();
+            softDeletedQuestion.Undo();
             await context.SaveChangesAsync();
         }
     }
 
+    /// <inheritdoc/>
     public async Task ClearAllEntities()
     {
         await context.Answers.ExecuteDeleteAsync();
@@ -83,12 +85,14 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
         await context.QuestionCategories.ExecuteDeleteAsync();
     }
 
+    /// <inheritdoc/>
     public async Task PopulateAnswerOptions(IEnumerable<AnswerOption> answerOptions)
     {
         context.AnswerOptions.AddRange(answerOptions);
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task PopulateQuestionCategories(IEnumerable<QuestionCategory> questionCategories)
     {
         foreach (var category in questionCategories)
@@ -100,6 +104,7 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task PopulateQuestionSections(IEnumerable<QuestionSection> questionSections)
     {
         foreach (var questionSection in questionSections)
@@ -122,6 +127,7 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task PopulateQuestions(IEnumerable<Question> questions)
     {
         foreach (var question in questions)

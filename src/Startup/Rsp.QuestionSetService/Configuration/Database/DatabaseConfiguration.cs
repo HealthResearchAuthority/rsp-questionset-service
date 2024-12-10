@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rsp.QuestionSetService.Infrastructure;
+using Rsp.QuestionSetService.Infrastructure.Interceptors;
 
 namespace Rsp.QuestionSetService.Configuration.Database;
 
@@ -21,6 +22,8 @@ public static class DatabaseConfiguration
             options.EnableSensitiveDataLogging();
 
             options.UseSqlServer(configuration.GetConnectionString("QuestionSetServiceDatabaseConnection"));
+
+            options.AddInterceptors(new SoftDeleteInterceptor());
         });
 
         return services;
