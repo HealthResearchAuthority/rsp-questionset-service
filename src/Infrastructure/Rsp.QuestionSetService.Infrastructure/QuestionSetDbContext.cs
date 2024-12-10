@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rsp.QuestionSetService.Domain.Entities;
 using Rsp.QuestionSetService.Infrastructure.EntitiesConfiguration;
+using Rsp.QuestionSetService.Infrastructure.Interceptors;
 
 namespace Rsp.QuestionSetService.Infrastructure;
 
@@ -16,9 +17,15 @@ public class QuestionSetDbContext(DbContextOptions<QuestionSetDbContext> options
     public DbSet<QuestionRule> QuestionRules { get; set; }
     public DbSet<Answer> Answers { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.AddInterceptors(new SoftDeleteInterceptor());
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Question>()
+            .HasQueryFilter(q => !q.IsDeleted);
 
         modelBuilder.ApplyConfiguration(new QuestionCategoryConfiguration());
         modelBuilder.ApplyConfiguration(new QuestionSectionConfiguration());

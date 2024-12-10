@@ -23,4 +23,8 @@ public interface IQuestionService : IInterceptable
     Task CreateQuestions(QuestionSetDto questionSet);
 
     Task AddQuestion(QuestionDto entity);
+
+    Task DeleteQuestion(string questionId);
+
+    Task UndeleteQuestion(string questionId);
 }
