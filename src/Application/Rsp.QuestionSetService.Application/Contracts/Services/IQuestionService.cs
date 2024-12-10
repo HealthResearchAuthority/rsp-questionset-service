@@ -20,11 +20,27 @@ public interface IQuestionService : IInterceptable
     /// <param name="categoryId">Category Id of the questions</param>
     Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId);
 
+    /// <summary>
+    /// Clears the database and recreates based on provided question set
+    /// </summary>
+    /// <param name="questionSet">A collection of categories, sections, questions, and answer options</param>
     Task CreateQuestions(QuestionSetDto questionSet);
 
+    /// <summary>
+    /// Adds a question to the database
+    /// </summary>
+    /// <param name="entity">The question entity to be added</param>
     Task AddQuestion(QuestionDto entity);
 
+    /// <summary>
+    /// Soft deletes a question in the database
+    /// </summary>
+    /// <param name="questionId">The id of the question to be soft deleted</param>
     Task DeleteQuestion(string questionId);
 
+    /// <summary>
+    /// Undeletes a soft deleted question in the database
+    /// </summary>
+    /// <param name="questionId">The id of the soft deleted question to be undeleted</param>
     Task UndeleteQuestion(string questionId);
 }

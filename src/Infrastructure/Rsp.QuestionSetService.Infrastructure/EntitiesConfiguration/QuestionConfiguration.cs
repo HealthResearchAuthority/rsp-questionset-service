@@ -11,6 +11,12 @@ public class QuestionConfiguration : IEntityTypeConfiguration<Question>
     {
         builder.HasKey(q => q.QuestionId);
 
+        builder.HasQueryFilter(q => !q.IsDeleted);
+
+        builder
+            .HasIndex(q => q.IsDeleted)
+            .HasFilter("IsDeleted = 0");
+
         builder
             .HasMany(q => q.Answers)
             .WithOne()

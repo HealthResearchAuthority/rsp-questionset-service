@@ -11,15 +11,23 @@ public class SoftDeleteInterceptor : SaveChangesInterceptor
         InterceptionResult<int> result,
         CancellationToken cancellationToken = default)
     {
-        if (eventData.Context is null) return new ValueTask<InterceptionResult<int>>(result);
-
-        foreach (var entry in eventData.Context.ChangeTracker.Entries())
+        if (eventData.Context is null)
         {
-            if (entry is not { State: EntityState.Deleted, Entity: ISoftDelete delete }) continue;
+            return base.SavingChangesAsync(eventData, result, cancellationToken);
+        }
 
+        var entries =
+            eventData
+            .Context
+            .ChangeTracker
+            .Entries<ISoftDeletable>()
+            .Where(e => e.State == EntityState.Deleted);
+
+        foreach (var entry in entries)
+        {
             entry.State = EntityState.Modified;
-            delete.IsDeleted = true;
-            delete.DeletedAt = DateTimeOffset.UtcNow;
+            entry.Entity.IsDeleted = true;
+            entry.Entity.DeletedAt = DateTimeOffset.UtcNow;
         }
 
         return new ValueTask<InterceptionResult<int>>(result);

@@ -31,6 +31,7 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }
 
+    /// <inheritdoc/>
     public async Task CreateQuestions(QuestionSetDto questionSet)
     {
         var adaptedCategories = questionSet.Categories.Adapt<IEnumerable<QuestionCategory>>();
@@ -45,6 +46,7 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
         await questionRepository.PopulateQuestions(adaptedQuestions);
     }
 
+    /// <inheritdoc/>
     public async Task AddQuestion(QuestionDto entity)
     {
         var adaptedQuestion = entity.Adapt<Question>();
@@ -52,11 +54,13 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
         await questionRepository.AddQuestion(adaptedQuestion);
     }
 
+    /// <inheritdoc/>
     public async Task DeleteQuestion(string questionId)
     {
         await questionRepository.DeleteQuestion(questionId);
     }
 
+    /// <inheritdoc/>
     public async Task UndeleteQuestion(string questionId)
     {
         await questionRepository.UndeleteQuestion(questionId);

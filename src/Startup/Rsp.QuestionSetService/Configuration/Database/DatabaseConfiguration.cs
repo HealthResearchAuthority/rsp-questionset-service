@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rsp.QuestionSetService.Infrastructure;
+using Rsp.QuestionSetService.Infrastructure.Interceptors;
 
 namespace Rsp.QuestionSetService.Configuration.Database;
 
@@ -15,11 +16,23 @@ public static class DatabaseConfiguration
     /// <param name="configuration"><see cref="IConfiguration"/></param>
     public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
+<<<<<<< HEAD
         services.AddDbContext<QuestionSetDbContext>
         (
             options => options
                 .UseSqlServer(configuration.GetConnectionString("QuestionSetServiceDatabaseConnection"))
         );
+=======
+        // TODO: rename the database connection as needed
+        services.AddDbContext<QuestionSetDbContext>(options =>
+        {
+            options.EnableSensitiveDataLogging();
+
+            options.UseSqlServer(configuration.GetConnectionString("QuestionSetServiceDatabaseConnection"));
+
+            options.AddInterceptors(new SoftDeleteInterceptor());
+        });
+>>>>>>> 1cf8137 (RSP-2017: Soft delete questions)
 
         return services;
     }
