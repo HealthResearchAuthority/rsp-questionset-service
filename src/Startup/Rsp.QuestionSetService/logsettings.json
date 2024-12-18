@@ -1,15 +1,15 @@
 {
   "Serilog": {
-    "Using": [
-      "Serilog.Sinks.Console"
-    ],
+    "Using": [ "Serilog.Sinks.Console" ],
     "MinimumLevel": {
       "Default": "Verbose",
       "Override": {
-        "System.Net.Http.HttpClient": "Information",
+        "System.Net.Http.HttpClient": "Warning",
         "Microsoft": "Information",
         "Microsoft.Hosting.Lifetime": "Information",
-        "Microsoft.AspNetCore": "Information"
+        "Microsoft.AspNetCore": "Warning",
+        "HealthChecks": "Warning",
+        "Polly": "Warning"
       }
     },
     "WriteTo": [

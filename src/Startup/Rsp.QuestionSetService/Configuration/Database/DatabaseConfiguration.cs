@@ -15,13 +15,11 @@ public static class DatabaseConfiguration
     /// <param name="configuration"><see cref="IConfiguration"/></param>
     public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        // TODO: rename the database connection as needed
-        services.AddDbContext<QuestionSetDbContext>(options =>
-        {
-            options.EnableSensitiveDataLogging();
-
-            options.UseSqlServer(configuration.GetConnectionString("QuestionSetServiceDatabaseConnection"));
-        });
+        services.AddDbContext<QuestionSetDbContext>
+        (
+            options => options
+                .UseSqlServer(configuration.GetConnectionString("QuestionSetServiceDatabaseConnection"))
+        );
 
         return services;
     }

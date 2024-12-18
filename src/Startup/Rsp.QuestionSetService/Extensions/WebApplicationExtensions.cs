@@ -19,19 +19,21 @@ public static class WebApplicationExtensions
     {
         var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
-        logger.LogInformationHp("Performing Migrations");
-
         try
         {
+            logger.LogAsInformation("Performing Migrations");
+
             using var scope = app.Services.CreateScope();
 
             await using var context = scope.ServiceProvider.GetRequiredService<QuestionSetDbContext>();
 
             await context.Database.MigrateAsync();
+
+            logger.LogAsInformation("Migrations Completed");
         }
         catch (Exception ex)
         {
-            logger.LogErrorHp("ERR_FAILED_MIGRATIONS", "Database Migration failed", ex);
+            logger.LogAsError("ERR_FAILED_MIGRATIONS", "Database Migration failed", ex);
         }
     }
 }

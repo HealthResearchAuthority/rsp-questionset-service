@@ -1,11 +1,13 @@
-﻿using Rsp.QuestionSetService.Application.DTOS.Responses;
+﻿using Rsp.Logging.Interceptors;
+using Rsp.QuestionSetService.Application.DTOS.Responses;
 
 namespace Rsp.QuestionSetService.Application.Contracts.Services;
 
 /// <summary>
-/// Questionset service interface
+/// Questionset service interface. Marked as IInterceptable to enable
+/// the start/end logging for all methods.
 /// </summary>
-public interface IQuestionService
+public interface IQuestionService : IInterceptable
 {
     /// <summary>
     /// Gets all questions

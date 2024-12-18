@@ -48,7 +48,7 @@ public class AuthorizeRequirementHandler(ILogger<AuthorizeRequirementHandler> lo
         // user should be in the role specified by the requirement
         if (roleClaims.Find(claim => claim.Value == AuthorizeRequirement.Role) == null)
         {
-            logger.LogErrorHp(string.Join(",", roleClaims), "ERR_AUTH_FAILED", "user is not in the required role");
+            logger.LogAsError(string.Join(",", roleClaims), "ERR_AUTH_FAILED", "user is not in the required role");
 
             // Do not fail the requirement as the handler is meant to work as OR
             // so the next handler will pick the next requirement, uncomment if AND behaviour is intended
@@ -73,14 +73,14 @@ public class AuthorizeRequirementHandler(ILogger<AuthorizeRequirementHandler> lo
         if (routeValues["status"] is not string status ||
             requirement.AllowedStatuses.FirstOrDefault(required => required == status) == null)
         {
-            logger.LogErrorHp(string.Join(",", roleClaims), "ERR_AUTH_FAILED", "user is not allowed to query the status");
+            logger.LogAsError(string.Join(",", roleClaims), "ERR_AUTH_FAILED", "user is not allowed to query the status");
 
             return;
         }
 
         context.Succeed(requirement);
 
-        logger.LogInformationHp("requirement was met successfully");
+        logger.LogAsInformation("requirement was met successfully");
 
         await Task.CompletedTask;
     }

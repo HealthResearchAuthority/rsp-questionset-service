@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
-using Rsp.QuestionSetService.Application.Authentication.Helpers;
-using Rsp.QuestionSetService.Application.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Net.Http.Headers;
+using Rsp.Logging.Extensions;
+using Rsp.QuestionSetService.Application.Authentication.Helpers;
+using Rsp.QuestionSetService.Application.Settings;
 
 namespace Rsp.QuestionSetService.Configuration.Auth;
 
@@ -51,11 +52,22 @@ public static class AuthConfiguration
             },
             OnAuthenticationFailed = context =>
             {
+                var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
+
+                logger.LogAsWarning("Authentication Failed");
+
                 context.Fail(context.Exception);
 
                 return Task.CompletedTask;
             },
-            OnTokenValidated = _ => Task.CompletedTask
+            OnTokenValidated = context =>
+            {
+                var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
+
+                logger.LogAsInformation("AuthToken Validated");
+
+                return Task.CompletedTask;
+            }
         };
 
         // Enable built-in authentication of Jwt bearer token
