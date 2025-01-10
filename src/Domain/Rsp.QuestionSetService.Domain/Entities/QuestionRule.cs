@@ -1,10 +1,13 @@
-﻿namespace Rsp.QuestionSetService.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Rsp.QuestionSetService.Domain.Entities;
 
 public class QuestionRule
 {
     /// <summary>
     /// Id of the rule. This is used for primary key
     /// </summary>
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int RuleId { get; set; }
 
     /// <summary>
@@ -37,4 +40,9 @@ public class QuestionRule
     /// List of one or more conditions to apply
     /// </summary>
     public IEnumerable<Condition> Conditions { get; set; } = null!;
+
+    /// <summary>
+    /// The question set version this rule belongs to
+    /// </summary>
+    public string VersionId { get; set; } = null!;
 }
