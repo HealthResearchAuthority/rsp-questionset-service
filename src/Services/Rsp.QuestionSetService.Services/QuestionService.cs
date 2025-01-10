@@ -31,20 +31,30 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }
 
+    public async Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId)
+    {
+        // specification with parameters will include all questions
+        var questions = await questionRepository.GetQuestionsByVersion(new QuestionSpecification(), versionId);
+
+        return questions.Adapt<IEnumerable<QuestionDto>>();
+    }
+
+    public async Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId, string categoryId)
+    {
+        // passing specification with categoryId parameter to get all questions for that category
+        var questions = await questionRepository.GetQuestionsByVersion(new QuestionSpecification(categoryId: categoryId), versionId);
+
+        return questions.Adapt<IEnumerable<QuestionDto>>();
+    }
 
     /// <inheritdoc/>
-    public async Task CreateQuestions(QuestionSetDto questionSet)
+    public async Task AddQuestionSet(QuestionSetDto questionSet)
     {
         var adaptedCategories = questionSet.Categories.Adapt<IEnumerable<QuestionCategory>>();
-        var adaptedSections = questionSet.Sections.Adapt<IEnumerable<QuestionSection>>();
-        var adaptedAnswerOptions = questionSet.AnswerOptions.Adapt<IEnumerable<AnswerOption>>();
         var adaptedQuestions = questionSet.Questions.Adapt<IEnumerable<Question>>();
 
-        await questionRepository.ClearAllEntities();
-        await questionRepository.PopulateAnswerOptions(adaptedAnswerOptions);
-        await questionRepository.PopulateQuestionCategories(adaptedCategories);
-        await questionRepository.PopulateQuestionSections(adaptedSections);
-        await questionRepository.PopulateQuestions(adaptedQuestions);
+        await questionRepository.AddQuestionCategories(adaptedCategories);
+        await questionRepository.AddQuestions(adaptedQuestions);
     }
 
     /// <inheritdoc/>
@@ -65,5 +75,31 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
     public async Task UndeleteQuestion(string questionId)
     {
         await questionRepository.UndeleteQuestion(questionId);
+    }
+
+    public async Task<IEnumerable<VersionDto>> GetVersions()
+    {
+        var versions = await questionRepository.GetVersions();
+
+        return versions.Adapt<IEnumerable<VersionDto>>();
+    }
+
+    public async Task CreateDraftVersion(VersionDto version)
+    {
+        await questionRepository.DeleteDraftVersion();
+
+        var adaptedVersion = version.Adapt<Domain.Entities.Version>();
+
+        await questionRepository.CreateDraftVersion(adaptedVersion);
+    }
+
+    public async Task DeleteDraftVersion()
+    {
+        await questionRepository.DeleteDraftVersion();
+    }
+
+    public async Task PublishVersion(string versionId)
+    {
+        await questionRepository.PublishVersion(versionId);
     }
 }
