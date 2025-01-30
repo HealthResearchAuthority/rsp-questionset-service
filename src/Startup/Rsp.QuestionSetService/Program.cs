@@ -12,17 +12,14 @@ using Rsp.Logging.Interceptors;
 using Rsp.Logging.Middlewares.CorrelationId;
 using Rsp.Logging.Middlewares.RequestTracing;
 using Rsp.QuestionSetService.Application.Constants;
+using Rsp.QuestionSetService.Application.Mapping;
 using Rsp.QuestionSetService.Application.Settings;
 using Rsp.QuestionSetService.Configuration.Auth;
 using Rsp.QuestionSetService.Configuration.Database;
 using Rsp.QuestionSetService.Configuration.Dependencies;
-using Rsp.QuestionSetService.Configuration.Mapping;
 using Rsp.QuestionSetService.Configuration.Swagger;
 using Rsp.QuestionSetService.Extensions;
 using Rsp.ServiceDefaults;
-
-// TODO: If you using .NET Aspire provide the namespace for the project
-// using ServiceDefaults
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,7 +62,7 @@ if (!builder.Environment.IsDevelopment())
             .ConfigureRefresh(refreshOptions =>
                 refreshOptions
                 .Register("AppSettings:Sentinel", AppSettings.ServiceLabel, refreshAll: true)
-                .SetCacheExpiration(new TimeSpan(0, 0, 15))
+                .SetRefreshInterval(new TimeSpan(0, 0, 15))
             );
         }
     );

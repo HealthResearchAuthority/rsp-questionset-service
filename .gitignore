@@ -367,3 +367,4 @@ FodyWeavers.xsd
 
 # Don't include .sonarlint
 .sonarlint
+*.lutconfig

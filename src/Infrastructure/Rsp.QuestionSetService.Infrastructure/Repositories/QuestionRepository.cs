@@ -93,9 +93,9 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
     }
 
     /// <inheritdoc/>
-    public async Task PopulateQuestionCategories(IEnumerable<QuestionCategory> questionCategories)
+    public async Task PopulateQuestionCategories(IEnumerable<QuestionCategory> categories)
     {
-        foreach (var category in questionCategories)
+        foreach (var category in categories)
         {
             category.IsActive = true;
             await context.QuestionCategories.AddAsync(category);
@@ -105,9 +105,9 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
     }
 
     /// <inheritdoc/>
-    public async Task PopulateQuestionSections(IEnumerable<QuestionSection> questionSections)
+    public async Task PopulateQuestionSections(IEnumerable<QuestionSection> sections)
     {
-        foreach (var questionSection in questionSections)
+        foreach (var questionSection in sections)
         {
             var questionCategory =
                 await context.QuestionCategories

@@ -2,7 +2,7 @@
 
 namespace Rsp.QuestionSetService.Application.Settings;
 
-// TODO: Modify as needed, these are typical properties for JWT authentication
+// Modify as needed, these are typical properties for JWT authentication
 // using Jwks, remove/modify as needed
 [ExcludeFromCodeCoverage]
 public class AuthSettings
