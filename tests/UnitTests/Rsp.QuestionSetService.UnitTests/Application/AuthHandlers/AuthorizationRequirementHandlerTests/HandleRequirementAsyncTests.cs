@@ -1,17 +1,15 @@
 ﻿using System.Security.Claims;
-using Rsp.QuestionSetService.Application.Authorization.Handlers;
-using Rsp.QuestionSetService.Application.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
-using Moq;
-using Shouldly;
+using Rsp.QuestionSetService.Application.Authorization.Handlers;
+using Rsp.QuestionSetService.Application.Authorization.Requirements;
 
-namespace Rsp.QuestionSetService.UnitTests.Authorization.AuthHandlers.AuthorizationRequirementHandlerTests;
+namespace Rsp.QuestionSetService.UnitTests.Application.AuthHandlers.AuthorizationRequirementHandlerTests;
 
-public class HandleRequirementAsync : TestServiceBase
+public class HandleRequirementAsyncTests : TestServiceBase
 {
     [Fact]
     public async Task WithRequirementAlreadyMet_Returns_CompletedTask()

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Rsp.QuestionSetService.WebApi.Controllers;
 
+[ExcludeFromCodeCoverage]
 [ApiController]
 [Route("[controller]")]
 public class ProbesController : ControllerBase

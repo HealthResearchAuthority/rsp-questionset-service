@@ -2,8 +2,8 @@
 
 public interface ISoftDeletable
 {
-    bool IsDeleted { get => false; set { } }
-    DateTimeOffset? DeletedAt { get => null; set { } }
+    bool IsDeleted { get; set; }
+    DateTimeOffset? DeletedAt { get; set; }
 
     void Undo()
     {
