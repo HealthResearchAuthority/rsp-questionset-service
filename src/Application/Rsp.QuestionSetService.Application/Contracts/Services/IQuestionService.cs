@@ -15,10 +15,11 @@ public interface IQuestionService : IInterceptable
     Task<IEnumerable<QuestionDto>> GetQuestions();
 
     /// <summary>
-    /// Gets all questions for the category
+    /// Gets all questions for the category and section
     /// </summary>
     /// <param name="categoryId">Category Id of the questions</param>
-    Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId);
+    /// <param name="sectionId">Section Id of the questions</param>
+    Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId, string sectionId);
 
     /// <summary>
     /// Clears the database and recreates based on provided question set
