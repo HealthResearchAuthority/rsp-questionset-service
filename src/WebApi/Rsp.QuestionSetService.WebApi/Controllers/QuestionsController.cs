@@ -9,15 +9,15 @@ namespace Rsp.QuestionSetService.WebApi.Controllers;
 public class QuestionsController(IQuestionService questionService) : ControllerBase
 {
     /// <summary>
-    /// Gets all questions or by category if provided
+    /// Gets all questions or filters by category and section if provided
     /// </summary>
     [HttpGet]
     [Produces<IEnumerable<QuestionDto>>]
-    public async Task<IEnumerable<QuestionDto>> GetQuestions(string? categoryId)
+    public async Task<IEnumerable<QuestionDto>> GetQuestions(string? categoryId, string? sectionId)
     {
-        return categoryId == null ?
+        return categoryId == null  ?
             await questionService.GetQuestions() :
-            await questionService.GetQuestions(categoryId);
+            await questionService.GetQuestions(categoryId, sectionId);
     }
 
     /// <summary>
