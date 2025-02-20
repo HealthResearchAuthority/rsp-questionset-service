@@ -21,15 +21,16 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
     }
 
     /// <summary>
-    /// Gets all questions for a category
+    /// Gets all questions for a category and section
     /// </summary>
-    public async Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId)
+    public async Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId, string sectionId)
     {
-        // passing specification with categoryId parameter to get all questions for that category
-        var questions = await questionRepository.GetQuestions(new QuestionSpecification(categoryId: categoryId));
+        // Passing specification with categoryId and sectionId parameters to get all questions for that category and section
+        var questions = await questionRepository.GetQuestions(new QuestionSpecification(categoryId: categoryId, sectionId: sectionId));
 
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }
+
 
     /// <inheritdoc/>
     public async Task CreateQuestions(QuestionSetDto questionSet)
