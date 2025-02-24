@@ -12,7 +12,7 @@ public class QuestionCatagoriesController(IQuestionCategoriesService questionCat
     ///     Gets all questions or filters by category and section if provided
     /// </summary>
     [HttpGet("all")]
-    public async Task<IEnumerable<CategoryDto>> GetQuestionSections()
+    public async Task<IEnumerable<CategoryDto>> GetQuestionCategories()
     {
         return await questionCategoriesService.GetQuestionCategories();
     }
