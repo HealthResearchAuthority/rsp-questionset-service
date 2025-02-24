@@ -13,7 +13,7 @@ public class QuestionsController(IQuestionService questionService) : ControllerB
     /// </summary>
     [HttpGet]
     [Produces<IEnumerable<QuestionDto>>]
-    public async Task<IEnumerable<QuestionDto>> GetQuestions(string? categoryId, string? sectionId)
+    public async Task<IEnumerable<QuestionDto>> GetQuestions(string? categoryId, string? sectionId= null)
     {
         return categoryId == null  ?
             await questionService.GetQuestions() :
