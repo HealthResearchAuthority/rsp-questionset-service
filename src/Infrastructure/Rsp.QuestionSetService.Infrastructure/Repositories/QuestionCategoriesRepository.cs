@@ -17,6 +17,7 @@ public class QuestionCategoriesRepository(QuestionSetDbContext context) : IQuest
     {
         return await context
             .QuestionCategories
+            .Where(qc => qc.IsActive) // Filter only active categories
             .ToListAsync();
     }
 }
