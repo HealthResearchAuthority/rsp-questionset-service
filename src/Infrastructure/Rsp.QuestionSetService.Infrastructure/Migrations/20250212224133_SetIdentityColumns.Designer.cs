@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rsp.QuestionSetService.Infrastructure;
 
@@ -11,9 +12,11 @@ using Rsp.QuestionSetService.Infrastructure;
 namespace Rsp.QuestionSetService.Infrastructure.Migrations
 {
     [DbContext(typeof(QuestionSetDbContext))]
-    partial class QuestionSetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250212224133_SetIdentityColumns")]
+    partial class SetIdentityColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +58,7 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     b.HasIndex("QuestionId", "VersionId");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
 
                     b.HasData(
                         new
@@ -3358,7 +3361,7 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     b.HasIndex("VersionId");
 
-                    b.ToTable("AnswerOptions", (string)null);
+                    b.ToTable("AnswerOptions");
 
                     b.HasData(
                         new
@@ -5326,7 +5329,7 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     b.HasIndex("QuestionSectionId", "VersionId");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
 
                     b.HasData(
                         new
@@ -9444,7 +9447,7 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     b.HasIndex("VersionId");
 
-                    b.ToTable("QuestionCategories", (string)null);
+                    b.ToTable("QuestionCategories");
 
                     b.HasData(
                         new
@@ -9561,7 +9564,7 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     b.Property<string>("QuestionId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Sequence")
                         .HasColumnType("int");
@@ -9572,9 +9575,7 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     b.HasIndex("ParentQuestionId", "VersionId");
 
-                    b.HasIndex("QuestionId", "VersionId");
-
-                    b.ToTable("QuestionRules", (string)null);
+                    b.ToTable("QuestionRules");
 
                     b.HasData(
                         new
@@ -9850,7 +9851,7 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     b.HasIndex("QuestionCategoryId", "VersionId");
 
-                    b.ToTable("QuestionSections", (string)null);
+                    b.ToTable("QuestionSections");
 
                     b.HasData(
                         new
@@ -10101,7 +10102,7 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
 
                     b.HasKey("VersionId");
 
-                    b.ToTable("Versions", (string)null);
+                    b.ToTable("Versions");
 
                     b.HasData(
                         new
@@ -10195,14 +10196,9 @@ namespace Rsp.QuestionSetService.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Rsp.QuestionSetService.Domain.Entities.Question", null)
-                        .WithMany()
-                        .HasForeignKey("ParentQuestionId", "VersionId");
-
-                    b.HasOne("Rsp.QuestionSetService.Domain.Entities.Question", null)
                         .WithMany("QuestionRules")
-                        .HasForeignKey("QuestionId", "VersionId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .HasForeignKey("ParentQuestionId", "VersionId")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("Rsp.QuestionSetService.Domain.Entities.QuestionSection", b =>

@@ -9,7 +9,19 @@ public class QuestionCategoryConfiguration : IEntityTypeConfiguration<QuestionCa
 {
     public void Configure(EntityTypeBuilder<QuestionCategory> builder)
     {
-        builder.HasKey(qs => qs.CategoryId);
+        builder.HasKey(qc => new { qc.CategoryId, qc.VersionId });
+
+        builder
+            .HasMany(qc => qc.QuestionSections)
+            .WithOne()
+            .HasForeignKey(q => new { q.QuestionCategoryId, q.VersionId })
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+           .HasMany(q => q.Questions)
+           .WithOne()
+           .HasForeignKey(q => new { q.QuestionCategoryId, q.VersionId })
+           .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasData(QuestionsData.SeedCategories());
     }

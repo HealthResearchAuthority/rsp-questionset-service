@@ -21,6 +21,12 @@ public interface IQuestionRepository
     Task<IEnumerable<Question>> GetQuestions(ISpecification<Question> specification);
 
     /// <summary>
+    /// Gets all questions using the provided specification
+    /// </summary>
+    /// <param name="specification"><see cref="QuestionSpecification"/></param>
+    Task<IEnumerable<Question>> GetQuestionsByVersion(ISpecification<Question> specification, string versionId);
+
+    /// <summary>
     /// Adds a question to the database
     /// </summary>
     /// <param name="entity">Question entity</param>
@@ -45,27 +51,34 @@ public interface IQuestionRepository
     Task UndeleteQuestion(string questionId);
 
     /// <summary>
-    /// Delete contents all tables in the database
+    /// Gets all question set versions
     /// </summary>
-    Task ClearAllEntities();
+    Task<IEnumerable<Domain.Entities.Version>> GetVersions();
 
     /// <summary>
-    /// Populates the AnswerOptions table
+    /// Creates a draft question set version in the database
     /// </summary>
-    Task PopulateAnswerOptions(IEnumerable<AnswerOption> answerOptions);
+    /// <param name="version">Draft question set version entity</param>
+    Task CreateDraftVersion(Domain.Entities.Version version);
 
     /// <summary>
-    /// Populates the QuestionCategories table
+    /// Deletes the draft version of the question set
     /// </summary>
-    Task PopulateQuestionCategories(IEnumerable<QuestionCategory> categories);
+    Task DeleteDraftVersion();
 
     /// <summary>
-    /// Populates the QuestionSections table
+    /// Publishes a version of the question set
     /// </summary>
-    Task PopulateQuestionSections(IEnumerable<QuestionSection> sections);
+    /// <param name="versionId">Id of the question set version to be published</param>
+    Task PublishVersion(string versionId);
 
     /// <summary>
-    /// Populates the Questions table
+    /// Adds a collection of records to the QuestionCategories table
     /// </summary>
-    Task PopulateQuestions(IEnumerable<Question> questions);
+    Task AddQuestionCategories(IEnumerable<QuestionCategory> categories);
+
+    /// <summary>
+    /// Adds a collection of records to the Questions table
+    /// </summary>
+    Task AddQuestions(IEnumerable<Question> questions);
 }

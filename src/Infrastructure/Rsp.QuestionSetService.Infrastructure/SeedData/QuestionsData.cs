@@ -33,4 +33,9 @@ internal static class QuestionsData
     {
         return SeedHelper.SeedData<QuestionRule>("QuestionRules.json");
     }
+
+    public static IList<Domain.Entities.Version> SeedVersions()
+    {
+        return SeedHelper.SeedData<Domain.Entities.Version>("Versions.json");
+    }
 }

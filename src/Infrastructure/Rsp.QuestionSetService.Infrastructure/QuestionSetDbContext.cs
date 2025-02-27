@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rsp.QuestionSetService.Domain.Entities;
 using Rsp.QuestionSetService.Infrastructure.EntitiesConfiguration;
+using Version = Rsp.QuestionSetService.Domain.Entities.Version;
 
 namespace Rsp.QuestionSetService.Infrastructure;
 
@@ -15,6 +16,7 @@ public class QuestionSetDbContext(DbContextOptions<QuestionSetDbContext> options
     public DbSet<AnswerOption> AnswerOptions { get; set; }
     public DbSet<QuestionRule> QuestionRules { get; set; }
     public DbSet<Answer> Answers { get; set; }
+    public DbSet<Version> Versions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,5 +28,6 @@ public class QuestionSetDbContext(DbContextOptions<QuestionSetDbContext> options
         modelBuilder.ApplyConfiguration(new AnswerOptionConfiguration());
         modelBuilder.ApplyConfiguration(new QuestionRuleConfiguration());
         modelBuilder.ApplyConfiguration(new AnswerConfiguration());
+        modelBuilder.ApplyConfiguration(new VersionConfiguration());
     }
 }

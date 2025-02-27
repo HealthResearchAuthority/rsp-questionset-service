@@ -27,7 +27,8 @@ public class MappingRegister : IRegister
             .Ignore(dest => dest.AnswerId)
             .Map(dest => dest.AnswerOptionId, source => source.AnswerId)
             .Map(dest => dest.AnswerOption.OptionText, source => source.AnswerText)
-            .Map(dest => dest.AnswerOption.OptionId, source => source.AnswerId);
+            .Map(dest => dest.AnswerOption.OptionId, source => source.AnswerId)
+            .Map(dest => dest.AnswerOption.VersionId, source => source.VersionId);
 
         config
             .NewConfig<Condition, ConditionDto>()
@@ -49,6 +50,10 @@ public class MappingRegister : IRegister
             .NewConfig<AnswerOption, AnswerOptionDto>()
             .TwoWays();
 
+        config
+            .NewConfig<Domain.Entities.Version, VersionDto>()
+            .TwoWays();
+
         // QuestionDto to Question mapping
         config
             .NewConfig<QuestionDto, Question>()
@@ -58,6 +63,7 @@ public class MappingRegister : IRegister
             .Map(dest => dest.QuestionSection.SectionId, source => source.SectionId)
             .Map(dest => dest.QuestionSection.QuestionCategoryId, source => source.Category)
             .Map(dest => dest.QuestionSection.SectionName, source => source.Section)
+            .Map(dest => dest.QuestionSection.VersionId, source => source.VersionId)
             .Map(dest => dest.Conformance, source => GetConformance(source))
             .Map(dest => dest.QuestionRules, source => source.Rules);
 
@@ -68,6 +74,7 @@ public class MappingRegister : IRegister
             .Map(dest => dest.Category, source => source.QuestionCategoryId)
             .Map(dest => dest.SectionId, source => source.QuestionSection.SectionId)
             .Map(dest => dest.Section, source => source.QuestionSection.SectionName)
+            .Map(dest => dest.VersionId, source => source.QuestionSection.VersionId)
             .Map(dest => dest.IsMandatory, _ => true, source => source.Conformance == "Mandatory")
             .Map(dest => dest.IsOptional, _ => true, source => source.Conformance == "Optional")
             .Map(dest => dest.Rules, source => source.QuestionRules);

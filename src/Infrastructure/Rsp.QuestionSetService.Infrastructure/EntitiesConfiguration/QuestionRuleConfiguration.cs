@@ -10,13 +10,12 @@ public class QuestionRuleConfiguration : IEntityTypeConfiguration<QuestionRule>
 {
     public void Configure(EntityTypeBuilder<QuestionRule> builder)
     {
-        builder.HasKey(cr => cr.RuleId);
+        builder.HasKey(qr => new { qr.RuleId, qr.VersionId });
 
         builder
             .HasOne<Question>()
             .WithMany()
-            .HasForeignKey(qr => qr.QuestionId)
-            .HasForeignKey(qr => qr.ParentQuestionId);
+            .HasForeignKey(qr => new { qr.ParentQuestionId, qr.VersionId });
 
         builder
             .Property(p => p.Conditions)

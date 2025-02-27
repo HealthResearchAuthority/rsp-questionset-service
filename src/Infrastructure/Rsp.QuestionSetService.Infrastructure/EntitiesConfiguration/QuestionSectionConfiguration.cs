@@ -9,13 +9,13 @@ public class QuestionSectionConfiguration : IEntityTypeConfiguration<QuestionSec
 {
     public void Configure(EntityTypeBuilder<QuestionSection> builder)
     {
-        builder.HasKey(qs => qs.SectionId);
+        builder.HasKey(qs => new { qs.SectionId, qs.VersionId });
 
         builder
            .HasMany(qs => qs.Questions)
            .WithOne(q => q.QuestionSection)
-           .HasForeignKey(q => q.QuestionSectionId)
-           .OnDelete(DeleteBehavior.NoAction);
+           .HasForeignKey(q => new { q.QuestionSectionId, q.VersionId })
+           .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasData(QuestionsData.SeedSections());
     }

@@ -9,7 +9,8 @@ public class QuestionConfiguration : IEntityTypeConfiguration<Question>
 {
     public void Configure(EntityTypeBuilder<Question> builder)
     {
-        builder.HasKey(q => q.QuestionId);
+        builder
+            .HasKey(q => new { q.QuestionId, q.VersionId });
 
         builder.HasQueryFilter(q => !q.IsDeleted);
 
@@ -20,19 +21,13 @@ public class QuestionConfiguration : IEntityTypeConfiguration<Question>
         builder
             .HasMany(q => q.Answers)
             .WithOne()
-            .HasForeignKey(ans => ans.QuestionId)
+            .HasForeignKey(a => new { a.QuestionId, a.VersionId })
             .OnDelete(DeleteBehavior.Cascade);
 
         builder
             .HasMany(q => q.QuestionRules)
             .WithOne()
-            .HasForeignKey(qr => qr.QuestionId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        builder
-            .HasMany(q => q.QuestionRules)
-            .WithOne()
-            .HasForeignKey(qr => qr.ParentQuestionId)
+            .HasForeignKey(qr => new { qr.QuestionId, qr.VersionId })
             .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasData(QuestionsData.SeedQuestions());

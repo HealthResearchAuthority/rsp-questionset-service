@@ -48,7 +48,7 @@ public class QuestionsControllerTests : TestServiceBase<QuestionsController>
     }
 
     [Theory, AutoData]
-    public async Task CreateQuestions_CallsCreateQuestions(string categoryId)
+    public async Task AddQuestionSet_CallsAddQuestionSet(string categoryId)
     {
         // Arrange
         var questionSet = new QuestionSetDto
@@ -62,14 +62,14 @@ public class QuestionsControllerTests : TestServiceBase<QuestionsController>
         var questionsService = Mocker.GetMock<IQuestionService>();
 
         questionsService
-            .Setup(x => x.CreateQuestions(questionSet))
+            .Setup(x => x.AddQuestionSet(questionSet))
             .Returns(Task.CompletedTask);
 
         // Act
-        await Sut.CreateQuestions(questionSet);
+        await Sut.AddQuestionSet(questionSet);
 
         // Assert
-        questionsService.Verify(x => x.CreateQuestions(questionSet), Times.Once);
+        questionsService.Verify(x => x.AddQuestionSet(questionSet), Times.Once);
     }
 
     [Fact]
