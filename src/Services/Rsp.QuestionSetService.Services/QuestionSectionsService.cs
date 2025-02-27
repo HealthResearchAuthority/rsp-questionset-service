@@ -2,6 +2,7 @@
 using Rsp.QuestionSetService.Application.Contracts.Repositories;
 using Rsp.QuestionSetService.Application.Contracts.Services;
 using Rsp.QuestionSetService.Application.DTOS.Responses;
+using Rsp.QuestionSetService.Application.Specifications;
 
 namespace Rsp.QuestionSetService.Services;
 
@@ -18,13 +19,16 @@ public class QuestionSectionsService(IQuestionSectionsRepository questionSection
 
     public async Task<QuestionSectionDto> GetPreviousQuestionSections(string currentSectionId)
     {
-        var questionsSection = await questionSectionRepository.GetPreviousQuestionSection(currentSectionId);
+        var questionsSection =
+            await questionSectionRepository.GetPreviousQuestionSection(
+                new QuestionSectionSpecification(currentSectionId));
         return questionsSection.Adapt<QuestionSectionDto>();
     }
 
     public async Task<QuestionSectionDto> GetNextQuestionSections(string currentSectionId)
     {
-        var questionsSection = await questionSectionRepository.GetNextQuestionSection(currentSectionId);
+        var questionsSection =
+            await questionSectionRepository.GetNextQuestionSection(new QuestionSectionSpecification(currentSectionId));
         return questionsSection.Adapt<QuestionSectionDto>();
     }
 }
