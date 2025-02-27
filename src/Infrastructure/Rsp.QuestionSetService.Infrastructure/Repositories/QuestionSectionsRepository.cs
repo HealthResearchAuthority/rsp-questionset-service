@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Rsp.QuestionSetService.Application.Contracts.Repositories;
 using Rsp.QuestionSetService.Domain.Entities;
 
@@ -20,55 +22,52 @@ public class QuestionSectionsRepository(QuestionSetDbContext context) : IQuestio
             .ToListAsync();
     }
 
-    /// <inheritdoc />
-    public async Task<QuestionSection?> GetNextQuestionSection(string sectionId)
+    public async Task<QuestionSection?> GetNextQuestionSection(ISpecification<QuestionSection> specification)
     {
-        // Retrieve all sections ordered correctly
-        var allSections = await context.QuestionSections
-            .OrderBy(qs => qs.QuestionCategoryId)
-            .ThenBy(qs => qs.SectionId)
-            .ToListAsync(); // Fetch all into memory
+        var allSections = await GetQuestionSections();
 
-        // Assign a temporary ID based on the order
-        var orderedSections = allSections
-            .Select((qs, index) => new { Section = qs, TempId = index })
-            .ToList();
+        // Retrieve the current section entry
+        var currentSectionEntry = await context
+            .QuestionSections
+            .WithSpecification(specification)
+            .FirstOrDefaultAsync();
 
-        // Find the current section based on sectionId
-        var currentSectionEntry = orderedSections.FirstOrDefault(q => q.Section.SectionId == sectionId);
-
-        if (currentSectionEntry == null || currentSectionEntry.TempId == orderedSections.Count - 1)
+        if (currentSectionEntry != null)
         {
-            return null; // No next section available (last item in list)
+            // Find the index of the current section in the original list
+            var questionSections = allSections.ToList();
+            var currentIndex = questionSections.FindIndex(s => s.SectionId == currentSectionEntry.SectionId);
+
+            // Get the next section if there is one
+            return currentIndex >= 0 && currentIndex < questionSections.Count - 1
+                ? questionSections[currentIndex + 1]
+                : null;
         }
 
-        // Get the next section using TempId
-        return orderedSections[currentSectionEntry.TempId + 1].Section;
+        return null;
     }
 
-    /// <inheritdoc />
-    public async Task<QuestionSection?> GetPreviousQuestionSection(string sectionId)
+
+    public async Task<QuestionSection?> GetPreviousQuestionSection(ISpecification<QuestionSection> specification)
     {
-        // Retrieve all sections ordered correctly
-        var allSections = await context.QuestionSections
-            .OrderBy(qs => qs.QuestionCategoryId)
-            .ThenBy(qs => qs.SectionId)
-            .ToListAsync(); // Fetch all into memory
+        var allSections = await GetQuestionSections();
 
-        // Assign a temporary ID based on the order
-        var orderedSections = allSections
-            .Select((qs, index) => new { Section = qs, TempId = index })
-            .ToList();
+        // Retrieve the current section entry
+        var currentSectionEntry = await context
+            .QuestionSections
+            .WithSpecification(specification)
+            .FirstOrDefaultAsync();
 
-        // Find the current section based on sectionId
-        var currentSectionEntry = orderedSections.FirstOrDefault(q => q.Section.SectionId == sectionId);
-
-        if (currentSectionEntry == null || currentSectionEntry.TempId == 0)
+        if (currentSectionEntry != null)
         {
-            return null; // No previous section available
+            // Find the index of the current section in the original list
+            var questionSections = allSections.ToList();
+            var currentIndex = questionSections.ToList().FindIndex(s => s.SectionId == currentSectionEntry.SectionId);
+
+            // Get the previous section if there is one
+            return currentIndex > 0 ? questionSections[currentIndex - 1] : null;
         }
 
-        // Get the previous section using TempId
-        return orderedSections[currentSectionEntry.TempId - 1].Section;
+        return null;
     }
 }
