@@ -12,6 +12,7 @@ public class GetQuestionsByCategoryTests : TestServiceBase<QuestionService>
     {
         // Arrange
         const string categoryId = "category1";
+        const string sectionId = "section1";
         var questions = new List<Question>()
         {
             new() { QuestionId = "1", QuestionText = "Question 1", QuestionCategoryId = categoryId },
@@ -25,7 +26,7 @@ public class GetQuestionsByCategoryTests : TestServiceBase<QuestionService>
             .ReturnsAsync(questions);
 
         // Act
-        var result = await Sut.GetQuestions(categoryId);
+        var result = await Sut.GetQuestions(categoryId,sectionId);
 
         // Assert
         result.ShouldNotBeNull();
@@ -43,13 +44,14 @@ public class GetQuestionsByCategoryTests : TestServiceBase<QuestionService>
     {
         // Arrange
         const string categoryId = "nonexistentCategory";
+        const string sectionId = "section1";
         Mocker
             .GetMock<IQuestionRepository>()
             .Setup(repo => repo.GetQuestions(It.IsAny<QuestionSpecification>()))
             .ReturnsAsync([]);
 
         // Act
-        var result = await Sut.GetQuestions(categoryId);
+        var result = await Sut.GetQuestions(categoryId, sectionId);
 
         // Assert
         result.ShouldNotBeNull();
@@ -66,11 +68,12 @@ public class GetQuestionsByCategoryTests : TestServiceBase<QuestionService>
     {
         // Arrange
         const string categoryId = "category1";
+        const string sectionId = "section1";
         var questions = new List<Question>()
         {
-            new() { QuestionId = "1", QuestionText = "Question 1", QuestionCategoryId = categoryId },
-            new() { QuestionId = "2", QuestionText = "Question 2", QuestionCategoryId = categoryId },
-            new() { QuestionId = "3", QuestionText = "Question 3", QuestionCategoryId = categoryId }
+            new() { QuestionId = "1", QuestionText = "Question 1", QuestionCategoryId = categoryId, QuestionSectionId = sectionId},
+            new() { QuestionId = "2", QuestionText = "Question 2", QuestionCategoryId = categoryId, QuestionSectionId = sectionId },
+            new() { QuestionId = "3", QuestionText = "Question 3", QuestionCategoryId = categoryId , QuestionSectionId = sectionId}
         };
 
         Mocker
@@ -79,7 +82,7 @@ public class GetQuestionsByCategoryTests : TestServiceBase<QuestionService>
             .ReturnsAsync(questions);
 
         // Act
-        var result = await Sut.GetQuestions(categoryId);
+        var result = await Sut.GetQuestions(categoryId, sectionId);
 
         // Assert
         result.ShouldNotBeNull();

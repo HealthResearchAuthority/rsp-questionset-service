@@ -17,12 +17,12 @@ public class QuestionsControllerTests : TestServiceBase<QuestionsController>
             .ReturnsAsync(expectedQuestions);
 
         // Act
-        var result = await Sut.GetQuestions(null);
+        var result = await Sut.GetQuestions(null,null);
 
         // Assert
         result.ShouldBe(expectedQuestions);
         questionsService.Verify(x => x.GetQuestions(), Times.Once);
-        questionsService.Verify(x => x.GetQuestions(It.IsAny<string>()), Times.Never);
+        questionsService.Verify(x => x.GetQuestions(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
     }
 
     [Theory, AutoData]
@@ -30,20 +30,21 @@ public class QuestionsControllerTests : TestServiceBase<QuestionsController>
     {
         // Arrange
         const string categoryId = "category-1";
+        const string sectionId = "section-1";
         expectedQuestions.ForEach(x => x.Category = categoryId);
 
         var questionsService = Mocker.GetMock<IQuestionService>();
 
         questionsService
-            .Setup(x => x.GetQuestions(categoryId))
+            .Setup(x => x.GetQuestions(categoryId, sectionId))
             .ReturnsAsync(expectedQuestions);
 
         // Act
-        var result = await Sut.GetQuestions(categoryId);
+        var result = await Sut.GetQuestions(categoryId, sectionId);
 
         // Assert
         result.ShouldBeOfType<List<QuestionDto>>();
-        questionsService.Verify(x => x.GetQuestions(categoryId), Times.Once);
+        questionsService.Verify(x => x.GetQuestions(categoryId, sectionId), Times.Once);
         questionsService.Verify(x => x.GetQuestions(), Times.Never);
     }
 
