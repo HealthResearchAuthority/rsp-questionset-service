@@ -8,6 +8,7 @@ namespace Rsp.QuestionSetService.Application.Contracts.Repositories;
 /// </summary>
 public interface IQuestionCategoriesRepository
 {
+
     /// <summary>
     ///     Gets all questions using the provided specification
     /// </summary>
