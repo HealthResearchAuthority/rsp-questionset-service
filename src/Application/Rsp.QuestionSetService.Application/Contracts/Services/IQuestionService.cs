@@ -19,7 +19,7 @@ public interface IQuestionService : IInterceptable
     /// </summary>
     /// <param name="categoryId">Category Id of the questions</param>
     /// <param name="sectionId">Section Id of the questions</param>
-    Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId, string sectionId);
+    Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId, string? sectionId);
 
     /// <summary>
     /// Clears the database and recreates based on provided question set
