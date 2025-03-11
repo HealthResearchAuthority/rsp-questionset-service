@@ -8,7 +8,7 @@ namespace Rsp.QuestionSetService.Application.Specifications;
 /// </summary>
 public class QuestionSpecification : Specification<Question>
 {
-    public QuestionSpecification(string? questionId = null, string? categoryId = null, string? sectionId = null)
+    public QuestionSpecification(string? questionId = null, string? categoryId = null, string? sectionId = null, string? versionId = null)
     {
         var builder = Query
             .AsNoTracking()
@@ -35,6 +35,12 @@ public class QuestionSpecification : Specification<Question>
         {
             builder.Where(q => q.QuestionSectionId == sectionId);
         }
-    }
 
+        // add a clause if versionId is not null
+        if (versionId != null)
+        {
+            builder
+                .Where(q => q.VersionId == versionId);
+        }
+    }
 }

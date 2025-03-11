@@ -16,16 +16,8 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
     /// <inheritdoc/>
     public async Task<Question?> GetQuestion(ISpecification<Question> specification)
     {
-        var publishedVersion = await context.Versions.FirstOrDefaultAsync(v => v.IsPublished);
-
-        if (publishedVersion == null)
-        {
-            return null;
-        }
-
         return await context
             .Questions
-            .Where(context => context.VersionId == publishedVersion.VersionId)
             .WithSpecification(specification)
             .FirstOrDefaultAsync();
     }
@@ -33,33 +25,8 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
     /// <inheritdoc/>
     public async Task<IEnumerable<Question>> GetQuestions(ISpecification<Question> specification)
     {
-        var publishedVersion = await context.Versions.FirstOrDefaultAsync(v => v.IsPublished);
-
-        if (publishedVersion == null)
-        {
-            return [];
-        }
-
         return await context
             .Questions
-            .Where(context => context.VersionId == publishedVersion.VersionId)
-            .WithSpecification(specification)
-            .ToListAsync();
-    }
-
-    /// <inheritdoc/>
-    public async Task<IEnumerable<Question>> GetQuestionsByVersion(ISpecification<Question> specification, string versionId)
-    {
-        var version = await context.Versions.FirstOrDefaultAsync(v => v.VersionId == versionId);
-
-        if (version == null)
-        {
-            return [];
-        }
-
-        return await context
-            .Questions
-            .Where(context => context.VersionId == version.VersionId)
             .WithSpecification(specification)
             .ToListAsync();
     }

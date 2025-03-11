@@ -21,12 +21,6 @@ public interface IQuestionRepository
     Task<IEnumerable<Question>> GetQuestions(ISpecification<Question> specification);
 
     /// <summary>
-    /// Gets all questions using the provided specification
-    /// </summary>
-    /// <param name="specification"><see cref="QuestionSpecification"/></param>
-    Task<IEnumerable<Question>> GetQuestionsByVersion(ISpecification<Question> specification, string versionId);
-
-    /// <summary>
     /// Adds a question to the database
     /// </summary>
     /// <param name="entity">Question entity</param>

@@ -4,6 +4,7 @@ using Rsp.QuestionSetService.Application.Contracts.Services;
 using Rsp.QuestionSetService.Application.DTOS.Responses;
 using Rsp.QuestionSetService.Application.Specifications;
 using Rsp.QuestionSetService.Domain.Entities;
+using Version = Rsp.QuestionSetService.Domain.Entities.Version;
 
 namespace Rsp.QuestionSetService.Services;
 
@@ -14,8 +15,11 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
     /// </summary>
     public async Task<IEnumerable<QuestionDto>> GetQuestions()
     {
+        // Only return the questions for the published version
+        var publishedVersionId = await GetPublishedVersionId();
+
         // specification with parameters will include all questions
-        var questions = await questionRepository.GetQuestions(new QuestionSpecification());
+        var questions = await questionRepository.GetQuestions(new QuestionSpecification(versionId: publishedVersionId));
 
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }
@@ -25,8 +29,11 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
     /// </summary>
     public async Task<IEnumerable<QuestionDto>> GetQuestions(string categoryId, string? sectionId)
     {
-        // Passing specification with categoryId and sectionId parameters to get all questions for that category and section
-        var questions = await questionRepository.GetQuestions(new QuestionSpecification(categoryId: categoryId, sectionId: sectionId));
+        // Only return the questions for the published version
+        var publishedVersionId = await GetPublishedVersionId();
+
+        // passing specification with categoryId parameter to get all questions for that category
+        var questions = await questionRepository.GetQuestions(new QuestionSpecification(versionId: publishedVersionId, categoryId: categoryId, sectionId: sectionId));
 
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }
@@ -34,7 +41,7 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
     public async Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId)
     {
         // specification with parameters will include all questions
-        var questions = await questionRepository.GetQuestionsByVersion(new QuestionSpecification(), versionId);
+        var questions = await questionRepository.GetQuestions(new QuestionSpecification(versionId: versionId));
 
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }
@@ -42,7 +49,7 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
     public async Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId, string categoryId)
     {
         // passing specification with categoryId parameter to get all questions for that category
-        var questions = await questionRepository.GetQuestionsByVersion(new QuestionSpecification(categoryId: categoryId), versionId);
+        var questions = await questionRepository.GetQuestions(new QuestionSpecification(versionId: versionId, categoryId: categoryId));
 
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }
@@ -88,7 +95,7 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
     {
         await questionRepository.DeleteDraftVersion();
 
-        var adaptedVersion = version.Adapt<Domain.Entities.Version>();
+        var adaptedVersion = version.Adapt<Version>();
 
         await questionRepository.CreateDraftVersion(adaptedVersion);
     }
@@ -101,5 +108,12 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
     public async Task PublishVersion(string versionId)
     {
         await questionRepository.PublishVersion(versionId);
+    }
+
+    private async Task<string?> GetPublishedVersionId()
+    {
+        var versions = await GetVersions();
+
+        return versions.FirstOrDefault(v => v.IsPublished)?.VersionId;
     }
 }
