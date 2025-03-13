@@ -46,10 +46,10 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }
 
-    public async Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId, string categoryId)
+    public async Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId, string categoryId, string? sectionId)
     {
         // passing specification with categoryId parameter to get all questions for that category
-        var questions = await questionRepository.GetQuestions(new QuestionSpecification(versionId: versionId, categoryId: categoryId));
+        var questions = await questionRepository.GetQuestions(new QuestionSpecification(versionId: versionId, categoryId: categoryId, sectionId: sectionId));
 
         return questions.Adapt<IEnumerable<QuestionDto>>();
     }

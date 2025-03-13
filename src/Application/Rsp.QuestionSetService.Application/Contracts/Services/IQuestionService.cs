@@ -32,7 +32,7 @@ public interface IQuestionService : IInterceptable
     /// </summary>
     /// <param name="versionId">Version of the questions</param>
     /// <param name="categoryId">Category Id of the questions</param>
-    Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId, string categoryId);
+    Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId, string categoryId, string? sectionId);
 
     /// <summary>
     /// Adds a question set to the database

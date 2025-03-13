@@ -9,27 +9,31 @@ namespace Rsp.QuestionSetService.WebApi.Controllers;
 public class QuestionsController(IQuestionService questionService) : ControllerBase
 {
     /// <summary>
-    /// Gets all questions or filters by category and section if provided
+    /// Gets all questions and filters by category and section if provided
     /// </summary>
     [HttpGet]
     [Produces<IEnumerable<QuestionDto>>]
-    public async Task<IEnumerable<QuestionDto>> GetQuestions(string? categoryId, string? sectionId= null)
+    public async Task<IEnumerable<QuestionDto>> GetQuestions(string? categoryId, string? sectionId = null)
     {
-        return categoryId == null  ?
+        return categoryId == null ?
             await questionService.GetQuestions() :
             await questionService.GetQuestions(categoryId, sectionId);
     }
 
+    /// <summary>
+    /// Gets all questions for a given versionId and filters by category and section if provided
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("questionset")]
-    public async Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId, string? categoryId)
+    public async Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId, string? categoryId, string? sectionId = null)
     {
         return categoryId == null ?
             await questionService.GetQuestionsByVersion(versionId) :
-            await questionService.GetQuestionsByVersion(versionId, categoryId);
+            await questionService.GetQuestionsByVersion(versionId, categoryId, sectionId);
     }
 
     /// <summary>
-    /// Deletes a draft question set (if one exists) and adds a draft question set to the database
+    /// Adds a set of questions to the database (as well as corresponding categories, sections, and answer options)
     /// </summary>
     /// <param name="questionSet">A collection of categories, sections, questions, and answer options</param>
     [HttpPost("questionset")]
