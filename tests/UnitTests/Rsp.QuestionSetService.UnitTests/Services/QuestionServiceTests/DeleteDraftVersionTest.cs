@@ -33,6 +33,6 @@ public class DeleteDraftVersionTest : TestServiceBase<QuestionService>
             .ThrowsAsync(new Exception("Repository error"));
 
         // Act & Assert
-        await Should.ThrowAsync<Exception>(async () => await Sut.DeleteDraftVersion());
+        await Should.ThrowAsync<Exception>(Sut.DeleteDraftVersion());
     }
 }

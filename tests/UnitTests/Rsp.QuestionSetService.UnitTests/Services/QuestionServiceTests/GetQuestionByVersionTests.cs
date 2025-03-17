@@ -27,8 +27,10 @@ public class GetQuestionByVersionTests : TestServiceBase<QuestionService>
         var result = await Sut.GetQuestionsByVersion("v1");
 
         // Assert
-        result.ShouldNotBeNull();
-        result.Count().ShouldBe(questions.Where(q => q.VersionId == "v1").Count());
+        result
+            .ShouldNotBeNull()
+            .Count()
+            .ShouldBe(questions.Count(q => q.VersionId == "v1"));
 
         // Verify
         Mocker
@@ -49,8 +51,9 @@ public class GetQuestionByVersionTests : TestServiceBase<QuestionService>
         var result = await Sut.GetQuestionsByVersion("v1");
 
         // Assert
-        result.ShouldNotBeNull();
-        result.ShouldBeEmpty();
+        result
+            .ShouldNotBeNull()
+            .ShouldBeEmpty();
 
         // Verify
         Mocker
@@ -78,8 +81,15 @@ public class GetQuestionByVersionTests : TestServiceBase<QuestionService>
         var result = await Sut.GetQuestions();
 
         // Assert
-        result.ShouldNotBeNull();
-        result.Count().ShouldBe(questions.Where(q => q.VersionId == "v1" && q.QuestionSectionId == "Section 1" && q.QuestionCategoryId == "Category 1").Count());
+        result
+            .ShouldNotBeNull()
+            .Count()
+            .ShouldBe(questions.Count
+            (
+                q => q.VersionId == "v1" && 
+                q.QuestionSectionId == "Section 1" && 
+                q.QuestionCategoryId == "Category 1"
+            ));
 
         // Verify
         Mocker
@@ -100,8 +110,9 @@ public class GetQuestionByVersionTests : TestServiceBase<QuestionService>
         var result = await Sut.GetQuestions();
 
         // Assert
-        result.ShouldNotBeNull();
-        result.ShouldBeEmpty();
+        result
+            .ShouldNotBeNull()
+            .ShouldBeEmpty();
 
         // Verify
         Mocker
