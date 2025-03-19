@@ -9,7 +9,7 @@ public class AnswerOptionConfiguration : IEntityTypeConfiguration<AnswerOption>
 {
     public void Configure(EntityTypeBuilder<AnswerOption> builder)
     {
-        builder.HasKey(ao => ao.OptionId);
+        builder.HasKey(ao => new { ao.OptionId, ao.VersionId });
 
         builder.HasData(QuestionsData.SeedAnswerOptions());
     }

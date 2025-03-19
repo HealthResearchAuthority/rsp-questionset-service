@@ -17,8 +17,16 @@ public class QuestionSectionsRepository(QuestionSetDbContext context) : IQuestio
     /// <inheritdoc />
     public async Task<IEnumerable<QuestionSection>> GetQuestionSections()
     {
+        var publishedVersion = await context.Versions.FirstOrDefaultAsync(v => v.IsPublished);
+
+        if (publishedVersion == null)
+        {
+            return [];
+        }
+
         return await context
             .QuestionSections
+            .Where(qs => qs.VersionId == publishedVersion.VersionId)
             .ToListAsync();
     }
 
@@ -46,7 +54,6 @@ public class QuestionSectionsRepository(QuestionSetDbContext context) : IQuestio
 
         return null;
     }
-
 
     public async Task<QuestionSection?> GetPreviousQuestionSection(ISpecification<QuestionSection> specification)
     {

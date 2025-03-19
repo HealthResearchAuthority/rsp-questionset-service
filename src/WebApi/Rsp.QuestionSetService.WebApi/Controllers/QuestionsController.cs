@@ -9,25 +9,38 @@ namespace Rsp.QuestionSetService.WebApi.Controllers;
 public class QuestionsController(IQuestionService questionService) : ControllerBase
 {
     /// <summary>
-    /// Gets all questions or filters by category and section if provided
+    /// Gets all questions and filters by category and section if provided
     /// </summary>
     [HttpGet]
     [Produces<IEnumerable<QuestionDto>>]
-    public async Task<IEnumerable<QuestionDto>> GetQuestions(string? categoryId, string? sectionId= null)
+    public async Task<IEnumerable<QuestionDto>> GetQuestions(string? categoryId, string? sectionId = null)
     {
-        return categoryId == null  ?
+        return categoryId == null ?
             await questionService.GetQuestions() :
             await questionService.GetQuestions(categoryId, sectionId);
     }
 
     /// <summary>
-    /// Clears the database and recreates based on provided question set
+    /// Gets all questions for a given versionId and filters by category and section if provided
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("questionset")]
+    public async Task<IEnumerable<QuestionDto>> GetQuestionsByVersion(string versionId, string? categoryId, string? sectionId = null)
+    {
+        return categoryId == null ?
+            await questionService.GetQuestionsByVersion(versionId) :
+            await questionService.GetQuestionsByVersion(versionId, categoryId, sectionId);
+    }
+
+    /// <summary>
+    /// Adds a set of questions to the database (as well as corresponding categories, sections, and answer options)
     /// </summary>
     /// <param name="questionSet">A collection of categories, sections, questions, and answer options</param>
-    [HttpPost]
-    public async Task CreateQuestions(QuestionSetDto questionSet)
+    [HttpPost("questionset")]
+    public async Task AddQuestionSet(QuestionSetDto questionSet)
     {
-        await questionService.CreateQuestions(questionSet);
+        await questionService.CreateDraftVersion(questionSet.Version);
+        await questionService.AddQuestionSet(questionSet);
     }
 
     /// <summary>
@@ -58,5 +71,32 @@ public class QuestionsController(IQuestionService questionService) : ControllerB
     public async Task UndeleteQuestion(string questionId)
     {
         await questionService.UndeleteQuestion(questionId);
+    }
+
+    /// <summary>
+    /// Gets all question set versions
+    /// </summary>
+    [HttpGet("version/all")]
+    public async Task<IEnumerable<VersionDto>> GetVersions()
+    {
+        return await questionService.GetVersions();
+    }
+
+    [HttpPost("version/create")]
+    public async Task CreateDraftVersion(VersionDto version)
+    {
+        await questionService.CreateDraftVersion(version);
+    }
+
+    [HttpDelete("version/delete")]
+    public async Task DeleteDraftVersion()
+    {
+        await questionService.DeleteDraftVersion();
+    }
+
+    [HttpPost("version/publish")]
+    public async Task PublishVersion(string versionId)
+    {
+        await questionService.PublishVersion(versionId);
     }
 }

@@ -17,7 +17,7 @@ public class QuestionsControllerTests : TestServiceBase<QuestionsController>
             .ReturnsAsync(expectedQuestions);
 
         // Act
-        var result = await Sut.GetQuestions(null,null);
+        var result = await Sut.GetQuestions(null, null);
 
         // Assert
         result.ShouldBe(expectedQuestions);
@@ -49,7 +49,45 @@ public class QuestionsControllerTests : TestServiceBase<QuestionsController>
     }
 
     [Theory, AutoData]
-    public async Task CreateQuestions_CallsCreateQuestions(string categoryId)
+    public async Task GetQuestions_ByVersion_CallsGetQuestionsByVersion(List<QuestionDto> expectedQuestions, string versionId)
+    {
+        // Arrange
+        var questionsService = Mocker.GetMock<IQuestionService>();
+
+        questionsService
+            .Setup(x => x.GetQuestionsByVersion(versionId))
+            .ReturnsAsync(expectedQuestions);
+
+        // Act
+        var result = await Sut.GetQuestionsByVersion(versionId, null, null);
+
+        // Assert
+        result.ShouldBe(expectedQuestions);
+        questionsService.Verify(x => x.GetQuestionsByVersion(versionId), Times.Once);
+        questionsService.Verify(x => x.GetQuestionsByVersion(versionId, It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+    }
+
+    [Theory, AutoData]
+    public async Task GetQuestions_ByVersion_WithSectionAndCategory_CallsGetQuestionsByVersion(List<QuestionDto> expectedQuestions, string versionId, string sectionId, string categoryId)
+    {
+        // Arrange
+        var questionsService = Mocker.GetMock<IQuestionService>();
+
+        questionsService
+            .Setup(x => x.GetQuestionsByVersion(versionId, categoryId, sectionId))
+            .ReturnsAsync(expectedQuestions);
+
+        // Act
+        var result = await Sut.GetQuestionsByVersion(versionId, categoryId, sectionId);
+
+        // Assert
+        result.ShouldBe(expectedQuestions);
+        questionsService.Verify(x => x.GetQuestionsByVersion(versionId), Times.Never);
+        questionsService.Verify(x => x.GetQuestionsByVersion(versionId, categoryId, sectionId), Times.Once);
+    }
+
+    [Theory, AutoData]
+    public async Task AddQuestionSet_CallsAddQuestionSet(string categoryId)
     {
         // Arrange
         var questionSet = new QuestionSetDto
@@ -63,14 +101,14 @@ public class QuestionsControllerTests : TestServiceBase<QuestionsController>
         var questionsService = Mocker.GetMock<IQuestionService>();
 
         questionsService
-            .Setup(x => x.CreateQuestions(questionSet))
+            .Setup(x => x.AddQuestionSet(questionSet))
             .Returns(Task.CompletedTask);
 
         // Act
-        await Sut.CreateQuestions(questionSet);
+        await Sut.AddQuestionSet(questionSet);
 
         // Assert
-        questionsService.Verify(x => x.CreateQuestions(questionSet), Times.Once);
+        questionsService.Verify(x => x.AddQuestionSet(questionSet), Times.Once);
     }
 
     [Fact]
@@ -128,5 +166,73 @@ public class QuestionsControllerTests : TestServiceBase<QuestionsController>
 
         // Assert
         questionsService.Verify(x => x.UndeleteQuestion(questionId), Times.Once);
+    }
+
+    [Theory, AutoData]
+    public async Task GetVersions_CallsGetVersions(List<VersionDto> expectedVersions)
+    {
+        // Arrange
+        var questionsService = Mocker.GetMock<IQuestionService>();
+
+        questionsService
+            .Setup(x => x.GetVersions())
+            .ReturnsAsync(expectedVersions);
+
+        // Act
+        await Sut.GetVersions();
+
+        // Assert
+        questionsService.Verify(x => x.GetVersions(), Times.Once);
+    }
+
+    [Theory, AutoData]
+    public async Task CreateDraftVersion_CallsCreateDraftVersion(VersionDto version)
+    {
+        // Arrange
+        var questionsService = Mocker.GetMock<IQuestionService>();
+
+        questionsService
+            .Setup(x => x.CreateDraftVersion(version))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        await Sut.CreateDraftVersion(version);
+
+        // Assert
+        questionsService.Verify(x => x.CreateDraftVersion(version), Times.Once);
+    }
+
+    [Fact]
+    public async Task DeleteDraftVersion_CallsDeleteDraftVersion()
+    {
+        // Arrange
+        var questionsService = Mocker.GetMock<IQuestionService>();
+
+        questionsService
+            .Setup(x => x.DeleteDraftVersion())
+            .Returns(Task.CompletedTask);
+
+        // Act
+        await Sut.DeleteDraftVersion();
+
+        // Assert
+        questionsService.Verify(x => x.DeleteDraftVersion(), Times.Once);
+    }
+
+    [Theory, AutoData]
+    public async Task PublishVersion_CallsPublishVersion(string versionId)
+    {
+        // Arrange
+        var questionsService = Mocker.GetMock<IQuestionService>();
+
+        questionsService
+            .Setup(x => x.PublishVersion(versionId))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        await Sut.PublishVersion(versionId);
+
+        // Assert
+        questionsService.Verify(x => x.PublishVersion(versionId), Times.Once);
     }
 }

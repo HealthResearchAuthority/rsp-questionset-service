@@ -75,25 +75,88 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
     }
 
     /// <inheritdoc/>
-    public async Task ClearAllEntities()
+    public async Task<IEnumerable<Domain.Entities.Version>> GetVersions()
     {
-        await context.Answers.ExecuteDeleteAsync();
-        await context.AnswerOptions.ExecuteDeleteAsync();
-        await context.QuestionRules.ExecuteDeleteAsync();
-        await context.Questions.IgnoreQueryFilters().ExecuteDeleteAsync();
-        await context.QuestionSections.ExecuteDeleteAsync();
-        await context.QuestionCategories.ExecuteDeleteAsync();
+        return await context
+            .Versions
+            .ToListAsync();
     }
 
     /// <inheritdoc/>
-    public async Task PopulateAnswerOptions(IEnumerable<AnswerOption> answerOptions)
+    public async Task CreateDraftVersion(Domain.Entities.Version version)
     {
-        context.AnswerOptions.AddRange(answerOptions);
+        await context.Versions.AddAsync(version);
         await context.SaveChangesAsync();
     }
 
     /// <inheritdoc/>
-    public async Task PopulateQuestionCategories(IEnumerable<QuestionCategory> categories)
+    public async Task DeleteDraftVersion()
+    {
+        var draftVersion =
+            await context.Versions
+            .FirstOrDefaultAsync(v => v.IsDraft);
+
+        if (draftVersion == null) return;
+
+        await context.Answers
+            .Where(a => a.VersionId == draftVersion.VersionId)
+            .ExecuteDeleteAsync();
+
+        await context.QuestionRules
+            .Where(qr => qr.VersionId == draftVersion.VersionId)
+            .ExecuteDeleteAsync();
+
+        await context.Questions
+            .Where(q => q.VersionId == draftVersion.VersionId)
+            .ExecuteDeleteAsync();
+
+        await context.QuestionSections
+            .Where(qs => qs.VersionId == draftVersion.VersionId)
+            .ExecuteDeleteAsync();
+
+        await context.QuestionCategories
+            .Where(qc => qc.VersionId == draftVersion.VersionId)
+            .ExecuteDeleteAsync();
+
+        await context.AnswerOptions
+            .Where(ao => ao.VersionId == draftVersion.VersionId)
+            .ExecuteDeleteAsync();
+
+        context.Versions.Remove(draftVersion);
+
+        await context.SaveChangesAsync();
+    }
+
+    /// <inheritdoc/>
+    public async Task PublishVersion(string versionId)
+    {
+        var version =
+            await context.Versions
+            .FirstOrDefaultAsync(v => v.VersionId == versionId);
+
+        if (version == null) return;
+
+        var publishedVersion =
+            await context.Versions
+            .FirstOrDefaultAsync(v => v.IsPublished);
+
+        if (publishedVersion != null)
+        {
+            publishedVersion.IsPublished = false;
+            publishedVersion.PublishedAt = null;
+            publishedVersion.PublishedBy = null;
+        }
+
+        version.IsDraft = false;
+        version.IsPublished = true;
+        version.PublishedAt = DateTime.UtcNow;
+        version.PublishedBy = "admin";
+
+        await context.SaveChangesAsync();
+    }
+
+    /// <inheritdoc/>
+    public async Task AddQuestionCategories(IEnumerable<QuestionCategory> categories)
     {
         foreach (var category in categories)
         {
@@ -105,105 +168,43 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
     }
 
     /// <inheritdoc/>
-    public async Task PopulateQuestionSections(IEnumerable<QuestionSection> sections)
-    {
-        foreach (var questionSection in sections)
-        {
-            var questionCategory =
-                await context.QuestionCategories
-                .FirstOrDefaultAsync(c => c.CategoryId == questionSection.QuestionCategoryId);
-
-            if (questionCategory == null)
-            {
-                continue;
-            }
-
-            questionSection.IsActive = true;
-
-            context.Entry(questionCategory).State = EntityState.Unchanged; // Might be unnecessary
-            context.QuestionSections.Add(questionSection);
-        }
-
-        await context.SaveChangesAsync();
-    }
-
-    /// <inheritdoc/>
-    public async Task PopulateQuestions(IEnumerable<Question> questions)
+    public async Task AddQuestions(IEnumerable<Question> questions)
     {
         foreach (var question in questions)
         {
-            var questionSection = await context.QuestionSections
-                .FirstOrDefaultAsync(s => s.SectionId == question.QuestionSectionId);
+            // Check if question.QuestionSection is already tracked
+            var trackedSection =
+                context.ChangeTracker
+                .Entries<QuestionSection>()
+                .SingleOrDefault(s => s.Entity.SectionId == question.QuestionSectionId && s.Entity.VersionId == question.VersionId)?
+                .Entity;
 
-            if (questionSection == null)
+            // Set question.QuestionSection to the tracked one to prevent tracked entity issues
+            if (trackedSection != null)
             {
-                continue;
+                question.QuestionSection = trackedSection;
             }
 
-            // Prevent tracked entity issues
-            context.Entry(questionSection).State = EntityState.Unchanged;
-            question.QuestionSection = questionSection;
-
-            // Skip question if category of QuestionSection does not match category of Question
-            if (questionSection.QuestionCategoryId != question.QuestionCategoryId)
-            {
-                continue;
-            }
-
-            var questionCategory = await context.QuestionCategories
-                .FirstOrDefaultAsync(c => c.CategoryId == question.QuestionCategoryId);
-
-            // Skip question if provided category does not exist
-            if (questionCategory == null)
-            {
-                continue;
-            }
-
-            // Populate answers
             foreach (var answer in question.Answers)
             {
-                var answerOption = await context.AnswerOptions
-                    .FirstOrDefaultAsync(o => o.OptionId == answer.AnswerOptionId);
+                // Repeat above for all answer.AnswerOption
+                var trackedAnswerOption =
+                    context.ChangeTracker
+                    .Entries<AnswerOption>()
+                    .SingleOrDefault(ao => ao.Entity.OptionId == answer.AnswerOptionId && ao.Entity.VersionId == answer.VersionId)?
+                    .Entity;
 
-                // Skip answer if provided answer option does not exist
-                if (answerOption == null)
-                {
-                    continue;
-                }
-
-                context.Entry(answerOption).State = EntityState.Unchanged;
-                answer.AnswerOption = answerOption;
                 answer.QuestionId = question.QuestionId;
-            }
 
-            var newQuestion = question;
-            newQuestion.QuestionRules = [];
-
-            await context.Questions.AddAsync(newQuestion);
-        }
-
-        // Save all questions to generate IDs
-        await context.SaveChangesAsync();
-
-        foreach (var question in questions)
-        {
-            foreach (var rule in question.QuestionRules)
-            {
-                var parentQuestion = await context.Questions
-                    .FirstOrDefaultAsync(q => q.QuestionId == rule.ParentQuestionId);
-
-                if (parentQuestion == null)
+                if (trackedAnswerOption != null)
                 {
-                    rule.ParentQuestionId = null;
+                    answer.AnswerOption = trackedAnswerOption;
                 }
-
-                rule.QuestionId = question.QuestionId;
-
-                context.QuestionRules.Add(rule);
             }
+
+            await context.Questions.AddAsync(question);
         }
 
-        // Save all rules
         await context.SaveChangesAsync();
     }
 }

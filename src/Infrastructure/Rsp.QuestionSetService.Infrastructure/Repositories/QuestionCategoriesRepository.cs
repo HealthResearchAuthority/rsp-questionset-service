@@ -18,8 +18,16 @@ public class QuestionCategoriesRepository(QuestionSetDbContext context) : IQuest
     public async Task<IEnumerable<QuestionCategory>> GetQuestionCategories(
         ISpecification<QuestionCategory> questionSpecification)
     {
+        var publishedVersion = await context.Versions.FirstOrDefaultAsync(v => v.IsPublished);
+
+        if (publishedVersion == null)
+        {
+            return [];
+        }
+
         return await context
             .QuestionCategories
+            .Where(qc => qc.VersionId == publishedVersion.VersionId)
             .WithSpecification(questionSpecification)
             .ToListAsync();
     }
