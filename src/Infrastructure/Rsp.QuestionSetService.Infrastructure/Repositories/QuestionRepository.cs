@@ -179,9 +179,12 @@ public class QuestionRepository(QuestionSetDbContext context) : IQuestionReposit
                 .SingleOrDefault(s => s.Entity.SectionId == question.QuestionSectionId && s.Entity.VersionId == question.VersionId)?
                 .Entity;
 
+            question.QuestionSection.IsActive = true;
+            
             // Set question.QuestionSection to the tracked one to prevent tracked entity issues
             if (trackedSection != null)
             {
+                trackedSection.IsActive = true;
                 question.QuestionSection = trackedSection;
             }
 
