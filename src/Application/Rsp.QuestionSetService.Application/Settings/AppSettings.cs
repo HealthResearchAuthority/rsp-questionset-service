@@ -16,4 +16,9 @@ public class AppSettings
     /// Settings for Azure AppConfiguration
     /// </summary>
     public AzureAppConfigurations AzureAppConfiguration { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets OneLogin settings
+    /// </summary>
+    public OneLoginConfiguration OneLogin { get; set; } = null!;
 }
