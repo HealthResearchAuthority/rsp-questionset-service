@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rsp.QuestionSetService.Infrastructure;
 
@@ -11,9 +12,11 @@ using Rsp.QuestionSetService.Infrastructure;
 namespace Rsp.QuestionSetService.Infrastructure.Migrations
 {
     [DbContext(typeof(QuestionSetDbContext))]
-    partial class QuestionSetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250425145556_AddShortAnswerText")]
+    partial class AddShortAnswerText
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
