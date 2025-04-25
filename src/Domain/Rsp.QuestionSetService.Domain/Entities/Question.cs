@@ -24,4 +24,5 @@ public class Question : ISoftDeletable
 
     public ICollection<Answer> Answers { get; set; } = [];
     public ICollection<QuestionRule> QuestionRules { get; set; } = [];
+    public string? ShortQuestionText { get; set; }
 }
