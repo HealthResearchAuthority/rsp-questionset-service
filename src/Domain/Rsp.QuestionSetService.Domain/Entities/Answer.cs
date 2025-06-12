@@ -9,8 +9,6 @@ public class Answer
 
     public string QuestionId { get; set; } = null!;
     public string AnswerOptionId { get; set; } = null!;
-    public DateTime? StartDate { get; set; }
-    public DateTime? EndDate { get; set; }
     public string VersionId { get; set; } = null!;
     public AnswerOption AnswerOption { get; set; } = null!;
 }
