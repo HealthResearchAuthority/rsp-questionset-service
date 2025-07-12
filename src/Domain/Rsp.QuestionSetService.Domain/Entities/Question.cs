@@ -8,6 +8,7 @@ public class Question : ISoftDeletable
     public string QuestionCategoryId { get; set; } = null!;
     public string QuestionSectionId { get; set; } = null!;
     public int Sequence { get; set; }
+    public bool IsModificationQuestion { get; set; }
     public string? Heading { get; set; }
     public string QuestionText { get; set; } = null!;
     public string QuestionType { get; set; } = null!;
